@@ -38,11 +38,3 @@
   .checkbox:checked + .label .ball{
     transform: translateX(11px);
   }
-  /*
-  .fa-moon {
-    color: pink;
-  }
-  
-  .fa-sun {
-    color: yellow;
-  }*/

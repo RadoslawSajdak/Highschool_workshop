@@ -3,7 +3,7 @@ body {
     font-family: 'Courier New', Courier, monospace;
     background-color: white;
     color: black;
-    font-size: 25px;
+    font-size: 18px;
     vertical-align: middle;
     
   }
@@ -13,8 +13,25 @@ th, td {
     text-align: left;
     font-size: 16px;
 }
+
+code {
+    background-color: #a3a3a3;
+    border: 1px solid #4e4e4e;
+    display: block;
+    padding: 10px;
+    color: black;
+    margin: 20px;
+    white-space: pre-wrap;
+}
   
 .content {
     max-width: 1200px;
     margin: auto;
 }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
