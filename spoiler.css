@@ -10,6 +10,7 @@ div.spoiler img {
 	filter: blur(20px) grayscale(100%);
 	transition: 0.3s;
     height: 100%;
+	width: 50%;
     width: auto;
 }
 
