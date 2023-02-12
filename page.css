@@ -12,7 +12,7 @@ th, td {
     padding: 5px 15px;
     text-align: left;
     font-size: 16px;
-}
+    }
 
 code {
     background-color: #a3a3a3;
@@ -22,12 +22,12 @@ code {
     color: black;
     margin: 20px;
     white-space: pre-wrap;
-}
+    }
   
 .content {
     max-width: 1200px;
     margin: auto;
-}
+    }
 
 .center {
     display: block;

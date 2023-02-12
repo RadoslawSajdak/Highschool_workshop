@@ -44,15 +44,3 @@ div.spoiler input:checked ~ img {
 div.spoiler input:checked, div.spoiler input:checked ~ label {
 	display: none;
 }
-
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-	.spoiler-button {
-		display: none;
-	}
-}
-
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-	div.spoiler input, .spoiler-button {
-		display: none;
-	}
-}
