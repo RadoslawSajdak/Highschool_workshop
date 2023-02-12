@@ -18,6 +18,24 @@ body {
     
   }
 
+.button_next {
+	height: 3rem;
+	line-height: 3rem;
+	width: 20%;
+	padding: 0 1rem;
+	font-size: 1rem;
+    vertical-align: middle;
+	background-color: rgb(0, 64, 0);
+	color: #FFF;
+	text-align: center;
+	border-radius: 1rem;
+	cursor: pointer;
+}
+
+.button_next:hover {
+    background-color: rgb(0, 128, 0);
+}
+
 th, td {
     padding: 5px 15px;
     text-align: left;
