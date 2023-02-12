@@ -1,3 +1,14 @@
+code {
+    background-color: #a3a3a3;
+    border: 1px solid #4e4e4e;
+    display: block;
+    padding: 10px;
+    color: black;
+    margin: 20px;
+    white-space: pre-wrap;
+    overflow-x: scroll;
+    }
+
 body {
     padding: 25px;
     font-family: 'Courier New', Courier, monospace;
@@ -14,15 +25,7 @@ th, td {
     font-size: 16px;
     }
 
-code {
-    background-color: #a3a3a3;
-    border: 1px solid #4e4e4e;
-    display: block;
-    padding: 10px;
-    color: black;
-    margin: 20px;
-    white-space: pre-wrap;
-    }
+
   
 .content {
     max-width: 1200px;
