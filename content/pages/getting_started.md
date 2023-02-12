@@ -26,6 +26,6 @@ w oknie "menadżer dodatkowych płytek" wklej:
 ```link
 https://arduino.esp8266.com/stable/package_esp8266com_index.json
 ```
-![image alt](/board_manager.png){.spoiler}
+![alt](/static/board_manager.png)
 
 Następnie, zainstaluj płytkę wybierając z lewej strony **Menedżer płytek** i wyszukując **esp8266**.
