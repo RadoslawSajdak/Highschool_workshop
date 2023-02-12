@@ -1,7 +1,7 @@
 ---
 title: "Getting started"
 date: 2023-02-12T22:17:39+01:00
-draft: true
+draft: false
 ---
 
 # Mikrokontrolery w praktyce
