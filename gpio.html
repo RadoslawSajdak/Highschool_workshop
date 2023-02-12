@@ -27,7 +27,19 @@
 </head>
 <body>
 
-Hello
+<h2>Obsługa wielu wyjść cyfrowych</h2>
+Po ukończeniu wprowadzenia, wiesz już jak zamrugać diodą. Każda dioda, ma katodę (-) oraz anodę (+).
+Anoda, posiada krótszą nóżkę i to do niej należy podłączyć zasilanie. Można skojarzyć to prez znaną
+nazwę AK47 (prąd płynie A -> K, a 4 jest mniejsze niż 7 :)). Dodatkowo, aby ograniczyć prąd płynący przez
+diodę, należy szeregowo włączyć do niej rezystor. Podobnie jak na poniższym obrazku, podłącz trzy diody
+do pinów <b>D5, D6, D7</b>.
+<img src="Images/three_leds.png">
+
+Wiedząc, że
+<pre><code>digitalWrite(PIN_NUMBER, LOGIC_LEVEL);</code></pre>
+oraz 
+<pre><code>pinMode(PIN_NUMBER, LOGIC_LEVEL);</code></pre>
+spróbuj zamrugać trzema diodami po kolei.
 <table style="margin-left: auto;margin-right: auto;">
     <tr>
     <td><a href="index.html" class="button_next center">Wprowadzenie</a></td>
