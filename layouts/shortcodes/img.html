@@ -1,7 +1,10 @@
 <link rel="stylesheet" href="../../stylesheets/spoiler.css" >
+<figure {{ with .Get "class" }}class="{{.}}"{{ end }}>
 
 <div class="spoiler">
-	<input id="board_install" type="checkbox">
-	<img src="images/board_install.png" alt="Tutaj powinien być obrazek" class="center">
-	<label for="board_install" class="spoiler-button">Pokaż mi gdzie
+	<input id="{{ .Get "label" }}" type="checkbox">
+    <img src="{{ .Get "src" }}" {{ if or (.Get "alt") (.Get "caption") }}alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" }}{{ end }}"{{ end }} />
+	<label for="{{ .Get "label" }}" class="spoiler-button">Pokaż mi gdzie
 </div>
+
+</figure>
