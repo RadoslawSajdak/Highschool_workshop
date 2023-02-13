@@ -2,6 +2,7 @@
 title: "Getting started"
 date: 2023-02-12T22:17:39+01:00
 draft: false
+weight: 1
 ---
 
 # Mikrokontrolery w praktyce
@@ -50,6 +51,7 @@ W lewym górnym rogu edytora, wybierz **Plik > Przykłady > 01.Basics > Blink**.
 ukaże się następujący kod:
 
 ```C
+#define BLINK_PERIOD 1000
 // the setup function runs once when you press reset or power the board
 void setup()
 {
@@ -61,9 +63,9 @@ void setup()
 void loop() 
 {
     digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
-    delay(1000);                      // wait for a second
+    delay(BLINK_PERIOD);                      // wait for a second
     digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
-    delay(1000);                      // wait for a second
+    delay(BLINK_PERIOD);                      // wait for a second
 }
 ```
 

@@ -3,7 +3,7 @@
 
 <div class="spoiler">
 	<input id="{{ .Get "label" }}" type="checkbox">
-    <img src="{{ .Get "src" }}" {{ if or (.Get "alt") (.Get "caption") }}alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" }}{{ end }}"{{ end }} />
+    {{.Inner}}
 	<label for="{{ .Get "label" }}" class="spoiler-button">Pokaż rozwiązanie
 </div>
 

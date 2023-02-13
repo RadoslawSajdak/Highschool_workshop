@@ -1,6 +1,6 @@
 baseURL: "https://radoslawsajdak.github.io/Highschool_workshop/"
-title: Workshops by Radosław Sajdak
-paginate: 5
+#title: Workshops by Radosław Sajdak
+paginate: 10
 theme: PaperMod
 publishDir: "docs"
 
@@ -19,7 +19,7 @@ params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: Radosław Sajdak - Workshops
   description: "Embedded workshops by Radosław Sajdak"
-  keywords: [Blog, Portfolio, PaperMod]
+  keywords: [Blog, Portfolio, PaperMod, Embedded, Arduino, C]
   author: Radosław Sajdak
   # author: ["Me", "You"] # multiple authors
   #images: ["<link or path of image for opengraph, twitter-cards>"]
@@ -28,7 +28,7 @@ params:
   disableThemeToggle: false
 
   ShowReadingTime: false
-  ShowShareButtons: true
+  ShowShareButtons: false
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
@@ -44,7 +44,7 @@ params:
   tocopen: false
   block: true
   title: true
-  custom_css: ["spoiler.css"]
+  #custom_css: ["spoiler.css"]
 
   assets:
     # disableHLJS: true # to disable highlight.js
@@ -63,17 +63,17 @@ params:
   # profile-mode
   profileMode:
     enabled: false # needs to be explicitly set
-    title: ExampleSite
-    subtitle: "This is subtitle"
-    imageUrl: "<img location>"
+    title: Radosław Sajdak
+    subtitle: "This is my page for the workshops"
+    imageUrl: "static/me.jpg"
     imageWidth: 120
     imageHeight: 120
     imageTitle: my image
     buttons:
       - name: Posts
-        url: posts
-      - name: Tags
-        url: tags
+        url: post
+      # - name: Tags
+      #   url: tags
 
   # home-info mode
   homeInfoParams:
@@ -81,12 +81,12 @@ params:
     Content: Welcome to workshops' page
 
   socialIcons:
-    - name: twitter
-      url: "https://twitter.com/"
-    - name: stackoverflow
-      url: "https://stackoverflow.com"
     - name: github
-      url: "https://github.com/"
+      url: "https://github.com/RadoslawSajdak"
+    - name: linkedin
+      url: "https://pl.linkedin.com/in/radoslawsajdak"
+    - name: email
+      url: "mailto:sajdak.radoslaw@gmail.com"
 
   # analytics:
   #   google:
@@ -116,16 +116,16 @@ params:
     threshold: 0.4
     minMatchCharLength: 0
     keys: ["title", "permalink", "summary", "content"]
-menu:
-  main:
-    - identifier: categories
-      name: categories
-      url: /categories/
-      weight: 10
-    - identifier: tags
-      name: tags
-      url: /tags/
-      weight: 20
+# menu:
+#   main:
+    # - identifier: categories
+    #   name: categories
+    #   url: /categories/
+    #   weight: 10
+    # - identifier: tags
+    #   name: tags
+    #   url: /tags/
+    #   weight: 20
 pygmentsUseClasses: true
 markup:
   highlight:
