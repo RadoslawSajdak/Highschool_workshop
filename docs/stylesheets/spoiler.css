@@ -1,7 +1,6 @@
 div.spoiler {
 	overflow: hidden;
 	position: relative;
-	margin: 10px;
 	padding: 0;
 }
 
@@ -13,6 +12,10 @@ div.spoiler img {
 	width: 50%;
     width: auto;
 	margin: auto;
+}
+
+div.spoiler pre {
+	filter: blur(20px);
 }
 
 .spoiler-button {
@@ -43,6 +46,11 @@ div.spoiler input:checked ~ img {
 	filter: none;
 }
 
+div.spoiler input:checked ~ pre {
+	filter: none;
+}
+
 div.spoiler input:checked, div.spoiler input:checked ~ label {
 	display: none;
 }
+

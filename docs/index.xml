@@ -5,7 +5,7 @@
     <link>https://radoslawsajdak.github.io/Highschool_workshop/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 12 Feb 2023 22:17:39 +0100</lastBuildDate><atom:link href="https://radoslawsajdak.github.io/Highschool_workshop/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Feb 2023 16:35:29 +0100</lastBuildDate><atom:link href="https://radoslawsajdak.github.io/Highschool_workshop/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Getting started</title>
       <link>https://radoslawsajdak.github.io/Highschool_workshop/post/getting_started/</link>
@@ -14,6 +14,15 @@
       <guid>https://radoslawsajdak.github.io/Highschool_workshop/post/getting_started/</guid>
       <description>Mikrokontrolery w praktyce Wstępne wymagania  Komputer z systemem Windows / Linux (preferowane ubuntu) ESP8266 oraz peryferia (dostarcza prowadzący)  Instalacja środowiska Arduino IDE Pobierz i zainstaluj arduino IDE. Poradnik oraz instalator znajdziesz na oficjalnej stronie producenta
 PlatformIO (opcjonalne) Alternatywnym, bardziej rozbudowanym środowiskiem jest PlatformIO. Pozwala ono na tworzenie bardziej złożonych projektów na różne platformy. Podczas warsztatu, będziemy korzystać z ArduinoIDE, jednak przykłady da się uruchomić również przez PlatformIO. Wymaga to jednak nieco dodatkowej konfiguracji.</description>
+    </item>
+    
+    <item>
+      <title>GPIO</title>
+      <link>https://radoslawsajdak.github.io/Highschool_workshop/post/gpio/</link>
+      <pubDate>Mon, 13 Feb 2023 16:35:29 +0100</pubDate>
+      
+      <guid>https://radoslawsajdak.github.io/Highschool_workshop/post/gpio/</guid>
+      <description>GPIO (General-Purpose Input Output) Obsługa wielu wyjść cyfrowych Po ukończeniu wprowadzenia, wiesz już jak zamrugać diodą. Każda dioda, ma katodę (-) oraz anodę (+). Anoda, posiada krótszą nóżkę i to do niej należy podłączyć zasilanie. Można skojarzyć to prez znaną nazwę AK47 (prąd płynie A -&amp;gt; K, a 4 jest mniejsze niż 7 :)). Dodatkowo, aby ograniczyć prąd płynący przez diodę, należy szeregowo włączyć do niej rezystor. Podobnie jak na poniższym obrazku, podłącz trzy diody do pinów D5, D6, D7.</description>
     </item>
     
   </channel>
