@@ -31,7 +31,7 @@
 <meta name=twitter:title content="GPIO">
 <meta name=twitter:description content="GPIO (General-Purpose Input Output) Obsługa wielu wyjść cyfrowych Po ukończeniu wprowadzenia, wiesz już jak zamrugać diodą. Każda dioda, ma katodę (-) oraz anodę (+). Anoda, posiada krótszą nóżkę i to do niej należy podłączyć zasilanie. Można skojarzyć to prez znaną nazwę AK47 (prąd płynie A -> K, a 4 jest mniejsze niż 7 :)). Dodatkowo, aby ograniczyć prąd płynący przez diodę, należy szeregowo włączyć do niej rezystor. Podobnie jak na poniższym obrazku, podłącz trzy diody do pinów D5, D6, D7.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://radoslawsajdak.github.io/Highschool_workshop/post/"},{"@type":"ListItem","position":2,"name":"GPIO","item":"https://radoslawsajdak.github.io/Highschool_workshop/post/gpio/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"GPIO","name":"GPIO","description":"GPIO (General-Purpose Input Output) Obsługa wielu wyjść cyfrowych Po ukończeniu wprowadzenia, wiesz już jak zamrugać diodą. Każda dioda, ma katodę (-) oraz anodę (+). Anoda, posiada krótszą nóżkę i to do niej należy podłączyć zasilanie. Można skojarzyć to prez znaną nazwę AK47 (prąd płynie A -\u0026gt; K, a 4 jest mniejsze niż 7 :)). Dodatkowo, aby ograniczyć prąd płynący przez diodę, należy szeregowo włączyć do niej rezystor. Podobnie jak na poniższym obrazku, podłącz trzy diody do pinów D5, D6, D7.","keywords":[],"articleBody":"GPIO (General-Purpose Input Output) Obsługa wielu wyjść cyfrowych Po ukończeniu wprowadzenia, wiesz już jak zamrugać diodą. Każda dioda, ma katodę (-) oraz anodę (+). Anoda, posiada krótszą nóżkę i to do niej należy podłączyć zasilanie. Można skojarzyć to prez znaną nazwę AK47 (prąd płynie A - K, a 4 jest mniejsze niż 7 :)). Dodatkowo, aby ograniczyć prąd płynący przez diodę, należy szeregowo włączyć do niej rezystor. Podobnie jak na poniższym obrazku, podłącz trzy diody do pinów D5, D6, D7.\nPokaż rozwiązanie   Wiedząc, że\ndigitalWrite(PIN_NUMBER, LOGIC_LEVEL); oraz\npinMode(PIN_NUMBER, LOGIC_LEVEL); spróbuj zamrugać trzema diodami po kolei.\n#include  #define LED_PIN1 D6 #define LED_PIN2 D7 #define LED_PIN3 D8 #define LED_BLINK_PERIOD 1000 void setup() { pinMode(LED_PIN1, OUTPUT); pinMode(LED_PIN2, OUTPUT); pinMode(LED_PIN3, OUTPUT); } void loop() { digitalWrite(LED_PIN1, HIGH); delay(LED_BLINK_PERIOD); digitalWrite(LED_PIN1, LOW); delay(LED_BLINK_PERIOD); digitalWrite(LED_PIN2, HIGH); delay(LED_BLINK_PERIOD); digitalWrite(LED_PIN2, LOW); delay(LED_BLINK_PERIOD); digitalWrite(LED_PIN3, HIGH); delay(LED_BLINK_PERIOD); digitalWrite(LED_PIN3, LOW); delay(LED_BLINK_PERIOD); }  Pokaż rozwiązanie   Funkcja, mrugająca diodą Aby uniknąć powielania kodu, co zrobiliśmy powyżej, tworzymy funkcje. W językach o typie statycznym (C, C++) mają zazwyczaj format [typ zwracany] nazwa_funkcji(typ argumentu1, typ argumentu2){ [Kod tutaj] }.\nTypy, różnią się od siebie rozmiarem. Wyjątkiem, jest typ void który informuje nas, że funkcja nie zwraca niczego.\nSpróbuj napisać funkcję mrugającą diodą:\n o nazwie blinkLED zwracającą void przyjmującą jeden argument typu uint8_t.  Na ten moment przyjmijmy, że funkcje znajdują się powyżej\nvoid setup() { } void blinkLED(uint8_t ledNo) { digitalWrite(ledNo, HIGH); delay(LED_BLINK_PERIOD); digitalWrite(ledNo, LOW); delay(LED_BLINK_PERIOD); }  Pokaż rozwiązanie   Używając napisanej przez Ciebie funkcji, popraw nasz wcześniejszy przykład.\nvoid loop() { blinkLED(LED_PIN1); blinkLED(LED_PIN2); blinkLED(LED_PIN3); }  Pokaż rozwiązanie   Sterowanie jasnością LED - PWM (Pulse Width Modulation) Każdy z naszych pinów, może pracować w różnych trybach. Jednym z nich jest PWM, czyli modulacja wypełnieniem sygnału. Upraszczając, możemy sterować tym jaki procent czasu pin jest w stanie wysokim, a jaki w niskim. Służy do tego funkcja\nanalogWrite(PIN_NUMBER, VALUE(0-255)); Dodatkowe informacje znajdziesz w:\n Dokumentacji biblioteki arduino link Krótkim tutorialu o PWM link  Spróbuj uruchomić na swojej płytce poniższy kod. Czy LED zmienia jasność krokowo?\nvoid loop(){ analogWrite(LED_PIN1, 50); delay(LED_BLINK_PERIOD); analogWrite(LED_PIN1, 150); delay(LED_BLINK_PERIOD); analogWrite(LED_PIN1, 250); delay(LED_BLINK_PERIOD); } Narastająca jasność - pętle Chcąc aby nasz LED rozjaśniał się płynnie, musielibyśmy 255 razy wywołać funkcję analogWrite(). Nie byłoby to jednak ani czytelne, ani wydajne. Służą do tego pętle. Pozwalają one na wywołanie jakiegoś fragmentu kodu, ściśle określoną ilość razy. W C, używamy trzech pętli:\n do{ [kod] }while(warunek) while(warunek){ [kod] } for(iterator; warunek; instrukcja){ [kod] }  Każda z nich, działa w trochę różny sposób.\n do{ [kod] }while(warunek), sprawdza warunek po wyjściu z bloku kodu while(warunek){ [kod] }, sprawdza warunek przed wejściem do bloku kodu for(iterator; warunek; instrukcja){ [kod] } może stworzyć element (np. iterator), sprawdza warunek przed wejściem, ale również wykonuje jakąś instrukcje (np. dodawanie) po wyjściu z bloku.  Używany przez nas\nvoid loop() { } To nic innego jak\nwhile(1) { } W naszych przykładach, będziemy używać głównie pętli for. Jest ona najwygodniejsza w użyciu, ponieważ pozwala wykonać wszystkie niezbędne operacje związane z pętlami w przejrzysty sposób.\nWięcej o pętli for, możesz przeczytać tutaj\nSpróbuj napisać funkcję fadeIn(), która będzie rozjaśniać diodę led w sposób płynny. Użyj do tego pętli\nfor(uint8_t i = 0; i  255; i++) { } UWAGA! Ze względu na charakterystykę diody, wyższe wartości i mogą nie wpływać wyraźnie na jasność diody, jednak bez problemu zaobserwujesz rozjaśnianie.\n#include  #define LED_PIN1 D6 #define LED_PIN2 D7 #define LED_PIN3 D8 #define LED_BLINK_PERIOD 1000 void setup() { pinMode(LED_PIN1, OUTPUT); pinMode(LED_PIN2, OUTPUT); pinMode(LED_PIN3, OUTPUT); } void fadeIn(uint8_t ledNo) { for(uint8_t i = 0; i  Pokaż rozwiązanie   Czy jesteś w stanie napisać również funkcję fadeOut(), zmniejszającą jasność od największej do zera?\nvoid fadeOut(uint8_t ledNo) { for(uint8_t i = 0; i  Pokaż rozwiązanie   Pseudo asynchroniczna kontrola LED W poprzednich przykładach, Mogliśmy jednocześnie zmieniać jasność tylko jednej diody. Nie jest to rozwiązanie stosowane w praktyce, ponieważ nie chcemy aby nasz “potężny” procesor marnował tyle czasu. Dla przykładu, chcąc obrócić dwa koła samochodu o 360 stopni, musimy zrobić to jednocześnie. W przeciwnym razie, znajdziemy się w zupełnie innym miejscu (zakładając, że w ogóle ruszymy).\nW tym celu skorzystamy z funkcji milis(). Zwraca ona liczbę milisekund które upłynęły od startu naszego procesora. Czas ten, według dokumentacji, wyzeruje się po około 50 dniach. Dlatego, do zapamiętania czasu, potrzebujemy zmiennej o dużym rozmiarze: long.\nZmienną o nazwie lastUpdate będziemy przechowywać poza blokami setup() oraz loop. Oznacza to, że będzie ona zmienną gobalną, dostępną w każdym miejscu kodu. Podobnie zapiszemy zmienną currentBrightness.\n#include #define LED_PIN1 D6 #define LED_PIN2 D7 #define LED_PIN3 D8  long lastUpdate = 0; uint8_t currentBrightness = 0; void setup() { pinMode(LED_PIN1, OUTPUT); pinMode(LED_PIN2, OUTPUT); pinMode(LED_PIN3, OUTPUT); } void loop() { if( (lastUpdate + 50)  millis() ) { analogWrite(LED_PIN1, currentBrightness); analogWrite(LED_PIN2, currentBrightness); analogWrite(LED_PIN3, currentBrightness); currentBrightness++; lastUpdate = millis(); } } W powyższym kodzie, znajduje się instrukcja warunkowa if. Sprawdza ona, czy wartość logiczna w nawiasach jest prawdą (w tym przypadku, czy ostatnia aktualizacja, była ponad 50ms temu). Jeśli tak, to aktualizuje wartość każdej LED oraz zwiększa ją o jeden.\nKod ten, zawiea jednak drobną pułapkę. currentBrightness będąc typu uint8_t, przyjmuje maksymalnie wartość 2 do potęgi 8 - 1 (255). Gdy spróbujemy ją zwiększyć, znów przyjmie wartość 0 gasząc diodę. Więcej na ten temat, przeczytasz tutaj.\n","wordCount":"845","inLanguage":"en","datePublished":"2023-02-13T16:35:29+01:00","dateModified":"2023-02-13T16:35:29+01:00","author":{"@type":"Person","name":"Radosław Sajdak"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://radoslawsajdak.github.io/Highschool_workshop/post/gpio/"},"publisher":{"@type":"Organization","name":"","logo":{"@type":"ImageObject","url":"https://radoslawsajdak.github.io/Highschool_workshop/favicon.ico"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"GPIO","name":"GPIO","description":"GPIO (General-Purpose Input Output) Obsługa wielu wyjść cyfrowych Po ukończeniu wprowadzenia, wiesz już jak zamrugać diodą. Każda dioda, ma katodę (-) oraz anodę (+). Anoda, posiada krótszą nóżkę i to do niej należy podłączyć zasilanie. Można skojarzyć to prez znaną nazwę AK47 (prąd płynie A -\u0026gt; K, a 4 jest mniejsze niż 7 :)). Dodatkowo, aby ograniczyć prąd płynący przez diodę, należy szeregowo włączyć do niej rezystor. Podobnie jak na poniższym obrazku, podłącz trzy diody do pinów D5, D6, D7.","keywords":[],"articleBody":"GPIO (General-Purpose Input Output) Obsługa wielu wyjść cyfrowych Po ukończeniu wprowadzenia, wiesz już jak zamrugać diodą. Każda dioda, ma katodę (-) oraz anodę (+). Anoda, posiada krótszą nóżkę i to do niej należy podłączyć zasilanie. Można skojarzyć to prez znaną nazwę AK47 (prąd płynie A - K, a 4 jest mniejsze niż 7 :)). Dodatkowo, aby ograniczyć prąd płynący przez diodę, należy szeregowo włączyć do niej rezystor. Podobnie jak na poniższym obrazku, podłącz trzy diody do pinów D5, D6, D7.\nPokaż rozwiązanie   Wiedząc, że\ndigitalWrite(PIN_NUMBER, LOGIC_LEVEL); oraz\npinMode(PIN_NUMBER, LOGIC_LEVEL); spróbuj zamrugać trzema diodami po kolei.\n#include  #define LED_PIN1 D6 #define LED_PIN2 D7 #define LED_PIN3 D8 #define LED_BLINK_PERIOD 1000 void setup() { pinMode(LED_PIN1, OUTPUT); pinMode(LED_PIN2, OUTPUT); pinMode(LED_PIN3, OUTPUT); } void loop() { digitalWrite(LED_PIN1, HIGH); delay(LED_BLINK_PERIOD); digitalWrite(LED_PIN1, LOW); delay(LED_BLINK_PERIOD); digitalWrite(LED_PIN2, HIGH); delay(LED_BLINK_PERIOD); digitalWrite(LED_PIN2, LOW); delay(LED_BLINK_PERIOD); digitalWrite(LED_PIN3, HIGH); delay(LED_BLINK_PERIOD); digitalWrite(LED_PIN3, LOW); delay(LED_BLINK_PERIOD); }  Pokaż rozwiązanie   Funkcja, mrugająca diodą Aby uniknąć powielania kodu, co zrobiliśmy powyżej, tworzymy funkcje. W językach o typie statycznym (C, C++) mają zazwyczaj format [typ zwracany] nazwa_funkcji(typ argumentu1, typ argumentu2){ [Kod tutaj] }.\nTypy, różnią się od siebie rozmiarem. Wyjątkiem, jest typ void który informuje nas, że funkcja nie zwraca niczego.\nSpróbuj napisać funkcję mrugającą diodą:\n o nazwie blinkLED zwracającą void przyjmującą jeden argument typu uint8_t.  Na ten moment przyjmijmy, że funkcje znajdują się powyżej\nvoid setup() { } void blinkLED(uint8_t ledNo) { digitalWrite(ledNo, HIGH); delay(LED_BLINK_PERIOD); digitalWrite(ledNo, LOW); delay(LED_BLINK_PERIOD); }  Pokaż rozwiązanie   Używając napisanej przez Ciebie funkcji, popraw nasz wcześniejszy przykład.\nvoid loop() { blinkLED(LED_PIN1); blinkLED(LED_PIN2); blinkLED(LED_PIN3); }  Pokaż rozwiązanie   Sterowanie jasnością LED - PWM (Pulse Width Modulation) Każdy z naszych pinów, może pracować w różnych trybach. Jednym z nich jest PWM, czyli modulacja wypełnieniem sygnału. Upraszczając, możemy sterować tym jaki procent czasu pin jest w stanie wysokim, a jaki w niskim. Służy do tego funkcja\nanalogWrite(PIN_NUMBER, VALUE(0-255)); Dodatkowe informacje znajdziesz w:\n Dokumentacji biblioteki arduino link Krótkim tutorialu o PWM link  Spróbuj uruchomić na swojej płytce poniższy kod. Czy LED zmienia jasność krokowo?\nvoid loop(){ analogWrite(LED_PIN1, 50); delay(LED_BLINK_PERIOD); analogWrite(LED_PIN1, 150); delay(LED_BLINK_PERIOD); analogWrite(LED_PIN1, 250); delay(LED_BLINK_PERIOD); } Narastająca jasność - pętle Chcąc aby nasz LED rozjaśniał się płynnie, musielibyśmy 255 razy wywołać funkcję analogWrite(). Nie byłoby to jednak ani czytelne, ani wydajne. Służą do tego pętle. Pozwalają one na wywołanie jakiegoś fragmentu kodu, ściśle określoną ilość razy. W C, używamy trzech pętli:\n do{ [kod] }while(warunek) while(warunek){ [kod] } for(iterator; warunek; instrukcja){ [kod] }  Każda z nich, działa w trochę różny sposób.\n do{ [kod] }while(warunek), sprawdza warunek po wyjściu z bloku kodu while(warunek){ [kod] }, sprawdza warunek przed wejściem do bloku kodu for(iterator; warunek; instrukcja){ [kod] } może stworzyć element (np. iterator), sprawdza warunek przed wejściem, ale również wykonuje jakąś instrukcje (np. dodawanie) po wyjściu z bloku.  Używany przez nas\nvoid loop() { } To nic innego jak\nwhile(1) { } W naszych przykładach, będziemy używać głównie pętli for. Jest ona najwygodniejsza w użyciu, ponieważ pozwala wykonać wszystkie niezbędne operacje związane z pętlami w przejrzysty sposób.\nWięcej o pętli for, możesz przeczytać tutaj\nSpróbuj napisać funkcję fadeIn(), która będzie rozjaśniać diodę led w sposób płynny. Użyj do tego pętli\nfor(uint8_t i = 0; i  255; i++) { } UWAGA! Ze względu na charakterystykę diody, wyższe wartości i mogą nie wpływać wyraźnie na jasność diody, jednak bez problemu zaobserwujesz rozjaśnianie.\n#include  #define LED_PIN1 D6 #define LED_PIN2 D7 #define LED_PIN3 D8 #define LED_BLINK_PERIOD 1000 void setup() { pinMode(LED_PIN1, OUTPUT); pinMode(LED_PIN2, OUTPUT); pinMode(LED_PIN3, OUTPUT); } void fadeIn(uint8_t ledNo) { for(uint8_t i = 0; i  Pokaż rozwiązanie   Czy jesteś w stanie napisać również funkcję fadeOut(), zmniejszającą jasność od największej do zera?\nvoid fadeOut(uint8_t ledNo) { for(uint8_t i = 0; i  Pokaż rozwiązanie   Pseudo asynchroniczna kontrola LED W poprzednich przykładach, Mogliśmy jednocześnie zmieniać jasność tylko jednej diody. Nie jest to rozwiązanie stosowane w praktyce, ponieważ nie chcemy aby nasz “potężny” procesor marnował tyle czasu. Dla przykładu, chcąc obrócić dwa koła samochodu o 360 stopni, musimy zrobić to jednocześnie. W przeciwnym razie, znajdziemy się w zupełnie innym miejscu (zakładając, że w ogóle ruszymy).\nW tym celu skorzystamy z funkcji milis(). Zwraca ona liczbę milisekund które upłynęły od startu naszego procesora. Czas ten, według dokumentacji, wyzeruje się po około 50 dniach. Dlatego, do zapamiętania czasu, potrzebujemy zmiennej o dużym rozmiarze: long.\nZmienną o nazwie lastUpdate będziemy przechowywać poza blokami setup() oraz loop. Oznacza to, że będzie ona zmienną gobalną, dostępną w każdym miejscu kodu. Podobnie zapiszemy zmienną currentBrightness.\n#include #define LED_PIN1 D6 #define LED_PIN2 D7 #define LED_PIN3 D8  long lastUpdate = 0; uint8_t currentBrightness = 0; void setup() { pinMode(LED_PIN1, OUTPUT); pinMode(LED_PIN2, OUTPUT); pinMode(LED_PIN3, OUTPUT); } void loop() { if( (lastUpdate + 50)  millis() ) { analogWrite(LED_PIN1, currentBrightness); analogWrite(LED_PIN2, currentBrightness); analogWrite(LED_PIN3, currentBrightness); currentBrightness++; lastUpdate = millis(); } } W powyższym kodzie, znajduje się instrukcja warunkowa if. Sprawdza ona, czy wartość logiczna w nawiasach jest prawdą (w tym przypadku, czy ostatnia aktualizacja, była ponad 50ms temu). Jeśli tak, to aktualizuje wartość każdej LED oraz zwiększa ją o jeden.\nKod ten, zawiera jednak drobną pułapkę. currentBrightness będąc typu uint8_t, przyjmuje maksymalnie wartość 2 do potęgi 8 - 1 (255). Gdy spróbujemy ją zwiększyć, znów przyjmie wartość 0 gasząc diodę. Więcej na ten temat, przeczytasz tutaj.\nObsługa wejścia Wielokrotnie, potrzebujemy dostarczyć do mikrokontrolera jakieś informacje. Taką informacją może być na przykład naciśnięcie przycisku, wpisanie kodu czy ustawienie głośności.\nPort szeregowy Na początek, skonfigurujmy jednak port szeregowy który pozwoli nam na wysyłanie “logów” do komputera. Obiekt Serial zawiera zbiór funkcji pozwalających na komunikację przy użyciu portu szeregowego. Funkcja Serial.begin(115200) inicjalizuje obiekt. Parametr 115200 to prędkość, z jaką przesyłane są dane.\nW funkcji loop wywołujemy funkcję println(), a jako parametr podajemy tekst, który chcemy wysłać. Warto zauważyć, że w C++ obiekty mogą zawierać funkcje.\n#include  void setup() { Serial.begin(115200); } void loop() { Serial.println(\"Hello World\"); delay(500); } Uruchom w swoim ArduinoIDE Monitor portu szeregowego w prawym górnym rogu, a następnie ustaw odpowiednią prędkość transmisji (baudrate). Pokaż rozwiązanie  \nObsługa przycisku - odczyt GPIO Zbuduj na swojej płytce konfigurację z poniższego obrazka, podłączając przycisk pomiędzy piny GND a D1 Rozbudujmy powyższy kod o czytanie informacji o stanie przycisku. Znamy już instrukcje warunkowe. Znamy też funkcję pinMode. Pojawia się tu jednak nowy argument - INPUT_PULLUP. Oznacza on, że mikrokontroler dołączy wewnętrzny rezystor między nasz pin, a zasilanie. Spowoduje to, że czytając wartość pinu, zobaczymy stan wysoki. Chyba, że naciśniemy przycisk, który zewrze pin do masy.\nWgraj poniższy kod na swoją płytkę. Naciskając przycisk, obserwuj port szeregowy.\n#include #define BUTTON_PIN D1 void setup() { pinMode(BUTTON_PIN, INPUT_PULLUP); Serial.begin(115200); } void loop() { if(digitalRead(BUTTON_PIN)) Serial.println(\"UP\"); else Serial.println(\"DOWN\"); delay(500); } Czy jesteś w stanie powiedzieć, jaką wartość zwraca digitalRead gdy przycisk nie jest wciśnięty?\nObsługa przycisku - przerwanie Wcześniej mówiliśmy o tym, że kod powinien być nieblokujący. Każda linijka kodu wykonywanego w pętli, to conajmniej jedna instrukcja. Czy gdybyśmy musieli w ten sposób obsłużyć 64 przyciski, każdemu przypisując złożone zadania, to czy nasz kod byłby wystarczająco szybki?\nNa szczęście, mikrokontrolery obsługują tak zwane przerwania. Są to funkcje wywoływane w odpowiedzi na jakieś zdarzenie.\nFunkcja\nattachInterrupt(digitalPinToInterrupt(BUTTON_PIN), handleBtnPress, FALLING); dołącza do pinu przycisku funkcję handleBtnPress. Jest to funkcja inicjalizująca, wywoływana na początku kodu. Wyzwoli ona funkcję handleBtnPress w przypadku naciśnięcia przycisku. FALLING, oznacza zbocze opadające. A więc gdy stan pinu zmienia się z wysokiego, na niski (napięcie “spada”).\nCzy jesteś w stanie napisać funkcję handleBtnPress która wypisze na port szeregowy napis “Hello IRQ”? Pamiętaj, aby odpowiednio umiejscowić attachInterrupt()\nUWAGA! Ze względu na platformę z której korzystamy, przed zwracanym typem funkcji musisz dodać ICACHE_RAM_ATTR. W przeciwnym razie… Sprawdź :) Dyrektywa ta, mówi kompilatorowi w jakiej pamięci umieścić daną instrukcję.\n#include  #define BUTTON_PIN D1 ICACHE_RAM_ATTR void handleBtnPress() { Serial.println(\"button pressed\"); } void setup() { pinMode(BUTTON_PIN, INPUT_PULLUP); attachInterrupt(digitalPinToInterrupt(BUTTON_PIN), handleBtnPress, FALLING); Serial.begin(115200); } void loop() { }  Pokaż rozwiązanie   Zadanie - kontrola głośności dwoma przyciskami (opcjonalne) Przy pomocy dwóch przycisków stwórz sterowanie głośnością (wysyłanie aktualnej wartości na Monitor Portu Szeregowego)\n Skonfiguruj dwa piny jako przerwania  Stwórz dwie funkcję volumeUp() i volumeDown() podłączone do przerwań   Przechowuj wartość głośności jako zmienną o maksymalnej wartości 10 Zapewnij, by wartość głośności nie mogła być mniejsza niż 0 i większa niż 10 (tip: if, else) W loop(), co pół sekundy “printuj” wartość głośności  Możesz zaprezentować wartość na kilku diodach LED. (tak, jak wskaźnik poziomu wody)    Odczyt pinu analogowego - potencjometr Na początku rozdziału ustawialiśmy przy użyciu PWM, jak mocno świeci dioda. Podobnie, używając mikroprocesora, możemy odczytać wartość napięcia. Mikrokontrolery, posiadają wbudowane przetworniki ADC (Analog to Digital Converter). Więcej na ten temat, możesz poczytać tutaj.\nPodłącz potencjometr zgodnie z poniższym schematem. Wykorzystaj piny\n 3V3 GND D1   Następnie, wgraj na płytkę poniższy kod\n#include #define POTENTIOMETER_PIN D1  void setup() { pinMode(POTENTIOMETER_PIN, INPUT); Serial.begin(115200); } void loop() { Serial.println(analogRead(POTENTIOMETER_PIN)); delay(100); } Obracając potencjometr, obserwuj port szeregowy. Czy wartości zmieniają się? Czy jesteś w stanie wskazać parametr odpowiedzialny za to jak duże wartości i ich zmiany obserwujesz?\nPrzetworniki, posiadają rozdzielczość. To ona definiuje dokładne są nasze pomiary. Nasz przetwornik, przetwornikiem 10-cio bitowym.  Pokaż rozwiązanie   ","wordCount":"1460","inLanguage":"en","datePublished":"2023-02-13T16:35:29+01:00","dateModified":"2023-02-13T16:35:29+01:00","author":{"@type":"Person","name":"Radosław Sajdak"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://radoslawsajdak.github.io/Highschool_workshop/post/gpio/"},"publisher":{"@type":"Organization","name":"","logo":{"@type":"ImageObject","url":"https://radoslawsajdak.github.io/Highschool_workshop/favicon.ico"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -54,7 +54,7 @@
 <h1 class=post-title>
 GPIO
 </h1>
-<div class=post-meta><span title="2023-02-13 16:35:29 +0100 CET">February 13, 2023</span>&nbsp;·&nbsp;845 words&nbsp;·&nbsp;Radosław Sajdak
+<div class=post-meta><span title="2023-02-13 16:35:29 +0100 CET">February 13, 2023</span>&nbsp;·&nbsp;1460 words&nbsp;·&nbsp;Radosław Sajdak
 </div>
 </header> <div class=toc>
 <details>
@@ -63,12 +63,20 @@ GPIO
 </summary>
 <div class=inner><nav id=TableOfContents>
 <ul>
-<li><a href=#obsługa-wielu-wyjść-cyfrowych>Obsługa wielu wyjść cyfrowych</a></li>
-<li><a href=#funkcja-mrugająca-diodą>Funkcja, mrugająca diodą</a></li>
-<li><a href=#sterowanie-jasnością-led---pwm-pulse-width-modulation>Sterowanie jasnością LED - PWM (Pulse Width Modulation)</a>
+<li><a href=#obsługa-wielu-wyjść-cyfrowych>Obsługa wielu wyjść cyfrowych</a>
 <ul>
+<li><a href=#funkcja-mrugająca-diodą>Funkcja, mrugająca diodą</a></li>
+<li><a href=#sterowanie-jasnością-led---pwm-pulse-width-modulation>Sterowanie jasnością LED - PWM (Pulse Width Modulation)</a></li>
 <li><a href=#narastająca-jasność---pętle>Narastająca jasność - pętle</a></li>
 <li><a href=#pseudo-asynchroniczna-kontrola-led>Pseudo asynchroniczna kontrola LED</a></li>
+</ul>
+</li>
+<li><a href=#obsługa-wejścia>Obsługa wejścia</a>
+<ul>
+<li><a href=#port-szeregowy>Port szeregowy</a></li>
+<li><a href=#obsługa-przycisku---odczyt-gpio>Obsługa przycisku - odczyt GPIO</a></li>
+<li><a href=#obsługa-przycisku---przerwanie>Obsługa przycisku - przerwanie</a></li>
+<li><a href=#odczyt-pinu-analogowego---potencjometr>Odczyt pinu analogowego - potencjometr</a></li>
 </ul>
 </li>
 </ul>
@@ -135,7 +143,7 @@ void loop()
 <label for=code0 class=spoiler-button>Pokaż rozwiązanie
 </div>
 </figure>
-<h2 id=funkcja-mrugająca-diodą>Funkcja, mrugająca diodą<a hidden class=anchor aria-hidden=true href=#funkcja-mrugająca-diodą>#</a></h2>
+<h3 id=funkcja-mrugająca-diodą>Funkcja, mrugająca diodą<a hidden class=anchor aria-hidden=true href=#funkcja-mrugająca-diodą>#</a></h3>
 <p>Aby uniknąć powielania kodu, co zrobiliśmy powyżej, tworzymy funkcje. W językach o typie statycznym (C, C++)
 mają zazwyczaj format <strong>[typ zwracany] nazwa_funkcji(typ argumentu1, typ argumentu2){ [Kod tutaj] }</strong>.</p>
 <p>Typy, różnią się od siebie rozmiarem.
@@ -183,7 +191,7 @@ void loop()
 <label for=code2 class=spoiler-button>Pokaż rozwiązanie
 </div>
 </figure>
-<h2 id=sterowanie-jasnością-led---pwm-pulse-width-modulation>Sterowanie jasnością LED - PWM (Pulse Width Modulation)<a hidden class=anchor aria-hidden=true href=#sterowanie-jasnością-led---pwm-pulse-width-modulation>#</a></h2>
+<h3 id=sterowanie-jasnością-led---pwm-pulse-width-modulation>Sterowanie jasnością LED - PWM (Pulse Width Modulation)<a hidden class=anchor aria-hidden=true href=#sterowanie-jasnością-led---pwm-pulse-width-modulation>#</a></h3>
 <p>Każdy z naszych pinów, może pracować w różnych trybach. Jednym z nich jest PWM, czyli modulacja wypełnieniem sygnału.
 Upraszczając, możemy sterować tym jaki procent czasu pin jest w stanie wysokim, a jaki w niskim. Służy do tego funkcja</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=n>analogWrite</span><span class=p>(</span><span class=n>PIN_NUMBER</span><span class=p>,</span> <span class=n>VALUE</span><span class=p>(</span><span class=mi>0</span><span class=o>-</span><span class=mi>255</span><span class=p>));</span>
@@ -327,7 +335,159 @@ będzie ona zmienną <strong>gobalną</strong>, dostępną w każdym miejscu kod
 
 </code></pre></div><p>W powyższym kodzie, znajduje się instrukcja warunkowa <code>if</code>. Sprawdza ona, czy wartość logiczna w nawiasach jest prawdą
 (w tym przypadku, czy ostatnia aktualizacja, była ponad 50ms temu). Jeśli tak, to aktualizuje wartość każdej LED oraz zwiększa ją o jeden.</p>
-<p>Kod ten, zawiea jednak drobną pułapkę. <code>currentBrightness</code> będąc typu <code>uint8_t</code>, przyjmuje maksymalnie wartość 2 do potęgi 8 - 1 (255). Gdy spróbujemy ją zwiększyć, znów przyjmie wartość 0 gasząc diodę. Więcej na ten temat, przeczytasz <a href=https://www.bbc.co.uk/bitesize/guides/z26rcdm/revision/5>tutaj</a>.</p>
+<p>Kod ten, zawiera jednak drobną pułapkę. <code>currentBrightness</code> będąc typu <code>uint8_t</code>, przyjmuje maksymalnie wartość 2 do potęgi 8 - 1 (255). Gdy spróbujemy ją zwiększyć, znów przyjmie wartość 0 gasząc diodę. Więcej na ten temat, przeczytasz <a href=https://www.bbc.co.uk/bitesize/guides/z26rcdm/revision/5>tutaj</a>.</p>
+<h2 id=obsługa-wejścia>Obsługa wejścia<a hidden class=anchor aria-hidden=true href=#obsługa-wejścia>#</a></h2>
+<p>Wielokrotnie, potrzebujemy dostarczyć do mikrokontrolera jakieś informacje. Taką informacją może być na przykład
+naciśnięcie przycisku, wpisanie kodu czy ustawienie głośności.</p>
+<h3 id=port-szeregowy>Port szeregowy<a hidden class=anchor aria-hidden=true href=#port-szeregowy>#</a></h3>
+<p>Na początek, skonfigurujmy jednak port szeregowy który pozwoli nam na wysyłanie &ldquo;logów&rdquo; do komputera.
+Obiekt <code>Serial</code> zawiera zbiór funkcji pozwalających na komunikację przy użyciu portu szeregowego. Funkcja <code>Serial.begin(115200)</code>
+inicjalizuje obiekt. Parametr <code>115200</code> to prędkość, z jaką przesyłane są dane.</p>
+<p>W funkcji loop wywołujemy funkcję <code>println()</code>, a jako parametr podajemy tekst, który chcemy wysłać. Warto zauważyć, że w C++ obiekty mogą zawierać funkcje.</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C><span class=cp>#include</span> <span class=cpf>&lt;Arduino.h&gt;</span><span class=cp>
+</span><span class=cp></span>
+<span class=kt>void</span> <span class=nf>setup</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>begin</span><span class=p>(</span><span class=mi>115200</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=kt>void</span> <span class=nf>loop</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>(</span><span class=s>&#34;Hello World&#34;</span><span class=p>);</span>
+    <span class=n>delay</span><span class=p>(</span><span class=mi>500</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></div><p>Uruchom w swoim ArduinoIDE Monitor portu szeregowego w prawym górnym rogu, a następnie ustaw odpowiednią prędkość transmisji (baudrate).
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=setup_monitor type=checkbox>
+<img src=images/setup_monitor.png>
+<label for=setup_monitor class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure></p>
+<h3 id=obsługa-przycisku---odczyt-gpio>Obsługa przycisku - odczyt GPIO<a hidden class=anchor aria-hidden=true href=#obsługa-przycisku---odczyt-gpio>#</a></h3>
+<p>Zbuduj na swojej płytce konfigurację z poniższego obrazka, podłączając przycisk pomiędzy piny <code>GND</code> a <code>D1</code>
+<img loading=lazy src=images/button-connect.png#center alt=button_connect>
+</p>
+<p>Rozbudujmy powyższy kod o czytanie informacji o stanie przycisku. Znamy już instrukcje warunkowe. Znamy też
+funkcję <code>pinMode</code>. Pojawia się tu jednak nowy argument - <code>INPUT_PULLUP</code>. Oznacza on, że mikrokontroler dołączy
+wewnętrzny rezystor między nasz pin, a zasilanie. Spowoduje to, że czytając wartość pinu, zobaczymy stan wysoki.
+Chyba, że naciśniemy przycisk, który zewrze pin do masy.</p>
+<p>Wgraj poniższy kod na swoją płytkę. Naciskając przycisk, obserwuj port szeregowy.</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C><span class=cp>#include</span> <span class=cpf>&lt;Arduino.h&gt;</span><span class=cp>
+</span><span class=cp>#define BUTTON_PIN D1
+</span><span class=cp></span><span class=kt>void</span> <span class=nf>setup</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=n>pinMode</span><span class=p>(</span><span class=n>BUTTON_PIN</span><span class=p>,</span> <span class=n>INPUT_PULLUP</span><span class=p>);</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>begin</span><span class=p>(</span><span class=mi>115200</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=kt>void</span> <span class=nf>loop</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=k>if</span><span class=p>(</span><span class=n>digitalRead</span><span class=p>(</span><span class=n>BUTTON_PIN</span><span class=p>))</span>
+        <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>(</span><span class=s>&#34;UP&#34;</span><span class=p>);</span>
+    <span class=k>else</span> 
+        <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>(</span><span class=s>&#34;DOWN&#34;</span><span class=p>);</span>
+    <span class=n>delay</span><span class=p>(</span><span class=mi>500</span><span class=p>);</span>
+<span class=p>}</span>
+
+</code></pre></div><p>Czy jesteś w stanie powiedzieć, jaką wartość zwraca <code>digitalRead</code> gdy przycisk nie jest wciśnięty?</p>
+<h3 id=obsługa-przycisku---przerwanie>Obsługa przycisku - przerwanie<a hidden class=anchor aria-hidden=true href=#obsługa-przycisku---przerwanie>#</a></h3>
+<p>Wcześniej mówiliśmy o tym, że kod powinien być nieblokujący. Każda linijka kodu wykonywanego w pętli,
+to conajmniej jedna instrukcja. Czy gdybyśmy musieli w ten sposób obsłużyć 64 przyciski, każdemu przypisując
+złożone zadania, to czy nasz kod byłby wystarczająco szybki?</p>
+<p>Na szczęście, mikrokontrolery obsługują tak zwane przerwania. Są to funkcje wywoływane w odpowiedzi na jakieś zdarzenie.<br>
+Funkcja</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C><span class=n>attachInterrupt</span><span class=p>(</span><span class=n>digitalPinToInterrupt</span><span class=p>(</span><span class=n>BUTTON_PIN</span><span class=p>),</span> <span class=n>handleBtnPress</span><span class=p>,</span> <span class=n>FALLING</span><span class=p>);</span>
+</code></pre></div><p>dołącza do pinu przycisku funkcję <code>handleBtnPress</code>. Jest to funkcja inicjalizująca, wywoływana na początku kodu.
+Wyzwoli ona funkcję <code>handleBtnPress</code> w przypadku naciśnięcia przycisku.
+<code>FALLING</code>, oznacza zbocze opadające. A więc gdy stan pinu zmienia się z wysokiego, na niski (napięcie &ldquo;spada&rdquo;).</p>
+<p>Czy jesteś w stanie napisać funkcję <code>handleBtnPress</code> która wypisze na port szeregowy napis &ldquo;Hello IRQ&rdquo;? Pamiętaj, aby
+odpowiednio umiejscowić <code>attachInterrupt()</code></p>
+<p><strong>UWAGA!</strong> Ze względu na platformę z której korzystamy, przed zwracanym typem funkcji <strong>musisz</strong> dodać <code>ICACHE_RAM_ATTR</code>. W przeciwnym razie&mldr; Sprawdź :) Dyrektywa ta, mówi kompilatorowi w jakiej pamięci umieścić daną instrukcję.</p>
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=code5 type=checkbox>
+<pre><code class=language-c>
+#include <arduino.h>
+#define BUTTON_PIN D1
+
+ICACHE_RAM_ATTR void handleBtnPress()
+{
+    Serial.println("button pressed");
+}
+
+void setup()
+{
+    pinMode(BUTTON_PIN, INPUT_PULLUP);
+    attachInterrupt(digitalPinToInterrupt(BUTTON_PIN), handleBtnPress, FALLING);
+    Serial.begin(115200);
+}
+
+void loop()
+{
+
+}
+</pre></code>
+<label for=code5 class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure>
+<h4 id=zadanie---kontrola-głośności-dwoma-przyciskami-opcjonalne>Zadanie - kontrola głośności dwoma przyciskami (opcjonalne)<a hidden class=anchor aria-hidden=true href=#zadanie---kontrola-głośności-dwoma-przyciskami-opcjonalne>#</a></h4>
+<p>Przy pomocy dwóch przycisków stwórz sterowanie głośnością (wysyłanie aktualnej wartości na Monitor Portu Szeregowego)</p>
+<ul>
+<li>Skonfiguruj dwa piny jako przerwania
+<ul>
+<li>Stwórz dwie funkcję <code>volumeUp()</code> i <code>volumeDown()</code> podłączone do przerwań</li>
+</ul>
+</li>
+<li>Przechowuj wartość głośności jako zmienną o maksymalnej wartości 10</li>
+<li>Zapewnij, by wartość głośności nie mogła być mniejsza niż 0 i większa niż 10 (tip: if, else)</li>
+<li>W <code>loop()</code>, co pół sekundy &ldquo;printuj&rdquo; wartość głośności
+<ul>
+<li>Możesz zaprezentować wartość na kilku diodach LED. (tak, jak wskaźnik poziomu wody)</li>
+</ul>
+</li>
+</ul>
+<h3 id=odczyt-pinu-analogowego---potencjometr>Odczyt pinu analogowego - potencjometr<a hidden class=anchor aria-hidden=true href=#odczyt-pinu-analogowego---potencjometr>#</a></h3>
+<p>Na początku rozdziału ustawialiśmy przy użyciu PWM, jak mocno świeci dioda. Podobnie, używając mikroprocesora,
+możemy odczytać wartość napięcia. Mikrokontrolery, posiadają wbudowane przetworniki ADC (Analog to Digital Converter). Więcej na ten temat, możesz poczytać <a href=https://forbot.pl/blog/leksykon/adc-a-d>tutaj</a>.</p>
+<p>Podłącz potencjometr zgodnie z poniższym schematem. Wykorzystaj piny</p>
+<ul>
+<li>3V3</li>
+<li>GND</li>
+<li>D1
+<img loading=lazy src=images/potentiometer-connect.png alt=potentiometer_connect>
+</li>
+</ul>
+<p>Następnie, wgraj na płytkę poniższy kod</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C><span class=cp>#include</span> <span class=cpf>&lt;Arduino.h&gt;</span><span class=cp>
+</span><span class=cp>#define POTENTIOMETER_PIN D1
+</span><span class=cp></span>
+<span class=kt>void</span> <span class=nf>setup</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=n>pinMode</span><span class=p>(</span><span class=n>POTENTIOMETER_PIN</span><span class=p>,</span> <span class=n>INPUT</span><span class=p>);</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>begin</span><span class=p>(</span><span class=mi>115200</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=kt>void</span> <span class=nf>loop</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>(</span><span class=n>analogRead</span><span class=p>(</span><span class=n>POTENTIOMETER_PIN</span><span class=p>));</span>
+    <span class=n>delay</span><span class=p>(</span><span class=mi>100</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></div><p>Obracając potencjometr, obserwuj port szeregowy. Czy wartości zmieniają się? Czy jesteś w stanie
+wskazać parametr odpowiedzialny za to jak duże wartości i ich zmiany obserwujesz?</p>
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=hint_adc type=checkbox>
+<pre><code class=html>
+Przetworniki, posiadają rozdzielczość. To ona definiuje dokładne są nasze pomiary.
+Nasz przetwornik, przetwornikiem 10-cio bitowym.
+</pre></code>
+<label for=hint_adc class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure>
 </div>
 <footer class=post-footer>
 <ul class=post-tags>
