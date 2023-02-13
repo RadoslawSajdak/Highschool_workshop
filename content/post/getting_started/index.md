@@ -26,11 +26,11 @@ w oknie "menadżer dodatkowych płytek" wklej:
 ```link
 https://arduino.esp8266.com/stable/package_esp8266com_index.json
 ```
-![board_manager](images/board_manager.png)
+{{< img src="images/board_manager.png" >}}
 
 Następnie, zainstaluj płytkę wybierając z lewej strony **Menedżer płytek** i wyszukując **esp8266**.
 
-![board_install](images/board_install.png)
+{{< img src="images/board_install.png" >}}
 
 ### Hello World!
 Dobrą praktyką, jest uruchomienie tak zwanego "Hello World!". W przypadku
@@ -44,7 +44,7 @@ Podłącz swoje ESP8266 do komputera. Następnie, u góry ekranu wybierz odpowie
 **(Narzędzia > esp8266 > LOLIN(WEMOS) D1 R2 & mini)** oraz odpowieni port, do którego podłączyłeś/aś
 płytkę.
 
-![board_select](images/board_select.png)
+{{< img src="images/board_select.png" >}}
 
 W lewym górnym rogu edytora, wybierz **Plik > Przykłady > 01.Basics > Blink**. W Twoim edytorze,
 ukaże się następujący kod:
@@ -70,7 +70,7 @@ void loop()
 Ostatnim krokiem, jest wgranie kodu na płytkę. Kompilację (tłumaczenie kodu, na instrukcje procesora)
 oraz programowanie uruchamiamy strzałką, w lewym górnym rogu.
 
-![board_upload](images/board_upload.png)
+{{< img src="images/board_upload.png" >}}
 
 Jeśli wykonałeś poprawnie wszystkie instrukcje, zobaczysz sekwencję programowania, a następnie Twoja
 płytka zacznie mrugać. Możesz teraz przejść, do dalszej części warsztatu. :)
@@ -95,3 +95,4 @@ Hash of data verified.
 Leaving...
 Hard resetting via RTS pin...
 ```
+{{< img src="images/board_upload.png" >}}
