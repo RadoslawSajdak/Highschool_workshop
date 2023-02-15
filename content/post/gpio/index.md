@@ -1,7 +1,7 @@
 ---
 title: "GPIO"
 date: 2023-02-13T16:35:29+01:00
-draft: false
+draft: true
 weight: 2
 ShowToc: true
 ---
@@ -30,7 +30,7 @@ spróbuj zamrugać trzema diodami po kolei.
 {{< spoiler_code label="code0">}}
 
 <pre><code class="language-c">
-#include <Arduino.h>
+#include "Arduino.h"
 #define LED_PIN1 D6
 #define LED_PIN2 D7
 #define LED_PIN3 D8
@@ -175,7 +175,7 @@ for(uint8_t i = 0; i < 255; i++)
 
 {{< spoiler_code label="code3">}}
 <pre><code class="language-c">
-#include <Arduino.h>
+#include "Arduino.h"
 #define LED_PIN1 D6
 #define LED_PIN2 D7
 #define LED_PIN3 D8
@@ -232,7 +232,7 @@ będzie ona zmienną **gobalną**, dostępną w każdym miejscu kodu. Podobnie z
 
 
 ```c
-#include <Arduino.h>
+#include "Arduino.h"
 #define LED_PIN1 D6
 #define LED_PIN2 D7
 #define LED_PIN3 D8
@@ -279,7 +279,7 @@ inicjalizuje obiekt. Parametr `115200` to prędkość, z jaką przesyłane są d
 W funkcji loop wywołujemy funkcję `println()`, a jako parametr podajemy tekst, który chcemy wysłać. Warto zauważyć, że w C++ obiekty mogą zawierać funkcje.
   
 ```C
-#include <Arduino.h>
+#include "Arduino.h"
 
 void setup()
 {
@@ -306,7 +306,7 @@ Chyba, że naciśniemy przycisk, który zewrze pin do masy.
 
 Wgraj poniższy kod na swoją płytkę. Naciskając przycisk, obserwuj port szeregowy.
 ```C
-#include <Arduino.h>
+#include "Arduino.h"
 #define BUTTON_PIN D1
 void setup()
 {
@@ -348,7 +348,7 @@ odpowiednio umiejscowić `attachInterrupt()`
 
 {{< spoiler_code label="code5">}}
 <pre><code class="language-c">
-#include <Arduino.h>
+#include "Arduino.h"
 #define BUTTON_PIN D1
 
 ICACHE_RAM_ATTR void handleBtnPress()
@@ -390,7 +390,7 @@ Podłącz potencjometr zgodnie z poniższym schematem. Wykorzystaj piny
 
 Następnie, wgraj na płytkę poniższy kod
 ```C
-#include <Arduino.h>
+#include "Arduino.h"
 #define POTENTIOMETER_PIN D1
 
 void setup()
