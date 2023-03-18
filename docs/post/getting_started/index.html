@@ -20,7 +20,6 @@ PlatformIO (opcjonalne) Alternatywnym, bardziej rozbudowanym środowiskiem jest 
 <meta name=msapplication-TileColor content="#2e2e33">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
-<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
 </noscript>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-123-45','auto'),ga('send','pageview'))</script><meta property="og:title" content="Getting started">
 <meta property="og:description" content="Mikrokontrolery w praktyce Wstępne wymagania  Komputer z systemem Windows / Linux (preferowane ubuntu) ESP8266 oraz peryferia (dostarcza prowadzący)  Instalacja środowiska Arduino IDE Pobierz i zainstaluj arduino IDE. Poradnik oraz instalator znajdziesz na oficjalnej stronie producenta
@@ -36,8 +35,8 @@ PlatformIO (opcjonalne) Alternatywnym, bardziej rozbudowanym środowiskiem jest 
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://radoslawsajdak.github.io/Highschool_workshop/post/"},{"@type":"ListItem","position":2,"name":"Getting started","item":"https://radoslawsajdak.github.io/Highschool_workshop/post/getting_started/"}]}</script>
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Getting started","name":"Getting started","description":"Mikrokontrolery w praktyce Wstępne wymagania  Komputer z systemem Windows / Linux (preferowane ubuntu) ESP8266 oraz peryferia (dostarcza prowadzący)  Instalacja środowiska Arduino IDE Pobierz i zainstaluj arduino IDE. Poradnik oraz instalator znajdziesz na oficjalnej stronie producenta\nPlatformIO (opcjonalne) Alternatywnym, bardziej rozbudowanym środowiskiem jest PlatformIO. Pozwala ono na tworzenie bardziej złożonych projektów na różne platformy. Podczas warsztatu, będziemy korzystać z ArduinoIDE, jednak przykłady da się uruchomić również przez PlatformIO. Wymaga to jednak nieco dodatkowej konfiguracji.","keywords":[],"articleBody":"Mikrokontrolery w praktyce Wstępne wymagania  Komputer z systemem Windows / Linux (preferowane ubuntu) ESP8266 oraz peryferia (dostarcza prowadzący)  Instalacja środowiska Arduino IDE Pobierz i zainstaluj arduino IDE. Poradnik oraz instalator znajdziesz na oficjalnej stronie producenta\nPlatformIO (opcjonalne) Alternatywnym, bardziej rozbudowanym środowiskiem jest PlatformIO. Pozwala ono na tworzenie bardziej złożonych projektów na różne platformy. Podczas warsztatu, będziemy korzystać z ArduinoIDE, jednak przykłady da się uruchomić również przez PlatformIO. Wymaga to jednak nieco dodatkowej konfiguracji. Instrukcja instalacji znajduje się na stronie projektu PlatformIO\nDodanie płytki do środowiska Domyślnie, ArduinoIDE wspiera mikrokontrolery z rodziny AVR. ESP8266 z którego korzystamy, wymaga więc doinstalowania “sterowników”. W tym celu, otwórz ustawienia (skrót CTRL + ,) a następnie w oknie “menadżer dodatkowych płytek” wklej:\nhttps://arduino.esp8266.com/stable/package_esp8266com_index.json Pokaż rozwiązanie   Następnie, zainstaluj płytkę wybierając z lewej strony Menedżer płytek i wyszukując esp8266.\nPokaż rozwiązanie   Hello World! Dobrą praktyką, jest uruchomienie tak zwanego “Hello World!”. W przypadku tworzenia oprogramowania, polega on zazwyczaj na wyświetleniu na ekranie napisu “Hello World”. Po co? Ponieważ w ten sposób wiemy, że nasze środowisko działa poprawnie i możemy zaczynać tworzenie kodu. :)\nW przypadku mikrokontrolerów, używamy tzw. “blinky”, czyli mrugania diodą.\nPodłącz swoje ESP8266 do komputera. Następnie, u góry ekranu wybierz odpowiednią płytkę z listy rozwijanej (Narzędzia  esp8266  LOLIN(WEMOS) D1 R2 \u0026 mini) oraz odpowieni port, do którego podłączyłeś/aś płytkę.\nPokaż rozwiązanie   W lewym górnym rogu edytora, wybierz Plik  Przykłady  01.Basics  Blink. W Twoim edytorze, ukaże się następujący kod:\n#define BLINK_PERIOD 1000 // the setup function runs once when you press reset or power the board void setup() { // initialize digital pin LED_BUILTIN as an output.  pinMode(LED_BUILTIN, OUTPUT); } // the loop function runs over and over again forever void loop() { digitalWrite(LED_BUILTIN, HIGH); // turn the LED on (HIGH is the voltage level)  delay(BLINK_PERIOD); // wait for a second  digitalWrite(LED_BUILTIN, LOW); // turn the LED off by making the voltage LOW  delay(BLINK_PERIOD); // wait for a second } Ostatnim krokiem, jest wgranie kodu na płytkę. Kompilację (tłumaczenie kodu, na instrukcje procesora) oraz programowanie uruchamiamy strzałką, w lewym górnym rogu.\nPokaż rozwiązanie   Jeśli wykonałeś poprawnie wszystkie instrukcje, zobaczysz sekwencję programowania, a następnie Twoja płytka zacznie mrugać. Możesz teraz przejść, do dalszej części warsztatu. :)\nCompressed 265280 bytes to 195521... Writing at 0x00000000... (8 %) Writing at 0x00004000... (16 %) Writing at 0x00008000... (25 %) Writing at 0x0000c000... (33 %) Writing at 0x00010000... (41 %) Writing at 0x00014000... (50 %) Writing at 0x00018000... (58 %) Writing at 0x0001c000... (66 %) Writing at 0x00020000... (75 %) Writing at 0x00024000... (83 %) Writing at 0x00028000... (91 %) Writing at 0x0002c000... (100 %) Wrote 265280 bytes (195521 compressed) at 0x00000000 in 4.3 seconds (effective 488.0 kbit/s)... Hash of data verified. Leaving... Hard resetting via RTS pin... ","wordCount":"452","inLanguage":"en","datePublished":"2023-02-12T22:17:39+01:00","dateModified":"2023-02-12T22:17:39+01:00","author":{"@type":"Person","name":"Radosław Sajdak"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://radoslawsajdak.github.io/Highschool_workshop/post/getting_started/"},"publisher":{"@type":"Organization","name":"","logo":{"@type":"ImageObject","url":"https://radoslawsajdak.github.io/Highschool_workshop/favicon.ico"}}}</script>
 </head>
-<body id=top>
-<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<body class=dark id=top>
+<script>localStorage.getItem("pref-theme")==="light"&&document.body.classList.remove('dark')</script>
 <header class=header>
 <nav class=nav>
 <div class=logo>
@@ -59,7 +58,27 @@ Getting started
 </h1>
 <div class=post-meta><span title="2023-02-12 22:17:39 +0100 CET">February 12, 2023</span>&nbsp;·&nbsp;452 words&nbsp;·&nbsp;Radosław Sajdak
 </div>
-</header>
+</header> <div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<span class=details>Table of Contents</span>
+</summary>
+<div class=inner><nav id=TableOfContents>
+<ul>
+<li><a href=#wstępne-wymagania>Wstępne wymagania</a></li>
+<li><a href=#instalacja-środowiska>Instalacja środowiska</a>
+<ul>
+<li><a href=#arduino-ide>Arduino IDE</a></li>
+<li><a href=#platformio-opcjonalne>PlatformIO (opcjonalne)</a></li>
+<li><a href=#dodanie-płytki-do-środowiska>Dodanie płytki do środowiska</a></li>
+<li><a href=#hello-world>Hello World!</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</details>
+</div>
 <div class=post-content><h1 id=mikrokontrolery-w-praktyce>Mikrokontrolery w praktyce<a hidden class=anchor aria-hidden=true href=#mikrokontrolery-w-praktyce>#</a></h1>
 <h2 id=wstępne-wymagania>Wstępne wymagania<a hidden class=anchor aria-hidden=true href=#wstępne-wymagania>#</a></h2>
 <ul>

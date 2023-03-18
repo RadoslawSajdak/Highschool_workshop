@@ -20,7 +20,6 @@
 <link rel=alternate type=application/rss+xml href=https://radoslawsajdak.github.io/Highschool_workshop/index.xml>
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
-<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
 </noscript>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-123-45','auto'),ga('send','pageview'))</script><meta property="og:title" content>
 <meta property="og:description" content="Embedded workshops by Radosław Sajdak">
@@ -31,8 +30,8 @@
 <meta name=twitter:description content="Embedded workshops by Radosław Sajdak">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"Organization","name":"","url":"https://radoslawsajdak.github.io/Highschool_workshop/","description":"Embedded workshops by Radosław Sajdak","thumbnailUrl":"https://radoslawsajdak.github.io/Highschool_workshop/favicon.ico","sameAs":["https://github.com/RadoslawSajdak","https://pl.linkedin.com/in/radoslawsajdak","mailto:sajdak.radoslaw@gmail.com"]}</script>
 </head>
-<body class=list id=top>
-<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<body class="list dark" id=top>
+<script>localStorage.getItem("pref-theme")==="light"&&document.body.classList.remove('dark')</script>
 <header class=header>
 <nav class=nav>
 <div class=logo>
@@ -45,16 +44,11 @@
 </ul>
 </nav>
 </header>
-<main class=main>
-<article class="first-entry home-info">
-<header class=entry-header>
-<h1>Hi there 👋</h1>
-</header>
-<div class=entry-content>
-Welcome to workshops' page
-</div>
-<footer class=entry-footer>
-<div class=social-icons>
+<main class=main><div class=profile>
+<div class=profile_inner>
+<img draggable=false src=https://radoslawsajdak.github.io/Highschool_workshop/static/me.jpg alt="my image" title="my image" height=320 width=320>
+<h1>Radosław Sajdak</h1>
+<span>Embedded engineer; Working in hardware and software with IoT devices</span><div class=social-icons>
 <a href=https://github.com/RadoslawSajdak target=_blank rel="noopener noreferrer me" title=Github><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>
 </a>
 <a href=https://pl.linkedin.com/in/radoslawsajdak target=_blank rel="noopener noreferrer me" title=Linkedin><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
@@ -62,20 +56,15 @@ Welcome to workshops' page
 <a href=mailto:sajdak.radoslaw@gmail.com target=_blank rel="noopener noreferrer me" title=Email><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1.0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1.0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
 </a>
 </div>
-</footer>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Getting started
-</h2>
-</header>
-<div class=entry-content>
-<p>Mikrokontrolery w praktyce Wstępne wymagania Komputer z systemem Windows / Linux (preferowane ubuntu) ESP8266 oraz peryferia (dostarcza prowadzący) Instalacja środowiska Arduino IDE Pobierz i zainstaluj arduino IDE. Poradnik oraz instalator znajdziesz na oficjalnej stronie producenta
-PlatformIO (opcjonalne) Alternatywnym, bardziej rozbudowanym środowiskiem jest PlatformIO. Pozwala ono na tworzenie bardziej złożonych projektów na różne platformy. Podczas warsztatu, będziemy korzystać z ArduinoIDE, jednak przykłady da się uruchomić również przez PlatformIO. Wymaga to jednak nieco dodatkowej konfiguracji....</p>
+<div class=buttons>
+<a class=button href=post rel=noopener title=Workshop>
+<span class=button-inner>
+Workshop
+</span>
+</a>
 </div>
-<footer class=entry-footer><span title="2023-02-12 22:17:39 +0100 CET">February 12, 2023</span>&nbsp;·&nbsp;452 words&nbsp;·&nbsp;Radosław Sajdak</footer>
-<a class=entry-link aria-label="post link to Getting started" href=https://radoslawsajdak.github.io/Highschool_workshop/post/getting_started/></a>
-</article>
+</div>
+</div>
 </main>
 <footer class=footer>
 <span>&copy; 2023 <a href=https://radoslawsajdak.github.io/Highschool_workshop/></a></span>
