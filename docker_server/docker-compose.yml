@@ -1,0 +1,10 @@
+version: "3.1"
+services:
+  mfi-box:
+    container_name: bot-box
+    restart: on-failure
+    build:
+      context: ./bot-box
+    command: ["sleep", "infinity"]
+    volumes:
+      - ./discord_bot:/home/botbox/discord_bot

@@ -24,7 +24,7 @@ params:
   # author: ["Me", "You"] # multiple authors
   #images: ["<link or path of image for opengraph, twitter-cards>"]
   DateFormat: "January 2, 2006"
-  defaultTheme: auto # dark, light
+  defaultTheme: dark # dark, light
   disableThemeToggle: false
 
   ShowReadingTime: false
@@ -40,7 +40,7 @@ params:
   comments: false
   hidemeta: false
   hideSummary: false
-  showtoc: false
+  showtoc: true
   tocopen: false
   block: true
   title: true
@@ -62,15 +62,15 @@ params:
 
   # profile-mode
   profileMode:
-    enabled: false # needs to be explicitly set
+    enabled: true # needs to be explicitly set
     title: Radosław Sajdak
-    subtitle: "This is my page for the workshops"
+    subtitle: "Embedded engineer; Working in hardware and software with IoT devices"
     imageUrl: "static/me.jpg"
-    imageWidth: 120
-    imageHeight: 120
+    imageWidth: 320
+    imageHeight: 320
     imageTitle: my image
     buttons:
-      - name: Posts
+      - name: Workshop
         url: post
       # - name: Tags
       #   url: tags
