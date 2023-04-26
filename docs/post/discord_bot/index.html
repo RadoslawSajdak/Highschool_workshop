@@ -1,0 +1,524 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Aplikacja - Discord BOT | </title>
+<meta name=keywords content>
+<meta name=description content="Discord BOT - aplikacja zaawansowana W tym rozdziale zaprezentowano przykład aplikacji z wykorzystaniem Discord API. Jest to prosta aplikacja mrugająca diodą LED w odpowiedzi na wiadomość na kanale Discord. Niemniej, jej stworzenie wymaga instalacji i zrozumienia wielu różnych zagadnień.
+Instalacja środowiska Do stworzenia aplikacji, potrzebujemy zainstalować:
+ Discord App - (desktop/mobile) Python3 Dodatkowe biblioteki python:  discord.py python-dotenv    Discord App Pobierz i zainstaluj aplikację Discord. Załóż również konto w aplikacji.">
+<meta name=author content="Radosław Sajdak">
+<link rel=canonical href=https://radoslawsajdak.github.io/Highschool_workshop/post/discord_bot/>
+<link crossorigin=anonymous href=/Highschool_workshop/assets/css/stylesheet.6a98292fb8fa8cf0f3ba4042d4b75515c04267550f3ad49ff6271b5af9562443.css integrity="sha256-apgpL7j6jPDzukBC1LdVFcBCZ1UPOtSf9icbWvlWJEM=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/Highschool_workshop/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG+9vmJ0cTS+ovo0FeA=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://radoslawsajdak.github.io/Highschool_workshop/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://radoslawsajdak.github.io/Highschool_workshop/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://radoslawsajdak.github.io/Highschool_workshop/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://radoslawsajdak.github.io/Highschool_workshop/apple-touch-icon.png>
+<link rel=mask-icon href=https://radoslawsajdak.github.io/Highschool_workshop/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-123-45','auto'),ga('send','pageview'))</script><meta property="og:title" content="Aplikacja - Discord BOT">
+<meta property="og:description" content="Discord BOT - aplikacja zaawansowana W tym rozdziale zaprezentowano przykład aplikacji z wykorzystaniem Discord API. Jest to prosta aplikacja mrugająca diodą LED w odpowiedzi na wiadomość na kanale Discord. Niemniej, jej stworzenie wymaga instalacji i zrozumienia wielu różnych zagadnień.
+Instalacja środowiska Do stworzenia aplikacji, potrzebujemy zainstalować:
+ Discord App - (desktop/mobile) Python3 Dodatkowe biblioteki python:  discord.py python-dotenv    Discord App Pobierz i zainstaluj aplikację Discord. Załóż również konto w aplikacji.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://radoslawsajdak.github.io/Highschool_workshop/post/discord_bot/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2023-02-13T16:42:09+01:00">
+<meta property="article:modified_time" content="2023-02-13T16:42:09+01:00"><meta property="og:site_name" content="true">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Aplikacja - Discord BOT">
+<meta name=twitter:description content="Discord BOT - aplikacja zaawansowana W tym rozdziale zaprezentowano przykład aplikacji z wykorzystaniem Discord API. Jest to prosta aplikacja mrugająca diodą LED w odpowiedzi na wiadomość na kanale Discord. Niemniej, jej stworzenie wymaga instalacji i zrozumienia wielu różnych zagadnień.
+Instalacja środowiska Do stworzenia aplikacji, potrzebujemy zainstalować:
+ Discord App - (desktop/mobile) Python3 Dodatkowe biblioteki python:  discord.py python-dotenv    Discord App Pobierz i zainstaluj aplikację Discord. Załóż również konto w aplikacji.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://radoslawsajdak.github.io/Highschool_workshop/post/"},{"@type":"ListItem","position":2,"name":"Aplikacja - Discord BOT","item":"https://radoslawsajdak.github.io/Highschool_workshop/post/discord_bot/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Aplikacja - Discord BOT","name":"Aplikacja - Discord BOT","description":"Discord BOT - aplikacja zaawansowana W tym rozdziale zaprezentowano przykład aplikacji z wykorzystaniem Discord API. Jest to prosta aplikacja mrugająca diodą LED w odpowiedzi na wiadomość na kanale Discord. Niemniej, jej stworzenie wymaga instalacji i zrozumienia wielu różnych zagadnień.\nInstalacja środowiska Do stworzenia aplikacji, potrzebujemy zainstalować:\n Discord App - (desktop/mobile) Python3 Dodatkowe biblioteki python:  discord.py python-dotenv    Discord App Pobierz i zainstaluj aplikację Discord. Załóż również konto w aplikacji.","keywords":[],"articleBody":"Discord BOT - aplikacja zaawansowana W tym rozdziale zaprezentowano przykład aplikacji z wykorzystaniem Discord API. Jest to prosta aplikacja mrugająca diodą LED w odpowiedzi na wiadomość na kanale Discord. Niemniej, jej stworzenie wymaga instalacji i zrozumienia wielu różnych zagadnień.\nInstalacja środowiska Do stworzenia aplikacji, potrzebujemy zainstalować:\n Discord App - (desktop/mobile) Python3 Dodatkowe biblioteki python:  discord.py python-dotenv    Discord App Pobierz i zainstaluj aplikację Discord. Załóż również konto w aplikacji. Wystarczająca będzie aplikacja na telefon.\n https://discord.com/download  Python3 Sugerowanym poradnikiem dla wszystkich platform jest poradnik ze strony djangogirls\nBiblioteki python3 Windows:\n Wciśnij przycisj Win (flaga) Wpisz cmd W wyświetlonym terminalu wpisz pip3 install -U discord.py Następnie wpisz komendę pip3 install -U python-dotenv  Ubuntu:\n Otwórz nowe okno terminala Wpisz pip3 install -U discord.py python-dotenv  Discord Developer Portal Discord, udostępnia deweloperom API, czyli zestaw funkcji pozwalających na komunikację z ich aplikacją. W pierwszej kolejności, należy stworzyć bota z odpowiednimi uprawnieniami. W tym celu, skorzystaj z portalu https://www.geeksforgeeks.org/building-a-discord-bot-in-python/ . Jest to portal na którym można znaleźć wiele wskazówek odnośnie tworzenia kodu.\nJeśli nie czujesz się płynnie w języku angielskim, w prawym górnym rogu strony możesz automatycznie przetłumaczyć stronę.\nUWAGA Zatrzymaj się na podrozdziale Writing Code for Bot (Pisanie kodu bota). Stworzymy własny kod, dopasowany do naszej aplikacji. Kod ze strony posiada również błędy wynikające z ostatnich zmian w API Discorda.\nHello bot Jeśli udało Ci się przejść przez wszystkie poprzednie kroki, czas uruchomić hello_world. Stwórz dwa pliki:\n bot.py .env A następnie wklej do nich poniższy kod  # bot.py import os import discord from dotenv import load_dotenv load_dotenv() TOKEN = os.getenv('DISCORD_TOKEN') GUILD = os.getenv('DISCORD_GUILD') intents = discord.Intents.all() client = discord.Client(intents=intents) @client.event async def on_ready(): for guild in client.guilds: if guild.name == GUILD: break print( f'{client.user}is connected to the following guild:\\n' f'{guild.name}(id: {guild.id})' ) members = '\\n- '.join([member.name for member in guild.members]) print(f'Guild Members:\\n- {members}') @client.event async def on_message(message): if message.author == client.user: return if message.content == \"Hello bot!\": response = \"Hello \" + str(message.author) await message.channel.send(response) client.run(TOKEN) # .env DISCORD_TOKEN=TWÓJ TOKEN DISCORD_GUILD=\"NAZWA TWOJEGO SERWERA\" W pliku .env koniecznie podmień TOKEN (krok 5. w Creating a bot)\nCzas na uruchomienie aplikacji. Wywołaj komendę\npython3 bot.py\nW Twoim terminalu powinno pokazać się kilka wiadomości i co najważniejsze - lista członków serwera. Teraz, na dowolnym kanale tekstowym Discord napisz wiadomość Hello bot!! Implementacja Implementacja - Klient UDP Kolejnym krokiem, jest stworzenie klienta UDP działającego na naszym ESP. Będzie on odbierać dane na odpowiednim porcie, a następnie wykonywał zaprogramowaną akcję. W tym przypadku, włączał i wyłączał LED.\nWięcej na temat UDP, przeczytasz tutaj: https://pasja-informatyki.pl/sieci-komputerowe/protokol-udp/\nImplementacja - ESP Kluczową biblioteką, jest WiFiUdp.h. Dodaj ją do swojego projektu.\n Zdefiniuj WIFI_SSID jako \"workshop_h3x\" Zdefiniuj WIFI_PASSWORD jako \"workshop_h3x\" Zdefiniuj MAX_PACKET_LEN jako 1500 Stwórz globalne tablice:  char packet_buffer[MAX_PACKET_LEN + 1] char reply_buffer[] = “Got data \\r\\n”   Stwórz globalny obiekt WiFiUDP o nazwie udp Zainicjalizuj:  Port szeregowy (baudrate 115200) WiFi (.mode(WIFI_STA), następnie .begin()) obiekt udp, wywołując udp.begin(8888)   Wyprintuj po połączeniu lokalny IP który dostało Twoje ESP  Następnie, w funkcji loop():\n Zadeklaruj packet_size typu int i przypisz do niego udp.parsePacket() Jeżeli packet_size jest niezerowy to wywołaj kolejno:  Do zmiennej n typu int przypisz udp.read(packet_buffer, MAX_PACKET_LEN) Ustaw wartość n elementu tablicy packet_buffer na 0 Wyprintuj zawartość packet_buffer Doklej poniższe 3 linie kodu. Wyślą one odpowiedź na wiadomość    udp.beginPacket(Udp.remoteIP(), Udp.remotePort()); udp.write(ReplyBuffer); udp.endPacket(); Rozwiązanie powyższego kodu znajdziesz poniżej: #include \"Arduino.h\" #include \"ESP8266WiFi.h\" #include \"WiFiUdp.h\" #define SSID \"workshop_h3x\" #define PASSWORD \"workshop_h3x\" #define MAX_PACKET_LEN 1500 // buffers for receiving and sending data char packet_buffer[MAX_PACKET_LEN]; // buffer to hold incoming packet, char reply_buffer[] = \"Data ok\"; // a string to send back WiFiUDP udp; void setup() { Serial.begin(115200); WiFi.mode(WIFI_STA); WiFi.begin(SSID, PASSWORD); while (WiFi.status() != WL_CONNECTED) { Serial.print('.'); delay(500); } Serial.println(\"Connected! IP address: \"); Serial.println(WiFi.localIP()); udp.begin(8888); } void loop() { // if there's data available, read a packet int packet_size = udp.parsePacket(); if (packet_size) { // read the packet into packetBufffer int n = udp.read(packet_buffer, MAX_PACKET_LEN); packet_buffer[n] = 0; Serial.print(\"Contents: \"); Serial.println(packet_buffer); // send a reply, to the IP address and port that sent us the packet we received udp.beginPacket(udp.remoteIP(), udp.remotePort()); udp.write(reply_buffer); udp.endPacket(); } }  Pokaż rozwiązanie  \nStworzony kod, powinien wyświetlić otrzymane dane. Aby przetestować jego działanie:\n Uruchom poniższy kod, podmieniając IP_ADDRESS na adres Twojego ESP. Zapisz plik jako send_udp.py  # Python import socket def send_udp(message): IP_ADDRESS = \"127.0.0.1\" UDP_PORT = 8888 print(\"UDP target IP: \", IP_ADDRESS) print(\"UDP target port: \", UDP_PORT) print(\"message: \", message) sock = socket.socket(socket.AF_INET, # Internet socket.SOCK_DGRAM) # UDP sock.sendto(bytes(message, \"utf-8\"), (IP_ADDRESS, UDP_PORT)) data, addr = sock.recvfrom(1500) # buffer size is 1500 bytes print(\"Got: \", data) sock.close() if __name__ == \"__main__\": send_udp(\"Hello world!\") W Twoim terminalu powinieneś zobaczyć Implementacja - Bot discord Czas połączyć wszystkie kropki!\n Na początku pliku bot.py dodaj linię from send_udp import send_udp Do zmiennej response w pliku bot.py przypisz dowolną wiadomość W kolejnej linii (przecd await) wywołaj send_udp(response)  Uruchom bota na Discord i wyślij do niego wybraną (message.content) wiadomość. Czy otrzymałeś response na discordzie oraz ESP?\nBlinky discord - Zadanie zaawansowane Masz już pełny zestaw narzędzi, pozwalających wykonać ostatnie zadanie tego kursu. Stosując wiedzę z WSZYSTKICH poprzednich zadań, dodaj do kodu ESP włączanie i wyłączanie LED przy użyciu bota Discord. Niech wiadomość\n LED on - włącza led LED off - wyłącza led W przypadku każdej innej wiadomości, LED powinna zamrugać i wrócić do stanu sprzed mrugnięcia.  Odpowiedzi znajdziesz poniżej:\nbot.py # bot.py import os import discord from dotenv import load_dotenv from send_udp import send_udp load_dotenv() TOKEN = os.getenv('DISCORD_TOKEN') GUILD = os.getenv('DISCORD_GUILD') intents = discord.Intents.all() client = discord.Client(intents=intents) @client.event async def on_ready(): for guild in client.guilds: if guild.name == GUILD: break print( f'{client.user} is connected to the following guild:\\n' f'{guild.name}(id: {guild.id})' ) members = '\\n - '.join([member.name for member in guild.members]) print(f'Guild Members:\\n - {members}') @client.event async def on_message(message): if message.author == client.user: return if message.content == \"LED on\": response = \"I turned the LED on\" send_udp(\"LED on\") await message.channel.send(response) elif message.content == \"LED off\": response = \"I turned the LED off\" send_udp(\"LED off\") await message.channel.send(response) else: response = \"I dont know this command\" send_udp(\"Wrong input!\") await message.channel.send(response) client.run(TOKEN)  Pokaż rozwiązanie   kod ESP #include \"Arduino.h\" #include \"ESP8266WiFi.h\" #include \"WiFiUdp.h\" #define SSID \"workshop_h3x\" #define PASSWORD \"workshop_h3x\" #define MAX_PACKET_LEN 1500 // buffers for receiving and sending data char packet_buffer[MAX_PACKET_LEN]; // buffer to hold incoming packet, char reply_buffer[] = \"Data ok\"; // a string to send back WiFiUDP udp; void setup() { Serial.begin(115200); pinMode(LED_BUILTIN, OUTPUT); digitalWrite(LED_BUILTIN, HIGH); WiFi.mode(WIFI_STA); WiFi.begin(SSID, PASSWORD); while (WiFi.status() != WL_CONNECTED) { Serial.print('.'); delay(500); } Serial.println(\"Connected! IP address: \"); Serial.println(WiFi.localIP()); udp.begin(8888); } void blink(int n_times) { bool prev_state = digitalRead(LED_BUILTIN); for (int i = 0; i  Pokaż rozwiązanie   Na podstawie tego rozdziału, możesz zrobić wiele własnych projektów. Wiele urządzeń IoT (kamery, zdalne gniazdka itp.) wystawiają swoje API w pythonie lub JavaScript. Korzystając z dostępnych w internecie poradników w sposób, który został tutaj przedstawiony, możesz stworzyć duże i ciekawe rozwiązania! :)\n","wordCount":"1112","inLanguage":"en","datePublished":"2023-02-13T16:42:09+01:00","dateModified":"2023-02-13T16:42:09+01:00","author":{"@type":"Person","name":"Radosław Sajdak"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://radoslawsajdak.github.io/Highschool_workshop/post/discord_bot/"},"publisher":{"@type":"Organization","name":"","logo":{"@type":"ImageObject","url":"https://radoslawsajdak.github.io/Highschool_workshop/favicon.ico"}}}</script>
+</head>
+<body class=dark id=top>
+<script>localStorage.getItem("pref-theme")==="light"&&document.body.classList.remove('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<div class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</div>
+</div>
+<ul id=menu>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=https://radoslawsajdak.github.io/Highschool_workshop/>Home</a>&nbsp;»&nbsp;<a href=https://radoslawsajdak.github.io/Highschool_workshop/post/>Posts</a></div>
+<h1 class=post-title>
+Aplikacja - Discord BOT
+</h1>
+<div class=post-meta><span title="2023-02-13 16:42:09 +0100 CET">February 13, 2023</span>&nbsp;·&nbsp;1112 words&nbsp;·&nbsp;Radosław Sajdak
+</div>
+</header> <div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<span class=details>Table of Contents</span>
+</summary>
+<div class=inner><nav id=TableOfContents>
+<ul>
+<li><a href=#instalacja-środowiska>Instalacja środowiska</a>
+<ul>
+<li><a href=#discord-app>Discord App</a></li>
+<li><a href=#python3>Python3</a></li>
+<li><a href=#biblioteki-python3>Biblioteki python3</a></li>
+</ul>
+</li>
+<li><a href=#discord-developer-portal>Discord Developer Portal</a></li>
+<li><a href=#hello-bot>Hello bot</a></li>
+<li><a href=#implementacja>Implementacja</a>
+<ul>
+<li><a href=#implementacja---klient-udp>Implementacja - Klient UDP</a></li>
+<li><a href=#implementacja---esp>Implementacja - ESP</a></li>
+<li><a href=#implementacja---bot-discord>Implementacja - Bot discord</a></li>
+<li><a href=#blinky-discord---zadanie-zaawansowane>Blinky discord - Zadanie zaawansowane</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</details>
+</div>
+<div class=post-content><h1 id=discord-bot---aplikacja-zaawansowana>Discord BOT - aplikacja zaawansowana<a hidden class=anchor aria-hidden=true href=#discord-bot---aplikacja-zaawansowana>#</a></h1>
+<p>W tym rozdziale zaprezentowano przykład aplikacji z wykorzystaniem Discord API. Jest to prosta aplikacja mrugająca diodą LED w odpowiedzi na wiadomość na kanale Discord.
+Niemniej, jej stworzenie wymaga instalacji i zrozumienia wielu różnych zagadnień.</p>
+<h2 id=instalacja-środowiska>Instalacja środowiska<a hidden class=anchor aria-hidden=true href=#instalacja-środowiska>#</a></h2>
+<p>Do stworzenia aplikacji, potrzebujemy zainstalować:</p>
+<ul>
+<li>Discord App - (desktop/mobile)</li>
+<li>Python3</li>
+<li>Dodatkowe biblioteki python:
+<ul>
+<li>discord.py</li>
+<li>python-dotenv</li>
+</ul>
+</li>
+</ul>
+<h3 id=discord-app>Discord App<a hidden class=anchor aria-hidden=true href=#discord-app>#</a></h3>
+<p>Pobierz i zainstaluj aplikację Discord. Załóż również konto w aplikacji. Wystarczająca będzie aplikacja na telefon.</p>
+<ul>
+<li><a href=https://discord.com/download>https://discord.com/download</a></li>
+</ul>
+<h3 id=python3>Python3<a hidden class=anchor aria-hidden=true href=#python3>#</a></h3>
+<p>Sugerowanym poradnikiem dla wszystkich platform jest poradnik ze strony <a href=https://tutorial.djangogirls.org/pl/python_installation/>djangogirls</a></p>
+<h3 id=biblioteki-python3>Biblioteki python3<a hidden class=anchor aria-hidden=true href=#biblioteki-python3>#</a></h3>
+<p><strong>Windows:</strong></p>
+<ul>
+<li>Wciśnij przycisj <code>Win</code> (flaga)</li>
+<li>Wpisz <code>cmd</code></li>
+<li>W wyświetlonym terminalu wpisz <code>pip3 install -U discord.py</code></li>
+<li>Następnie wpisz komendę <code>pip3 install -U python-dotenv</code></li>
+</ul>
+<p><strong>Ubuntu:</strong></p>
+<ul>
+<li>Otwórz nowe okno terminala</li>
+<li>Wpisz <code>pip3 install -U discord.py python-dotenv</code></li>
+</ul>
+<h2 id=discord-developer-portal>Discord Developer Portal<a hidden class=anchor aria-hidden=true href=#discord-developer-portal>#</a></h2>
+<p>Discord, udostępnia deweloperom API, czyli zestaw funkcji pozwalających na komunikację z ich aplikacją.
+W pierwszej kolejności, należy stworzyć bota z odpowiednimi uprawnieniami. W tym celu, skorzystaj z
+portalu <a href=https://www.geeksforgeeks.org/building-a-discord-bot-in-python/>https://www.geeksforgeeks.org/building-a-discord-bot-in-python/</a> . Jest to portal na którym można znaleźć
+wiele wskazówek odnośnie tworzenia kodu.<br>
+Jeśli nie czujesz się płynnie w języku angielskim, w prawym górnym rogu strony możesz automatycznie przetłumaczyć stronę.</p>
+<p><strong>UWAGA</strong> Zatrzymaj się na podrozdziale <code>Writing Code for Bot</code> (Pisanie kodu bota). Stworzymy własny kod, dopasowany do
+naszej aplikacji. Kod ze strony posiada również błędy wynikające z ostatnich zmian w API Discorda.</p>
+<h2 id=hello-bot>Hello bot<a hidden class=anchor aria-hidden=true href=#hello-bot>#</a></h2>
+<p>Jeśli udało Ci się przejść przez wszystkie poprzednie kroki, czas uruchomić <code>hello_world</code>. Stwórz dwa pliki:</p>
+<ul>
+<li>bot.py</li>
+<li>.env
+A następnie wklej do nich poniższy kod</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=c1># bot.py</span>
+<span class=kn>import</span> <span class=nn>os</span>
+
+<span class=kn>import</span> <span class=nn>discord</span>
+<span class=kn>from</span> <span class=nn>dotenv</span> <span class=kn>import</span> <span class=n>load_dotenv</span>
+
+<span class=n>load_dotenv</span><span class=p>()</span>
+<span class=n>TOKEN</span> <span class=o>=</span> <span class=n>os</span><span class=o>.</span><span class=n>getenv</span><span class=p>(</span><span class=s1>&#39;DISCORD_TOKEN&#39;</span><span class=p>)</span>
+<span class=n>GUILD</span> <span class=o>=</span> <span class=n>os</span><span class=o>.</span><span class=n>getenv</span><span class=p>(</span><span class=s1>&#39;DISCORD_GUILD&#39;</span><span class=p>)</span>
+
+<span class=n>intents</span> <span class=o>=</span> <span class=n>discord</span><span class=o>.</span><span class=n>Intents</span><span class=o>.</span><span class=n>all</span><span class=p>()</span>
+<span class=n>client</span> <span class=o>=</span> <span class=n>discord</span><span class=o>.</span><span class=n>Client</span><span class=p>(</span><span class=n>intents</span><span class=o>=</span><span class=n>intents</span><span class=p>)</span>
+
+<span class=nd>@client</span><span class=o>.</span><span class=n>event</span>
+<span class=k>async</span> <span class=k>def</span> <span class=nf>on_ready</span><span class=p>():</span>
+    <span class=k>for</span> <span class=n>guild</span> <span class=ow>in</span> <span class=n>client</span><span class=o>.</span><span class=n>guilds</span><span class=p>:</span>
+        <span class=k>if</span> <span class=n>guild</span><span class=o>.</span><span class=n>name</span> <span class=o>==</span> <span class=n>GUILD</span><span class=p>:</span>
+            <span class=k>break</span>
+
+    <span class=nb>print</span><span class=p>(</span>
+        <span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>client</span><span class=o>.</span><span class=n>user</span><span class=si>}</span><span class=s1> is connected to the following guild:</span><span class=se>\n</span><span class=s1>&#39;</span>
+        <span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>guild</span><span class=o>.</span><span class=n>name</span><span class=si>}</span><span class=s1>(id: </span><span class=si>{</span><span class=n>guild</span><span class=o>.</span><span class=n>id</span><span class=si>}</span><span class=s1>)&#39;</span>
+    <span class=p>)</span>
+    <span class=n>members</span> <span class=o>=</span> <span class=s1>&#39;</span><span class=se>\n</span><span class=s1> - &#39;</span><span class=o>.</span><span class=n>join</span><span class=p>([</span><span class=n>member</span><span class=o>.</span><span class=n>name</span> <span class=k>for</span> <span class=n>member</span> <span class=ow>in</span> <span class=n>guild</span><span class=o>.</span><span class=n>members</span><span class=p>])</span>
+    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;Guild Members:</span><span class=se>\n</span><span class=s1> - </span><span class=si>{</span><span class=n>members</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)</span>
+
+<span class=nd>@client</span><span class=o>.</span><span class=n>event</span>
+<span class=k>async</span> <span class=k>def</span> <span class=nf>on_message</span><span class=p>(</span><span class=n>message</span><span class=p>):</span>
+    <span class=k>if</span> <span class=n>message</span><span class=o>.</span><span class=n>author</span> <span class=o>==</span> <span class=n>client</span><span class=o>.</span><span class=n>user</span><span class=p>:</span>
+        <span class=k>return</span>
+
+    <span class=k>if</span> <span class=n>message</span><span class=o>.</span><span class=n>content</span> <span class=o>==</span> <span class=s2>&#34;Hello bot!&#34;</span><span class=p>:</span>
+        <span class=n>response</span> <span class=o>=</span> <span class=s2>&#34;Hello &#34;</span> <span class=o>+</span> <span class=nb>str</span><span class=p>(</span><span class=n>message</span><span class=o>.</span><span class=n>author</span><span class=p>)</span>
+        <span class=k>await</span> <span class=n>message</span><span class=o>.</span><span class=n>channel</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=n>response</span><span class=p>)</span>
+
+<span class=n>client</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>TOKEN</span><span class=p>)</span>
+
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=c1># .env</span>
+<span class=n>DISCORD_TOKEN</span><span class=o>=</span><span class=n>TWÓJ</span> <span class=n>TOKEN</span>
+<span class=n>DISCORD_GUILD</span><span class=o>=</span><span class=s2>&#34;NAZWA TWOJEGO SERWERA&#34;</span>
+</code></pre></div><p>W pliku <code>.env</code> koniecznie podmień TOKEN (krok 5. w <code>Creating a bot</code>)</p>
+<p>Czas na uruchomienie aplikacji. Wywołaj komendę<br>
+<code>python3 bot.py</code></p>
+<p>W Twoim terminalu powinno pokazać się kilka wiadomości i co najważniejsze - lista członków serwera.
+<img loading=lazy src=images/auth_bot.png#center alt=terminal>
+</p>
+<p>Teraz, na dowolnym kanale tekstowym Discord napisz wiadomość <code>Hello bot!</code>!
+<img loading=lazy src=images/hello_bot.png#center alt=hello_bot>
+</p>
+<h2 id=implementacja>Implementacja<a hidden class=anchor aria-hidden=true href=#implementacja>#</a></h2>
+<h3 id=implementacja---klient-udp>Implementacja - Klient UDP<a hidden class=anchor aria-hidden=true href=#implementacja---klient-udp>#</a></h3>
+<p>Kolejnym krokiem, jest stworzenie klienta UDP działającego na naszym ESP. Będzie on odbierać dane na odpowiednim porcie, a następnie wykonywał zaprogramowaną akcję. W tym przypadku, włączał i wyłączał LED.</p>
+<p>Więcej na temat UDP, przeczytasz tutaj: <a href=https://pasja-informatyki.pl/sieci-komputerowe/protokol-udp/>https://pasja-informatyki.pl/sieci-komputerowe/protokol-udp/</a></p>
+<h3 id=implementacja---esp>Implementacja - ESP<a hidden class=anchor aria-hidden=true href=#implementacja---esp>#</a></h3>
+<p>Kluczową biblioteką, jest <code>WiFiUdp.h</code>. Dodaj ją do swojego projektu.</p>
+<ul>
+<li>Zdefiniuj <code>WIFI_SSID</code> jako <code>"workshop_h3x"</code></li>
+<li>Zdefiniuj <code>WIFI_PASSWORD</code> jako <code>"workshop_h3x"</code></li>
+<li>Zdefiniuj <code>MAX_PACKET_LEN</code> jako <code>1500</code></li>
+<li>Stwórz globalne tablice:
+<ul>
+<li>char packet_buffer[MAX_PACKET_LEN + 1]</li>
+<li>char reply_buffer[] = &ldquo;Got data \r\n&rdquo;</li>
+</ul>
+</li>
+<li>Stwórz globalny obiekt <code>WiFiUDP</code> o nazwie <code>udp</code></li>
+<li>Zainicjalizuj:
+<ul>
+<li>Port szeregowy (baudrate <code>115200</code>)</li>
+<li>WiFi (.mode(WIFI_STA), następnie .begin())</li>
+<li>obiekt <code>udp</code>, wywołując <code>udp.begin(8888)</code></li>
+</ul>
+</li>
+<li>Wyprintuj po połączeniu lokalny IP który dostało Twoje ESP</li>
+</ul>
+<p>Następnie, w funkcji <code>loop()</code>:</p>
+<ul>
+<li>Zadeklaruj <code>packet_size</code> typu int i przypisz do niego <code>udp.parsePacket()</code></li>
+<li>Jeżeli <code>packet_size</code> jest niezerowy to wywołaj kolejno:
+<ul>
+<li>Do zmiennej <code>n</code> typu int przypisz <code>udp.read(packet_buffer, MAX_PACKET_LEN)</code></li>
+<li>Ustaw wartość <code>n</code> elementu tablicy <code>packet_buffer</code> na 0</li>
+<li>Wyprintuj zawartość <code>packet_buffer</code></li>
+<li>Doklej poniższe 3 linie kodu. Wyślą one odpowiedź na wiadomość</li>
+</ul>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C>    <span class=n>udp</span><span class=p>.</span><span class=n>beginPacket</span><span class=p>(</span><span class=n>Udp</span><span class=p>.</span><span class=n>remoteIP</span><span class=p>(),</span> <span class=n>Udp</span><span class=p>.</span><span class=n>remotePort</span><span class=p>());</span>
+    <span class=n>udp</span><span class=p>.</span><span class=n>write</span><span class=p>(</span><span class=n>ReplyBuffer</span><span class=p>);</span>
+    <span class=n>udp</span><span class=p>.</span><span class=n>endPacket</span><span class=p>();</span>
+</code></pre></div><p>Rozwiązanie powyższego kodu znajdziesz poniżej:
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=udp_server_esp type=checkbox>
+<pre><code class=language-c>
+
+#include "Arduino.h"
+#include "ESP8266WiFi.h"
+#include "WiFiUdp.h"
+
+#define SSID "workshop_h3x"
+#define PASSWORD "workshop_h3x"
+#define MAX_PACKET_LEN 1500
+
+// buffers for receiving and sending data
+char packet_buffer[MAX_PACKET_LEN];      // buffer to hold incoming packet,
+char reply_buffer[] = "Data ok";     // a string to send back
+
+WiFiUDP udp;
+
+void setup()
+{
+    Serial.begin(115200);
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(SSID, PASSWORD);
+    while (WiFi.status() != WL_CONNECTED)
+    {
+        Serial.print('.');
+        delay(500);
+    }
+    Serial.println("Connected! IP address: ");
+    Serial.println(WiFi.localIP());
+
+    udp.begin(8888);
+}
+
+void loop()
+{
+    // if there's data available, read a packet
+    int packet_size = udp.parsePacket();
+    if (packet_size)
+    {
+        // read the packet into packetBufffer
+        int n = udp.read(packet_buffer, MAX_PACKET_LEN);
+        packet_buffer[n] = 0;
+        Serial.print("Contents:  ");
+        Serial.println(packet_buffer);
+
+        // send a reply, to the IP address and port that sent us the packet we received
+        udp.beginPacket(udp.remoteIP(), udp.remotePort());
+        udp.write(reply_buffer);
+        udp.endPacket();
+    }
+}
+
+</pre></code>
+<label for=udp_server_esp class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure></p>
+<p>Stworzony kod, powinien wyświetlić otrzymane dane. Aby przetestować jego działanie:</p>
+<ul>
+<li>Uruchom poniższy kod, podmieniając <code>IP_ADDRESS</code> na adres Twojego ESP. Zapisz plik jako <code>send_udp.py</code></li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=c1># Python</span>
+<span class=kn>import</span> <span class=nn>socket</span>
+
+<span class=k>def</span> <span class=nf>send_udp</span><span class=p>(</span><span class=n>message</span><span class=p>):</span>
+    <span class=n>IP_ADDRESS</span> <span class=o>=</span> <span class=s2>&#34;127.0.0.1&#34;</span>
+    <span class=n>UDP_PORT</span> <span class=o>=</span> <span class=mi>8888</span>
+
+    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;UDP target IP: &#34;</span><span class=p>,</span> <span class=n>IP_ADDRESS</span><span class=p>)</span>
+    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;UDP target port: &#34;</span><span class=p>,</span> <span class=n>UDP_PORT</span><span class=p>)</span>
+    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;message: &#34;</span><span class=p>,</span> <span class=n>message</span><span class=p>)</span>
+
+    <span class=n>sock</span> <span class=o>=</span> <span class=n>socket</span><span class=o>.</span><span class=n>socket</span><span class=p>(</span><span class=n>socket</span><span class=o>.</span><span class=n>AF_INET</span><span class=p>,</span> <span class=c1># Internet</span>
+                        <span class=n>socket</span><span class=o>.</span><span class=n>SOCK_DGRAM</span><span class=p>)</span> <span class=c1># UDP</span>
+    <span class=n>sock</span><span class=o>.</span><span class=n>sendto</span><span class=p>(</span><span class=nb>bytes</span><span class=p>(</span><span class=n>message</span><span class=p>,</span> <span class=s2>&#34;utf-8&#34;</span><span class=p>),</span> <span class=p>(</span><span class=n>IP_ADDRESS</span><span class=p>,</span> <span class=n>UDP_PORT</span><span class=p>))</span>
+
+    <span class=n>data</span><span class=p>,</span> <span class=n>addr</span> <span class=o>=</span> <span class=n>sock</span><span class=o>.</span><span class=n>recvfrom</span><span class=p>(</span><span class=mi>1500</span><span class=p>)</span> <span class=c1># buffer size is 1500 bytes</span>
+    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Got: &#34;</span><span class=p>,</span> <span class=n>data</span><span class=p>)</span>
+    <span class=n>sock</span><span class=o>.</span><span class=n>close</span><span class=p>()</span>
+
+<span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+    <span class=n>send_udp</span><span class=p>(</span><span class=s2>&#34;Hello world!&#34;</span><span class=p>)</span>
+</code></pre></div><p>W Twoim terminalu powinieneś zobaczyć
+<img loading=lazy src=images/data_ok.png#center alt=data_ok>
+</p>
+<h3 id=implementacja---bot-discord>Implementacja - Bot discord<a hidden class=anchor aria-hidden=true href=#implementacja---bot-discord>#</a></h3>
+<p>Czas połączyć wszystkie kropki!</p>
+<ul>
+<li>Na początku pliku <code>bot.py</code> dodaj linię <code>from send_udp import send_udp</code></li>
+<li>Do zmiennej <code>response</code> w pliku <code>bot.py</code> przypisz dowolną wiadomość</li>
+<li>W kolejnej linii (przecd await) wywołaj <code>send_udp(response)</code></li>
+</ul>
+<p>Uruchom bota na Discord i wyślij do niego wybraną (<code>message.content</code>) wiadomość. Czy otrzymałeś <code>response</code> na discordzie oraz ESP?</p>
+<p><img loading=lazy src=images/bot_success.png#center alt=bot_success>
+</p>
+<h3 id=blinky-discord---zadanie-zaawansowane>Blinky discord - Zadanie zaawansowane<a hidden class=anchor aria-hidden=true href=#blinky-discord---zadanie-zaawansowane>#</a></h3>
+<p>Masz już pełny zestaw narzędzi, pozwalających wykonać ostatnie zadanie tego kursu. Stosując wiedzę z <strong>WSZYSTKICH</strong> poprzednich zadań, dodaj do kodu ESP
+włączanie i wyłączanie LED przy użyciu bota Discord. Niech wiadomość</p>
+<ul>
+<li>LED on - włącza led</li>
+<li>LED off - wyłącza led
+W przypadku każdej innej wiadomości, LED powinna zamrugać i wrócić do stanu sprzed mrugnięcia.</li>
+</ul>
+<p>Odpowiedzi znajdziesz poniżej:</p>
+<h4 id=botpy>bot.py<a hidden class=anchor aria-hidden=true href=#botpy>#</a></h4>
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id="bot ready" type=checkbox>
+<pre><code class=language-python>
+
+# bot.py
+import os
+
+import discord
+from dotenv import load_dotenv
+from send_udp import send_udp
+
+load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
+GUILD = os.getenv('DISCORD_GUILD')
+
+intents = discord.Intents.all()
+client = discord.Client(intents=intents)
+
+@client.event
+async def on_ready():
+    for guild in client.guilds:
+        if guild.name == GUILD:
+            break
+
+    print(
+        f'{client.user} is connected to the following guild:\n'
+        f'{guild.name}(id: {guild.id})'
+    )
+    members = '\n - '.join([member.name for member in guild.members])
+    print(f'Guild Members:\n - {members}')
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content == "LED on":
+        response = "I turned the LED on"
+        send_udp("LED on")
+        await message.channel.send(response)
+
+    elif message.content == "LED off":
+        response = "I turned the LED off"
+        send_udp("LED off")
+        await message.channel.send(response)
+    
+    else:
+        response = "I dont know this command"
+        send_udp("Wrong input!")
+        await message.channel.send(response)
+    
+
+client.run(TOKEN)
+
+</pre></code>
+<label for="bot ready" class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure>
+<h4 id=kod-esp>kod ESP<a hidden class=anchor aria-hidden=true href=#kod-esp>#</a></h4>
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id="esp ready" type=checkbox>
+<pre><code class=language-c>
+
+#include "Arduino.h"
+#include "ESP8266WiFi.h"
+#include "WiFiUdp.h"
+
+#define SSID "workshop_h3x"
+#define PASSWORD "workshop_h3x"
+#define MAX_PACKET_LEN 1500
+
+// buffers for receiving and sending data
+char packet_buffer[MAX_PACKET_LEN];      // buffer to hold incoming packet,
+char reply_buffer[] = "Data ok";     // a string to send back
+
+WiFiUDP udp;
+
+void setup()
+{
+    Serial.begin(115200);
+    pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, HIGH);
+
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(SSID, PASSWORD);
+    while (WiFi.status() != WL_CONNECTED)
+    {
+        Serial.print('.');
+        delay(500);
+    }
+    Serial.println("Connected! IP address: ");
+    Serial.println(WiFi.localIP());
+
+    udp.begin(8888);
+}
+
+void blink(int n_times)
+{
+    bool prev_state = digitalRead(LED_BUILTIN);
+    for (int i = 0; i < n_times; i++)
+    {
+        digitalWrite(LED_BUILTIN, LOW);
+        delay(200);
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(200);
+    }
+    digitalWrite(LED_BUILTIN, prev_state);
+}
+
+void loop()
+{
+    // if there's data available, read a packet
+    int packet_size = udp.parsePacket();
+    if (packet_size)
+    {
+        // read the packet into packetBufffer
+        int n = udp.read(packet_buffer, MAX_PACKET_LEN);
+        packet_buffer[n] = 0;
+        Serial.print("Contents:  ");
+        Serial.println(packet_buffer);
+        if (0 == strcmp("LED on", packet_buffer))
+        {
+            digitalWrite(LED_BUILTIN, LOW);
+        }
+        else if (0 == strcmp("LED off", packet_buffer))
+        {
+            digitalWrite(LED_BUILTIN, HIGH);
+        }
+        else
+            blink(3);
+
+        // send a reply, to the IP address and port that sent us the packet we received
+        udp.beginPacket(udp.remoteIP(), udp.remotePort());
+        udp.write(reply_buffer);
+        udp.endPacket();
+    }
+}
+
+</pre></code>
+<label for="esp ready" class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure>
+<p>Na podstawie tego rozdziału, możesz zrobić wiele własnych projektów. Wiele urządzeń IoT (kamery, zdalne gniazdka itp.)
+wystawiają swoje API w pythonie lub JavaScript. Korzystając z dostępnych w internecie poradników w sposób, który
+został tutaj przedstawiony, możesz stworzyć duże i ciekawe rozwiązania! :)</p>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+</ul>
+<nav class=paginav>
+<a class=prev href=https://radoslawsajdak.github.io/Highschool_workshop/post/wifi/>
+<span class=title>« Prev</span>
+<br>
+<span>Wi-fi</span>
+</a>
+<a class=next href=https://radoslawsajdak.github.io/Highschool_workshop/post/useful_links/>
+<span class=title>Next »</span>
+<br>
+<span>Użyteczne linki</span>
+</a>
+</nav>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2023 <a href=https://radoslawsajdak.github.io/Highschool_workshop/></a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerHTML='copy';function d(){a.innerHTML='copied!',setTimeout(()=>{a.innerHTML='copy'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
+</body>
+</html>

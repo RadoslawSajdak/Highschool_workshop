@@ -1,0 +1,590 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Wi-fi | </title>
+<meta name=keywords content>
+<meta name=description content="Wi-Fi Wi-Fi jest zestawem standardów sieci bezprzewodowych. Obecne jest właściwie wszędzie. W IoT również stosuje się je coraz częściej, ze względu na rozwijające się mechanizmy oszczędzania energii.
+Więcej na temat sieci Wi-Fi, można przeczytać np. w wikipedii.
+W poniższym ćwiczeniu, poznamy podstawy łączenia się z istniejącą siecią Wi-Fi oraz komunikacji przy użyciu MQTT.
+Blinky dla Wi-Fi Jak zawsze, pisanie kodu należy zacząć od blinky. W tym celu:
+  Do pustego projektu zaincluduj bibliotekę <ESP8266WiFi.">
+<meta name=author content="Radosław Sajdak">
+<link rel=canonical href=https://radoslawsajdak.github.io/Highschool_workshop/post/wifi/>
+<link crossorigin=anonymous href=/Highschool_workshop/assets/css/stylesheet.6a98292fb8fa8cf0f3ba4042d4b75515c04267550f3ad49ff6271b5af9562443.css integrity="sha256-apgpL7j6jPDzukBC1LdVFcBCZ1UPOtSf9icbWvlWJEM=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/Highschool_workshop/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG+9vmJ0cTS+ovo0FeA=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://radoslawsajdak.github.io/Highschool_workshop/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://radoslawsajdak.github.io/Highschool_workshop/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://radoslawsajdak.github.io/Highschool_workshop/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://radoslawsajdak.github.io/Highschool_workshop/apple-touch-icon.png>
+<link rel=mask-icon href=https://radoslawsajdak.github.io/Highschool_workshop/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-123-45','auto'),ga('send','pageview'))</script><meta property="og:title" content="Wi-fi">
+<meta property="og:description" content="Wi-Fi Wi-Fi jest zestawem standardów sieci bezprzewodowych. Obecne jest właściwie wszędzie. W IoT również stosuje się je coraz częściej, ze względu na rozwijające się mechanizmy oszczędzania energii.
+Więcej na temat sieci Wi-Fi, można przeczytać np. w wikipedii.
+W poniższym ćwiczeniu, poznamy podstawy łączenia się z istniejącą siecią Wi-Fi oraz komunikacji przy użyciu MQTT.
+Blinky dla Wi-Fi Jak zawsze, pisanie kodu należy zacząć od blinky. W tym celu:
+  Do pustego projektu zaincluduj bibliotekę <ESP8266WiFi.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://radoslawsajdak.github.io/Highschool_workshop/post/wifi/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2023-02-13T16:41:57+01:00">
+<meta property="article:modified_time" content="2023-02-13T16:41:57+01:00"><meta property="og:site_name" content="true">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Wi-fi">
+<meta name=twitter:description content="Wi-Fi Wi-Fi jest zestawem standardów sieci bezprzewodowych. Obecne jest właściwie wszędzie. W IoT również stosuje się je coraz częściej, ze względu na rozwijające się mechanizmy oszczędzania energii.
+Więcej na temat sieci Wi-Fi, można przeczytać np. w wikipedii.
+W poniższym ćwiczeniu, poznamy podstawy łączenia się z istniejącą siecią Wi-Fi oraz komunikacji przy użyciu MQTT.
+Blinky dla Wi-Fi Jak zawsze, pisanie kodu należy zacząć od blinky. W tym celu:
+  Do pustego projektu zaincluduj bibliotekę <ESP8266WiFi.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://radoslawsajdak.github.io/Highschool_workshop/post/"},{"@type":"ListItem","position":2,"name":"Wi-fi","item":"https://radoslawsajdak.github.io/Highschool_workshop/post/wifi/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Wi-fi","name":"Wi-fi","description":"Wi-Fi Wi-Fi jest zestawem standardów sieci bezprzewodowych. Obecne jest właściwie wszędzie. W IoT również stosuje się je coraz częściej, ze względu na rozwijające się mechanizmy oszczędzania energii.\nWięcej na temat sieci Wi-Fi, można przeczytać np. w wikipedii.\nW poniższym ćwiczeniu, poznamy podstawy łączenia się z istniejącą siecią Wi-Fi oraz komunikacji przy użyciu MQTT.\nBlinky dla Wi-Fi Jak zawsze, pisanie kodu należy zacząć od blinky. W tym celu:\n  Do pustego projektu zaincluduj bibliotekę \u0026lt;ESP8266WiFi.","keywords":[],"articleBody":"Wi-Fi Wi-Fi jest zestawem standardów sieci bezprzewodowych. Obecne jest właściwie wszędzie. W IoT również stosuje się je coraz częściej, ze względu na rozwijające się mechanizmy oszczędzania energii.\nWięcej na temat sieci Wi-Fi, można przeczytać np. w wikipedii.\nW poniższym ćwiczeniu, poznamy podstawy łączenia się z istniejącą siecią Wi-Fi oraz komunikacji przy użyciu MQTT.\nBlinky dla Wi-Fi Jak zawsze, pisanie kodu należy zacząć od blinky. W tym celu:\n  Do pustego projektu zaincluduj bibliotekę \n  Zdefiniuj WIFI_SSID \"workshop_h3x\"\n  Zdefiniuj WIFI_PASSWORD \"workshop_h3x\"\n  Dodaj funkcję:\n  void setup_wifi() { delay(10); Serial.println(); Serial.print(\"Connecting to \"); Serial.println(WIFI_SSID); WiFi.begin(WIFI_SSID, WIFI_PASSWORD); while (WiFi.status() != WL_CONNECTED) { delay(500); Serial.print(\".\"); } randomSeed(micros()); Serial.println(\"\"); Serial.println(\"WiFi connected\"); Serial.println(\"IP address: \"); Serial.println(WiFi.localIP()); }  Zainicjalizuj port szeregowy z prędkością 115200 Wywołaj funkcję setup_wifi()  Uruchom kod i obserwuj port szeregowy. Twoje urządzenie powinno połączyć się z siecią i otrzymać adres ip 172.30.0.xx.\n#include \"Arduino.h\" #include \"ESP8266WiFi.h\" #define WIFI_SSID \"workshop_h3x\" #define WIFI_PASSWORD \"workshop_h3x\" void setup_wifi() { delay(10); Serial.println(); Serial.print(\"Connecting to \"); Serial.println(WIFI_SSID); WiFi.begin(WIFI_SSID, WIFI_PASSWORD); while (WiFi.status() != WL_CONNECTED) { delay(500); Serial.print(\".\"); } randomSeed(micros()); Serial.println(\"\"); Serial.println(\"WiFi connected\"); Serial.println(\"IP address: \"); Serial.println(WiFi.localIP()); } void setup() { Serial.begin(115200); setup_wifi(); } void loop() { }  Pokaż rozwiązanie   MQTT - odczyt wiadomości w chmurze MQTT jest lekkim protokołem IoT działającym w formacie subskrybcji. Urządzenia wysyłają oraz odbierają wiadomości w konkretnym wątku (Topic).\nInstalacja Zainstaluj bibliotekę PubSubClient Implementacja klienta Rozbuduj kod blinky w następujący sposób:\n Dodaj bibliotekę  Zdefiniuj MQTT_SERVER \"broker.emqx.io\" Zdefiniuj SENSOR_NAME \"workshop/test1\" - test1 zmień na dowolną, wymyśloną przez siebie nazwę Stwórz globalne zmienne WiFiClient espClient oraz PubSubClient client(espClient) Dodaj do kodu funkcję callback() - Będzie ona wywoływana gdy urządzenie odbierze wiadomość  void callback(char* topic, byte* payload, unsigned int length) { Serial.print(\"Message arrived [\"); Serial.print(topic); Serial.print(\"] \"); for (int i = 0; i  length; i++) { Serial.print((char)payload[i]); } Serial.println(); }  Dodaj do kodu funkcję reconnect() - będzie ona łączyć urządzenie z brokerem (serwerem)  void reconnect() { while (!client.connected()) { Serial.print(\"Attempting MQTT connection...\"); String clientId = \"client-\"; clientId += String(random(0xffff), HEX); if (client.connect(clientId.c_str())) { Serial.println(\"connected\"); client.publish(SENSOR_NAME, \"hello world\"); client.subscribe(SENSOR_NAME); } else { delay(5000); } } }  Po połączeniu z Wi-Fi wywołaj funkcje client.setServer(MQTT_SERVER, 1883) oraz client.setCallback(callback); W funkcji loop wywołaj funkcję reconnect jeśli !client.connected() W funkcji loop wywołaj client.loop() - Jest to niezbędne dla obsłużenia przychodzących wiadomości  Skompiluj i uruchom swój kod. Obserwuj port szeregowy. Twoje urządzenie powinno połączyć się z wifi oraz brokerem: (Attempting MQTT connection...connected).\n#include \"Arduino.h\" #include \"ESP8266WiFi.h\" #include \"PubSubClient.h\" #define MQTT_SERVER \"broker.emqx.io\" #define TOPIC \"workshop/test1\" #define WIFI_SSID \"workshop_h3x\" #define WIFI_PASSWORD \"workshop_h3x\" WiFiClient espClient; PubSubClient client(espClient); void callback(char* topic, byte* payload, unsigned int length) { Serial.print(\"Message arrived [\"); Serial.print(topic); Serial.print(\"] \"); for (int i = 0; i  Pokaż rozwiązanie   Konfiguracja brokera Aby odbierać wiadomości musimy mieć brokera. Czyli serwer, przekazujący wiadomości. Wykorzystamy do tego narzędzie online http://tools.emqx.io/ W pierwszym kroku, należy stworzyć nowe połączenie. Wykorzystamy domyślne ustawienia, zmieniając jedynie nazwę. W pole Name wpisz dowolną, wybraną przez siebie nazwę połączenia. Po dodaniu połączenia, po lewej stronie zobaczymy nasze połączenie wraz z zieloną kropką, sygnalizującą stan połączenia. Przyciskiem New subscription należy stworzyć nową subskrubcję. W polu Topic wpisujemy zdefiniowane w kodzie TOPIC. Możemy również zmienić kolor, który będzie wyświetlany przy danym temacie. Na koniec, zresetuj swoją płytkę (lub wgraj kod od nowa). W przeglądarce, zobaczysz wiadomość, którą wysyła Twoje ESP. Możesz również wysłać wiadomość do swojej płytki. W tym celu na dole panelu:\n Ustaw Payload na plaintext Wpisz temat który subskrybuje w kodzie Twoje urządzenie (funkcja client.subscribe()) Wpisz dowolną wiadomość  Subskrubcja kilku tematów - zadanie dodatkowe Zwróć uwagę, że za to czy odbierzemy wiadomość w jakimś temacie odpowiada funkcja client.subscribe(). Może być ona wywołana wielokrotnie, z różnymi argumentami, Podobnie, jak funkcja client.publish(). Dzięki temu, Twoje urządzenie może:\n Wysyłać konkretne informacje (temperatura, stan przycisku, wartość z czujnika) pod różne tematy Odbierać wiadomości i reagować w różny sposób w zależności od tematu wiadomości  Spróbuj przerobić kod w taki sposób aby:\n Subskrybował dwa różne tematy:  Temat A Będzie włączać lub wyłączać LED_BUILTIN w zależności czy otrzyma wartość 1 czy 0 Temat B Będzie wypisywać otrzymaną wiadomość na port szeregowy   Wysyłał wiadomość pod dwa różne tematy:  Temat A wyśle wiadomość button pressed gdy naciśniemy przycisk Temat B wyśle wiadomość wpisaną na port szeregowy    Wskazówki:\n Wykorzystaj funkcję void serialEvent() z rozdziału UART. UWAGA! Funkcja client.publish() przyjmuje argumenty typu char *, czyli tablicę znaków. Wspomniany przykład używa obiektu String. Podając go jako argument, wywołaj na nim funkcję .c_str():\nclient.publish(TOPIC_B_PUBLISH, inputString.c_str());\nPrzekonwertuje ona typ String, na char *. Zdefiniuj osobne stałe dla kolejnych tematów np. #define TOPIC_A_SUBSCRIBE \"workshop/suba\". Pamiętaj, że broker (przeglądarka) powinna publikować pod tematem, który urządzenie subskrybuje. Stwórz dwie zmienne globalne typu bool: button_pressed oraz button_previously_pressed. Przy ich użyciu stwórz w funkcji loop() warunek który sprawi, że będziesz wysyłać tylko jedną wiadomość, w momencie naciskania przycisku. Skorzystaj z funkcji strcmp(char *, char *) aby sprawdzić pod jakim tematem otrzymałeś wiadomość. Zwróci ona 0 gdy oba teksty(tablice znaków, char*) są identyczne. Pamiętaj o odwróconej logice LED_BUILTIN Pamiętaj o konfiguracji pinów, w funkcji setup()  #include \"Arduino.h\" #include \"ESP8266WiFi.h\" #include \"PubSubClient.h\" #define BUTTON D1 #define MQTT_SERVER \"broker.emqx.io\" #define TOPIC_A_SUBSCRIBE \"workshop/suba\" #define TOPIC_B_SUBSCRIBE \"workshop/subb\" #define TOPIC_A_PUBLISH \"workshop/puba\" #define TOPIC_B_PUBLISH \"workshop/pubb\" #define WIFI_SSID \"workshop_h3x\" #define WIFI_PASSWORD \"workshop_h3x\" WiFiClient espClient; PubSubClient client(espClient); bool button_pressed = false; bool button_previously_pressed = false; String inputString; void callback(char* topic, byte* payload, unsigned int length) { if (0 == strcmp(topic, TOPIC_A_SUBSCRIBE)) { if ((char)payload[0] == '0') digitalWrite(LED_BUILTIN, HIGH); else if ((char)payload[0] == '1') digitalWrite(LED_BUILTIN, LOW); else Serial.println(\"Got wrong input\"); } else if (0 == strcmp(topic, TOPIC_B_SUBSCRIBE)) { Serial.print(\"Message arrived [\"); Serial.print(topic); Serial.print(\"] \"); for (int i = 0; i 0) { char character = Serial.read(); inputString += character; if(character == '\\n') { client.publish(TOPIC_B_PUBLISH, inputString.c_str()); inputString = \"\"; } } } void setup() { pinMode(LED_BUILTIN, OUTPUT); pinMode(BUTTON, INPUT_PULLUP); Serial.begin(115200); setup_wifi(); client.setServer(MQTT_SERVER, 1883); client.setCallback(callback); } void loop() { button_pressed = !digitalRead(BUTTON); if ((button_pressed != button_previously_pressed) \u0026\u0026 button_pressed) { client.publish(TOPIC_A_PUBLISH, \"button pressed\"); delay(500); } if (!client.connected()) { reconnect(); } client.loop(); button_previously_pressed = button_pressed; }  Pokaż rozwiązanie   Pokaż rozwiązanie   Pokaż rozwiązanie  \n","wordCount":"972","inLanguage":"en","datePublished":"2023-02-13T16:41:57+01:00","dateModified":"2023-02-13T16:41:57+01:00","author":{"@type":"Person","name":"Radosław Sajdak"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://radoslawsajdak.github.io/Highschool_workshop/post/wifi/"},"publisher":{"@type":"Organization","name":"","logo":{"@type":"ImageObject","url":"https://radoslawsajdak.github.io/Highschool_workshop/favicon.ico"}}}</script>
+</head>
+<body class=dark id=top>
+<script>localStorage.getItem("pref-theme")==="light"&&document.body.classList.remove('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<div class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</div>
+</div>
+<ul id=menu>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=https://radoslawsajdak.github.io/Highschool_workshop/>Home</a>&nbsp;»&nbsp;<a href=https://radoslawsajdak.github.io/Highschool_workshop/post/>Posts</a></div>
+<h1 class=post-title>
+Wi-fi
+</h1>
+<div class=post-meta><span title="2023-02-13 16:41:57 +0100 CET">February 13, 2023</span>&nbsp;·&nbsp;972 words&nbsp;·&nbsp;Radosław Sajdak
+</div>
+</header> <div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<span class=details>Table of Contents</span>
+</summary>
+<div class=inner><nav id=TableOfContents>
+<ul>
+<li><a href=#blinky-dla-wi-fi>Blinky dla Wi-Fi</a></li>
+<li><a href=#mqtt---odczyt-wiadomości-w-chmurze>MQTT - odczyt wiadomości w chmurze</a>
+<ul>
+<li><a href=#instalacja>Instalacja</a></li>
+<li><a href=#implementacja-klienta>Implementacja klienta</a></li>
+<li><a href=#konfiguracja-brokera>Konfiguracja brokera</a></li>
+<li><a href=#subskrubcja-kilku-tematów---zadanie-dodatkowe>Subskrubcja kilku tematów - zadanie dodatkowe</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</details>
+</div>
+<div class=post-content><h1 id=wi-fi>Wi-Fi<a hidden class=anchor aria-hidden=true href=#wi-fi>#</a></h1>
+<p>Wi-Fi jest zestawem standardów sieci bezprzewodowych. Obecne jest właściwie wszędzie. W IoT również
+stosuje się je coraz częściej, ze względu na rozwijające się mechanizmy oszczędzania energii.</p>
+<p>Więcej na temat sieci Wi-Fi, można przeczytać np. <a href=https://pl.wikipedia.org/wiki/Wi-Fi>w wikipedii</a>.</p>
+<p>W poniższym ćwiczeniu, poznamy podstawy łączenia się z istniejącą siecią Wi-Fi oraz komunikacji przy
+użyciu MQTT.</p>
+<h2 id=blinky-dla-wi-fi>Blinky dla Wi-Fi<a hidden class=anchor aria-hidden=true href=#blinky-dla-wi-fi>#</a></h2>
+<p>Jak zawsze, pisanie kodu należy zacząć od <code>blinky</code>. W tym celu:</p>
+<ul>
+<li>
+<p>Do pustego projektu zaincluduj bibliotekę <code>&lt;ESP8266WiFi.h></code></p>
+</li>
+<li>
+<p>Zdefiniuj <code>WIFI_SSID "workshop_h3x"</code></p>
+</li>
+<li>
+<p>Zdefiniuj <code>WIFI_PASSWORD "workshop_h3x"</code></p>
+</li>
+<li>
+<p>Dodaj funkcję:</p>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C><span class=kt>void</span> <span class=nf>setup_wifi</span><span class=p>()</span> <span class=p>{</span>
+
+    <span class=n>delay</span><span class=p>(</span><span class=mi>10</span><span class=p>);</span>
+
+    <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>();</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>print</span><span class=p>(</span><span class=s>&#34;Connecting to &#34;</span><span class=p>);</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>(</span><span class=n>WIFI_SSID</span><span class=p>);</span>
+
+    <span class=n>WiFi</span><span class=p>.</span><span class=n>begin</span><span class=p>(</span><span class=n>WIFI_SSID</span><span class=p>,</span> <span class=n>WIFI_PASSWORD</span><span class=p>);</span>
+
+    <span class=k>while</span> <span class=p>(</span><span class=n>WiFi</span><span class=p>.</span><span class=n>status</span><span class=p>()</span> <span class=o>!=</span> <span class=n>WL_CONNECTED</span><span class=p>)</span>
+    <span class=p>{</span>
+        <span class=n>delay</span><span class=p>(</span><span class=mi>500</span><span class=p>);</span>
+        <span class=n>Serial</span><span class=p>.</span><span class=n>print</span><span class=p>(</span><span class=s>&#34;.&#34;</span><span class=p>);</span>
+    <span class=p>}</span>
+
+    <span class=n>randomSeed</span><span class=p>(</span><span class=n>micros</span><span class=p>());</span>
+
+    <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>(</span><span class=s>&#34;&#34;</span><span class=p>);</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>(</span><span class=s>&#34;WiFi connected&#34;</span><span class=p>);</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>(</span><span class=s>&#34;IP address: &#34;</span><span class=p>);</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>(</span><span class=n>WiFi</span><span class=p>.</span><span class=n>localIP</span><span class=p>());</span>
+<span class=p>}</span>
+</code></pre></div><ul>
+<li>Zainicjalizuj port szeregowy z prędkością <code>115200</code></li>
+<li>Wywołaj funkcję <code>setup_wifi()</code></li>
+</ul>
+<p>Uruchom kod i obserwuj port szeregowy. Twoje urządzenie powinno połączyć się z siecią i otrzymać adres ip <code>172.30.0.xx</code>.</p>
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=wifi_blinky type=checkbox>
+<pre><code class=language-c>
+#include "Arduino.h"
+#include "ESP8266WiFi.h"
+
+
+#define WIFI_SSID "workshop_h3x"
+#define WIFI_PASSWORD "workshop_h3x"
+
+void setup_wifi()
+{
+    delay(10);
+
+    Serial.println();
+    Serial.print("Connecting to ");
+    Serial.println(WIFI_SSID);
+
+    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+
+    while (WiFi.status() != WL_CONNECTED)
+    {
+        delay(500);
+        Serial.print(".");
+    }
+
+    randomSeed(micros());
+
+    Serial.println("");
+    Serial.println("WiFi connected");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
+}
+
+void setup()
+{
+    Serial.begin(115200);
+    setup_wifi();
+
+}
+  
+void loop()
+{
+
+}
+
+</pre></code>
+<label for=wifi_blinky class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure>
+<h2 id=mqtt---odczyt-wiadomości-w-chmurze>MQTT - odczyt wiadomości w chmurze<a hidden class=anchor aria-hidden=true href=#mqtt---odczyt-wiadomości-w-chmurze>#</a></h2>
+<p>MQTT jest lekkim protokołem IoT działającym w formacie subskrybcji. Urządzenia wysyłają oraz odbierają wiadomości w konkretnym wątku (Topic).</p>
+<h3 id=instalacja>Instalacja<a hidden class=anchor aria-hidden=true href=#instalacja>#</a></h3>
+<p>Zainstaluj bibliotekę <code>PubSubClient</code>
+<img loading=lazy src=images/pubsub.png#center alt=pubsub>
+</p>
+<h3 id=implementacja-klienta>Implementacja klienta<a hidden class=anchor aria-hidden=true href=#implementacja-klienta>#</a></h3>
+<p>Rozbuduj kod blinky w następujący sposób:</p>
+<ul>
+<li>Dodaj bibliotekę <code>&lt;PubSubClient.h></code></li>
+<li>Zdefiniuj <code>MQTT_SERVER "broker.emqx.io"</code></li>
+<li>Zdefiniuj <code>SENSOR_NAME "workshop/test1"</code> - test1 zmień na dowolną, wymyśloną przez siebie nazwę</li>
+<li>Stwórz globalne zmienne <code>WiFiClient espClient</code> oraz <code>PubSubClient client(espClient)</code></li>
+<li>Dodaj do kodu funkcję <code>callback()</code> - Będzie ona wywoływana gdy urządzenie odbierze wiadomość</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C><span class=kt>void</span> <span class=nf>callback</span><span class=p>(</span><span class=kt>char</span><span class=o>*</span> <span class=n>topic</span><span class=p>,</span> <span class=n>byte</span><span class=o>*</span> <span class=n>payload</span><span class=p>,</span> <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>length</span><span class=p>)</span>
+<span class=p>{</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>print</span><span class=p>(</span><span class=s>&#34;Message arrived [&#34;</span><span class=p>);</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>print</span><span class=p>(</span><span class=n>topic</span><span class=p>);</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>print</span><span class=p>(</span><span class=s>&#34;] &#34;</span><span class=p>);</span>
+    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>length</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span>
+    <span class=p>{</span>
+        <span class=n>Serial</span><span class=p>.</span><span class=n>print</span><span class=p>((</span><span class=kt>char</span><span class=p>)</span><span class=n>payload</span><span class=p>[</span><span class=n>i</span><span class=p>]);</span>
+    <span class=p>}</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>();</span>
+<span class=p>}</span>
+</code></pre></div><ul>
+<li>Dodaj do kodu funkcję <code>reconnect()</code> - będzie ona łączyć urządzenie z brokerem (serwerem)</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C><span class=kt>void</span> <span class=nf>reconnect</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=k>while</span> <span class=p>(</span><span class=o>!</span><span class=n>client</span><span class=p>.</span><span class=n>connected</span><span class=p>())</span>
+    <span class=p>{</span>
+        <span class=n>Serial</span><span class=p>.</span><span class=n>print</span><span class=p>(</span><span class=s>&#34;Attempting MQTT connection...&#34;</span><span class=p>);</span>
+        <span class=n>String</span> <span class=n>clientId</span> <span class=o>=</span> <span class=s>&#34;client-&#34;</span><span class=p>;</span>
+        <span class=n>clientId</span> <span class=o>+=</span> <span class=n>String</span><span class=p>(</span><span class=n>random</span><span class=p>(</span><span class=mh>0xffff</span><span class=p>),</span> <span class=n>HEX</span><span class=p>);</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>client</span><span class=p>.</span><span class=n>connect</span><span class=p>(</span><span class=n>clientId</span><span class=p>.</span><span class=n>c_str</span><span class=p>()))</span>
+        <span class=p>{</span>
+        <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>(</span><span class=s>&#34;connected&#34;</span><span class=p>);</span>
+        <span class=n>client</span><span class=p>.</span><span class=n>publish</span><span class=p>(</span><span class=n>SENSOR_NAME</span><span class=p>,</span> <span class=s>&#34;hello world&#34;</span><span class=p>);</span>
+        <span class=n>client</span><span class=p>.</span><span class=n>subscribe</span><span class=p>(</span><span class=n>SENSOR_NAME</span><span class=p>);</span>
+        <span class=p>}</span>
+        <span class=k>else</span>
+        <span class=p>{</span>
+        <span class=n>delay</span><span class=p>(</span><span class=mi>5000</span><span class=p>);</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><ul>
+<li>Po połączeniu z Wi-Fi wywołaj funkcje <code>client.setServer(MQTT_SERVER, 1883)</code> oraz <code>client.setCallback(callback);</code></li>
+<li>W funkcji loop wywołaj funkcję reconnect <strong>jeśli</strong> <code>!client.connected()</code></li>
+<li>W funkcji loop wywołaj <code>client.loop()</code> - Jest to niezbędne dla obsłużenia przychodzących wiadomości</li>
+</ul>
+<p>Skompiluj i uruchom swój kod. Obserwuj port szeregowy. Twoje urządzenie powinno połączyć się z wifi oraz
+brokerem: (<code>Attempting MQTT connection...connected</code>).</p>
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=wifi_mqtt type=checkbox>
+<pre><code class=language-c>
+
+#include "Arduino.h"
+#include "ESP8266WiFi.h"
+#include "PubSubClient.h"
+
+#define MQTT_SERVER "broker.emqx.io"
+#define TOPIC "workshop/test1"
+#define WIFI_SSID "workshop_h3x"
+#define WIFI_PASSWORD "workshop_h3x"
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+void callback(char* topic, byte* payload, unsigned int length)
+{
+    Serial.print("Message arrived [");
+    Serial.print(topic);
+    Serial.print("] ");
+    for (int i = 0; i < length; i++)
+    {
+        Serial.print((char)payload[i]);
+    }
+    Serial.println();
+}
+
+void reconnect()
+{
+    while (!client.connected())
+    {
+        Serial.print("Attempting MQTT connection...");
+        String clientId = "client-";
+        clientId += String(random(0xffff), HEX);
+        if (client.connect(clientId.c_str()))
+        {
+            Serial.println("connected");
+            client.publish(TOPIC, "hello world");
+            client.subscribe(TOPIC);
+        }
+        else
+        {
+            delay(5000);
+        }
+    }
+}
+
+void setup_wifi()
+{
+    delay(10);
+
+    Serial.println();
+    Serial.print("Connecting to ");
+    Serial.println(WIFI_SSID);
+
+    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+
+    while (WiFi.status() != WL_CONNECTED)
+    {
+        delay(500);
+        Serial.print(".");
+    }
+
+    randomSeed(micros());
+
+    Serial.println("");
+    Serial.println("WiFi connected");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
+}
+
+
+void setup()
+{
+    Serial.begin(115200);
+    setup_wifi();
+    client.setServer(MQTT_SERVER, 1883);
+    client.setCallback(callback);
+}
+  
+void loop()
+{
+    if (!client.connected())
+    {
+        reconnect();
+    }
+    client.loop();
+}
+
+
+</pre></code>
+<label for=wifi_mqtt class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure>
+<h3 id=konfiguracja-brokera>Konfiguracja brokera<a hidden class=anchor aria-hidden=true href=#konfiguracja-brokera>#</a></h3>
+<p>Aby odbierać wiadomości musimy mieć brokera. Czyli serwer, przekazujący wiadomości.
+Wykorzystamy do tego narzędzie online <a href=http://tools.emqx.io/>http://tools.emqx.io/</a>
+W pierwszym kroku, należy stworzyć nowe połączenie. Wykorzystamy domyślne ustawienia, zmieniając jedynie nazwę. W pole <code>Name</code> wpisz dowolną, wybraną przez siebie nazwę połączenia.
+<img loading=lazy src=images/broker_new_connection.png#center alt=broker_connection>
+<img loading=lazy src=images/broker_new_connection2.png#center alt=broker_connection2>
+Po dodaniu połączenia, po lewej stronie zobaczymy nasze połączenie wraz z zieloną kropką, sygnalizującą stan połączenia.
+Przyciskiem <code>New subscription</code> należy stworzyć nową subskrubcję. W polu <code>Topic</code> wpisujemy zdefiniowane w kodzie <code>TOPIC</code>. Możemy również zmienić kolor, który będzie wyświetlany przy danym temacie.
+<img loading=lazy src=images/topic_name.png#center alt=broker_connection>
+Na koniec, zresetuj swoją płytkę (lub wgraj kod od nowa). W przeglądarce, zobaczysz wiadomość, którą wysyła Twoje ESP.
+<img loading=lazy src=images/got_msg.png#center alt=broker_connection>
+Możesz również wysłać wiadomość <strong>do</strong> swojej płytki. W tym celu na dole panelu:</p>
+<ul>
+<li>Ustaw <code>Payload</code> na <code>plaintext</code></li>
+<li>Wpisz temat który subskrybuje w kodzie Twoje urządzenie (funkcja <code>client.subscribe()</code>)</li>
+<li>Wpisz dowolną wiadomość</li>
+</ul>
+<p><img loading=lazy src=images/send_msg.png#center alt=broker_connection>
+</p>
+<h3 id=subskrubcja-kilku-tematów---zadanie-dodatkowe>Subskrubcja kilku tematów - zadanie dodatkowe<a hidden class=anchor aria-hidden=true href=#subskrubcja-kilku-tematów---zadanie-dodatkowe>#</a></h3>
+<p>Zwróć uwagę, że za to czy odbierzemy wiadomość w jakimś temacie odpowiada funkcja <code>client.subscribe()</code>. Może być ona wywołana wielokrotnie, z różnymi argumentami, Podobnie, jak funkcja <code>client.publish()</code>. Dzięki temu, Twoje urządzenie może:</p>
+<ul>
+<li>Wysyłać konkretne informacje (temperatura, stan przycisku, wartość z czujnika) pod różne tematy</li>
+<li>Odbierać wiadomości i reagować w różny sposób w zależności od tematu wiadomości</li>
+</ul>
+<p>Spróbuj przerobić kod w taki sposób aby:</p>
+<ul>
+<li>Subskrybował dwa różne tematy:
+<ul>
+<li>Temat A Będzie włączać lub wyłączać <code>LED_BUILTIN</code> w zależności czy otrzyma wartość <code>1</code> czy <code>0</code></li>
+<li>Temat B Będzie wypisywać otrzymaną wiadomość na port szeregowy</li>
+</ul>
+</li>
+<li>Wysyłał wiadomość pod dwa różne tematy:
+<ul>
+<li>Temat A wyśle wiadomość <code>button pressed</code> gdy naciśniemy przycisk</li>
+<li>Temat B wyśle wiadomość wpisaną na port szeregowy</li>
+</ul>
+</li>
+</ul>
+<p>Wskazówki:</p>
+<ul>
+<li>Wykorzystaj funkcję <code>void serialEvent()</code> z rozdziału UART. UWAGA! Funkcja <code>client.publish()</code> przyjmuje argumenty typu <code>char *</code>, czyli tablicę znaków. Wspomniany przykład używa obiektu <code>String</code>. Podając go jako argument, wywołaj na nim funkcję <code>.c_str()</code>:<br>
+<code>client.publish(TOPIC_B_PUBLISH, inputString.c_str());</code><br>
+Przekonwertuje ona typ String, na char *.</li>
+<li>Zdefiniuj osobne stałe dla kolejnych tematów np. <code>#define TOPIC_A_SUBSCRIBE "workshop/suba"</code>. Pamiętaj, że broker (przeglądarka) powinna publikować pod tematem, który urządzenie subskrybuje.</li>
+<li>Stwórz dwie zmienne globalne typu <code>bool</code>: button_pressed oraz button_previously_pressed. Przy ich użyciu stwórz w funkcji <code>loop()</code> warunek który sprawi, że będziesz wysyłać <strong>tylko jedną wiadomość</strong>, w momencie naciskania przycisku.</li>
+<li>Skorzystaj z funkcji <code>strcmp(char *, char *)</code> aby sprawdzić pod jakim tematem otrzymałeś wiadomość. Zwróci ona 0 gdy oba teksty(tablice znaków, char*) są identyczne.</li>
+<li>Pamiętaj o odwróconej logice <code>LED_BUILTIN</code></li>
+<li>Pamiętaj o konfiguracji pinów, w funkcji <code>setup()</code></li>
+</ul>
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=mqtt_super_task type=checkbox>
+<pre><code class=language-c>
+#include "Arduino.h"
+#include "ESP8266WiFi.h"
+#include "PubSubClient.h"
+
+#define BUTTON D1
+
+#define MQTT_SERVER "broker.emqx.io"
+#define TOPIC_A_SUBSCRIBE "workshop/suba"
+#define TOPIC_B_SUBSCRIBE "workshop/subb"
+#define TOPIC_A_PUBLISH "workshop/puba"
+#define TOPIC_B_PUBLISH "workshop/pubb"
+
+#define WIFI_SSID "workshop_h3x"
+#define WIFI_PASSWORD "workshop_h3x"
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+bool button_pressed = false;
+bool button_previously_pressed = false;
+
+String inputString;
+
+void callback(char* topic, byte* payload, unsigned int length)
+{
+    if (0 == strcmp(topic, TOPIC_A_SUBSCRIBE))
+    {
+        if ((char)payload[0] == '0')
+            digitalWrite(LED_BUILTIN, HIGH);
+        else if ((char)payload[0] == '1')
+            digitalWrite(LED_BUILTIN, LOW);
+        else
+            Serial.println("Got wrong input");
+    }
+    else if (0 == strcmp(topic, TOPIC_B_SUBSCRIBE))
+    {
+        Serial.print("Message arrived [");
+        Serial.print(topic);
+        Serial.print("] ");
+        for (int i = 0; i < length; i++)
+        {
+            Serial.print((char)payload[i]);
+        }
+        Serial.println();
+    }
+}
+
+void reconnect()
+{
+    while (!client.connected())
+    {
+        Serial.print("Attempting MQTT connection...");
+        String clientId = "client-";
+        clientId += String(random(0xffff), HEX);
+        if (client.connect(clientId.c_str()))
+        {
+            Serial.println("connected");
+            client.subscribe(TOPIC_A_SUBSCRIBE);
+            client.subscribe(TOPIC_B_SUBSCRIBE);        
+        }
+        else
+        {
+            delay(5000);
+        }
+    }
+}
+
+void setup_wifi()
+{
+    delay(10);
+
+    Serial.println();
+    Serial.print("Connecting to ");
+    Serial.println(WIFI_SSID);
+
+    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+
+    while (WiFi.status() != WL_CONNECTED)
+    {
+        delay(500);
+        Serial.print(".");
+    }
+
+    randomSeed(micros());
+
+    Serial.println("");
+    Serial.println("WiFi connected");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
+}
+
+void serialEvent()
+{
+    if (Serial.available() > 0) 
+    {
+        char character = Serial.read();
+        inputString += character;
+        if(character == '\n')
+        {
+            client.publish(TOPIC_B_PUBLISH, inputString.c_str());
+            inputString = "";
+        }
+    }
+}
+
+void setup()
+{
+    pinMode(LED_BUILTIN, OUTPUT);
+
+    pinMode(BUTTON, INPUT_PULLUP);
+    
+    Serial.begin(115200);
+    setup_wifi();
+    client.setServer(MQTT_SERVER, 1883);
+    client.setCallback(callback);
+
+}
+
+void loop()
+{
+    button_pressed = !digitalRead(BUTTON);
+    if ((button_pressed != button_previously_pressed) && button_pressed)
+    {
+        client.publish(TOPIC_A_PUBLISH, "button pressed");
+        delay(500);
+    }
+
+    if (!client.connected())
+    {
+        reconnect();
+    }
+    client.loop();
+    button_previously_pressed = button_pressed;
+}
+
+</pre></code>
+<label for=mqtt_super_task class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure>
+<p><link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=difficult_mqtt type=checkbox>
+<img src=images/difficult_mqtt.png>
+<label for=difficult_mqtt class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure>
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=difficult_mqtt2 type=checkbox>
+<img src=images/difficult_mqtt2.png>
+<label for=difficult_mqtt2 class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure></p>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+</ul>
+<nav class=paginav>
+<a class=prev href=https://radoslawsajdak.github.io/Highschool_workshop/post/i2c/>
+<span class=title>« Prev</span>
+<br>
+<span>I2C - Wyświetlacz OLED</span>
+</a>
+<a class=next href=https://radoslawsajdak.github.io/Highschool_workshop/post/discord_bot/>
+<span class=title>Next »</span>
+<br>
+<span>Aplikacja - Discord BOT</span>
+</a>
+</nav>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2023 <a href=https://radoslawsajdak.github.io/Highschool_workshop/></a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerHTML='copy';function d(){a.innerHTML='copied!',setTimeout(()=>{a.innerHTML='copy'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
+</body>
+</html>

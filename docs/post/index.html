@@ -63,6 +63,84 @@ PlatformIO (opcjonalne) Alternatywnym, bardziej rozbudowanym środowiskiem jest 
 <footer class=entry-footer><span title="2023-02-12 22:17:39 +0100 CET">February 12, 2023</span>&nbsp;·&nbsp;452 words&nbsp;·&nbsp;Radosław Sajdak</footer>
 <a class=entry-link aria-label="post link to Getting started" href=https://radoslawsajdak.github.io/Highschool_workshop/post/getting_started/></a>
 </article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>GPIO
+</h2>
+</header>
+<div class=entry-content>
+<p>GPIO (General-Purpose Input Output) Obsługa wielu wyjść cyfrowych Po ukończeniu wprowadzenia, wiesz już jak zamrugać diodą. Każda dioda, ma katodę (-) oraz anodę (+). Anoda, posiada krótszą nóżkę i to do niej należy podłączyć zasilanie. Można skojarzyć to prez znaną nazwę AK47 (prąd płynie A -> K, a 4 jest mniejsze niż 7 :)). Dodatkowo, aby ograniczyć prąd płynący przez diodę, należy szeregowo włączyć do niej rezystor. Podobnie jak na poniższym obrazku, podłącz trzy diody do pinów D5, D6, D7....</p>
+</div>
+<footer class=entry-footer><span title="2023-02-13 16:35:29 +0100 CET">February 13, 2023</span>&nbsp;·&nbsp;1463 words&nbsp;·&nbsp;Radosław Sajdak</footer>
+<a class=entry-link aria-label="post link to GPIO" href=https://radoslawsajdak.github.io/Highschool_workshop/post/gpio/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>UART (Universal Asynchronous Receiver-Transmitter)
+</h2>
+</header>
+<div class=entry-content>
+<p>“UART (Universal Asynchronous Receiver-Transmitter)” UART jest jednym z najczęściej stosowanych protokołów komunikacyjnych. Stosuje się go m.in.:
+W komunikacji między procesorami Do wyprowadzania tzw. “Debugu” Do komunikacji z modułami (Bluetooth, GPS, LTE itp.) Poznaliśmy wcześniej monitor portu szeregowego. Jest to nic innego, jak właśnie UART. W ten sposób, wysyłając bajt po bajcie, czytaliśmy wiadomości wysyłane przez mikroprocesor.
+Więcej na temat komunikacji UART, przeczytasz tutaj. Dla nas, najważniejszy jest sposób podłączenia “na krzyż”: UART - komunikacja z komputerem Czytanie wiadomości UART W rozdziale GPIO, przy użyciu biblioteki Serial, wysyłaliśmy wiadomości do naszego komputera....</p>
+</div>
+<footer class=entry-footer><span title="2023-02-13 16:41:13 +0100 CET">February 13, 2023</span>&nbsp;·&nbsp;732 words&nbsp;·&nbsp;Radosław Sajdak</footer>
+<a class=entry-link aria-label="post link to UART (Universal Asynchronous Receiver-Transmitter)" href=https://radoslawsajdak.github.io/Highschool_workshop/post/uart/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>I2C - Wyświetlacz OLED
+</h2>
+</header>
+<div class=entry-content>
+<p>Magistrala I2C Magistrala I2C, pozwala na komunikację wielu równolegle połączonych urządzeń. Korzysta przy tym z dwóch linii:
+SCL/SCK (Clock) - pin D1 SDA (Data) - pin D2 Komunikacja jest możliwa dzięki wykorzystaniu adresów. Każde urządzenie posiada swój adres 7 bitowy (127 adresów). Moduły zazwyczaj posiadają dodatkowe piny pozwalające na zmianę adresu poprzez ich zwarcie. Pozwala to na jednoczesne połączenie wielu takich samych układów (na przykład czujników temperatury).
+Komunikacja przy użyciu I2C Połącz mikrokontroler oraz wyświetlacz OLED w następujący sposób:...</p>
+</div>
+<footer class=entry-footer><span title="2023-02-13 16:41:27 +0100 CET">February 13, 2023</span>&nbsp;·&nbsp;925 words&nbsp;·&nbsp;Radosław Sajdak</footer>
+<a class=entry-link aria-label="post link to I2C - Wyświetlacz OLED" href=https://radoslawsajdak.github.io/Highschool_workshop/post/i2c/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Wi-fi
+</h2>
+</header>
+<div class=entry-content>
+<p>Wi-Fi Wi-Fi jest zestawem standardów sieci bezprzewodowych. Obecne jest właściwie wszędzie. W IoT również stosuje się je coraz częściej, ze względu na rozwijające się mechanizmy oszczędzania energii.
+Więcej na temat sieci Wi-Fi, można przeczytać np. w wikipedii.
+W poniższym ćwiczeniu, poznamy podstawy łączenia się z istniejącą siecią Wi-Fi oraz komunikacji przy użyciu MQTT.
+Blinky dla Wi-Fi Jak zawsze, pisanie kodu należy zacząć od blinky. W tym celu:
+Do pustego projektu zaincluduj bibliotekę &lt;ESP8266WiFi....</p>
+</div>
+<footer class=entry-footer><span title="2023-02-13 16:41:57 +0100 CET">February 13, 2023</span>&nbsp;·&nbsp;972 words&nbsp;·&nbsp;Radosław Sajdak</footer>
+<a class=entry-link aria-label="post link to Wi-fi" href=https://radoslawsajdak.github.io/Highschool_workshop/post/wifi/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Aplikacja - Discord BOT
+</h2>
+</header>
+<div class=entry-content>
+<p>Discord BOT - aplikacja zaawansowana W tym rozdziale zaprezentowano przykład aplikacji z wykorzystaniem Discord API. Jest to prosta aplikacja mrugająca diodą LED w odpowiedzi na wiadomość na kanale Discord. Niemniej, jej stworzenie wymaga instalacji i zrozumienia wielu różnych zagadnień.
+Instalacja środowiska Do stworzenia aplikacji, potrzebujemy zainstalować:
+Discord App - (desktop/mobile) Python3 Dodatkowe biblioteki python: discord.py python-dotenv Discord App Pobierz i zainstaluj aplikację Discord. Załóż również konto w aplikacji....</p>
+</div>
+<footer class=entry-footer><span title="2023-02-13 16:42:09 +0100 CET">February 13, 2023</span>&nbsp;·&nbsp;1112 words&nbsp;·&nbsp;Radosław Sajdak</footer>
+<a class=entry-link aria-label="post link to Aplikacja - Discord BOT" href=https://radoslawsajdak.github.io/Highschool_workshop/post/discord_bot/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Użyteczne linki
+</h2>
+</header>
+<div class=entry-content>
+<p>Stworzony przeze mnie poradnik, powierzchownie dotyka wielu problemów, technik i języków. Jego celem jest jednak pokazanie, że można robić “rzeczy”, bez specjalistycznej wiedzy. Wystarczą chęci i przeglądarka. Dlatego, dla osób które chcą dalej zgłębiać którykolwiek z rozpoczętych tematów przgotowałem.
+Jednocześnie zapraszam uczestników do bezpośredniego kontaktu. Z przyjemnością pomogę “zorganizować” sprzęt i odpowiem na nurtujące pytania! :)
+Alternatywne kursy Podstawy elektroniki Tutaj dowiesz się czym jest rezystor oraz jakie podstawowe prawa obowiązują w elektronice....</p>
+</div>
+<footer class=entry-footer><span title="2023-02-13 16:41:39 +0100 CET">February 13, 2023</span>&nbsp;·&nbsp;391 words&nbsp;·&nbsp;Radosław Sajdak</footer>
+<a class=entry-link aria-label="post link to Użyteczne linki" href=https://radoslawsajdak.github.io/Highschool_workshop/post/useful_links/></a>
+</article>
 </main>
 <footer class=footer>
 <span>&copy; 2023 <a href=https://radoslawsajdak.github.io/Highschool_workshop/></a></span>

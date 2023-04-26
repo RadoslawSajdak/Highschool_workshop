@@ -1,0 +1,457 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>I2C - Wyświetlacz OLED | </title>
+<meta name=keywords content>
+<meta name=description content="Magistrala I2C Magistrala I2C, pozwala na komunikację wielu równolegle połączonych urządzeń. Korzysta przy tym z dwóch linii:
+ SCL/SCK (Clock) - pin D1 SDA (Data) - pin D2  Komunikacja jest możliwa dzięki wykorzystaniu adresów. Każde urządzenie posiada swój adres 7 bitowy (127 adresów). Moduły zazwyczaj posiadają dodatkowe piny pozwalające na zmianę adresu poprzez ich zwarcie. Pozwala to na jednoczesne połączenie wielu takich samych układów (na przykład czujników temperatury).
+Komunikacja przy użyciu I2C Połącz mikrokontroler oraz wyświetlacz OLED w następujący sposób:">
+<meta name=author content="Radosław Sajdak">
+<link rel=canonical href=https://radoslawsajdak.github.io/Highschool_workshop/post/i2c/>
+<link crossorigin=anonymous href=/Highschool_workshop/assets/css/stylesheet.6a98292fb8fa8cf0f3ba4042d4b75515c04267550f3ad49ff6271b5af9562443.css integrity="sha256-apgpL7j6jPDzukBC1LdVFcBCZ1UPOtSf9icbWvlWJEM=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/Highschool_workshop/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG+9vmJ0cTS+ovo0FeA=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://radoslawsajdak.github.io/Highschool_workshop/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://radoslawsajdak.github.io/Highschool_workshop/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://radoslawsajdak.github.io/Highschool_workshop/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://radoslawsajdak.github.io/Highschool_workshop/apple-touch-icon.png>
+<link rel=mask-icon href=https://radoslawsajdak.github.io/Highschool_workshop/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-123-45','auto'),ga('send','pageview'))</script><meta property="og:title" content="I2C - Wyświetlacz OLED">
+<meta property="og:description" content="Magistrala I2C Magistrala I2C, pozwala na komunikację wielu równolegle połączonych urządzeń. Korzysta przy tym z dwóch linii:
+ SCL/SCK (Clock) - pin D1 SDA (Data) - pin D2  Komunikacja jest możliwa dzięki wykorzystaniu adresów. Każde urządzenie posiada swój adres 7 bitowy (127 adresów). Moduły zazwyczaj posiadają dodatkowe piny pozwalające na zmianę adresu poprzez ich zwarcie. Pozwala to na jednoczesne połączenie wielu takich samych układów (na przykład czujników temperatury).
+Komunikacja przy użyciu I2C Połącz mikrokontroler oraz wyświetlacz OLED w następujący sposób:">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://radoslawsajdak.github.io/Highschool_workshop/post/i2c/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2023-02-13T16:41:27+01:00">
+<meta property="article:modified_time" content="2023-02-13T16:41:27+01:00"><meta property="og:site_name" content="true">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="I2C - Wyświetlacz OLED">
+<meta name=twitter:description content="Magistrala I2C Magistrala I2C, pozwala na komunikację wielu równolegle połączonych urządzeń. Korzysta przy tym z dwóch linii:
+ SCL/SCK (Clock) - pin D1 SDA (Data) - pin D2  Komunikacja jest możliwa dzięki wykorzystaniu adresów. Każde urządzenie posiada swój adres 7 bitowy (127 adresów). Moduły zazwyczaj posiadają dodatkowe piny pozwalające na zmianę adresu poprzez ich zwarcie. Pozwala to na jednoczesne połączenie wielu takich samych układów (na przykład czujników temperatury).
+Komunikacja przy użyciu I2C Połącz mikrokontroler oraz wyświetlacz OLED w następujący sposób:">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://radoslawsajdak.github.io/Highschool_workshop/post/"},{"@type":"ListItem","position":2,"name":"I2C - Wyświetlacz OLED","item":"https://radoslawsajdak.github.io/Highschool_workshop/post/i2c/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"I2C - Wyświetlacz OLED","name":"I2C - Wyświetlacz OLED","description":"Magistrala I2C Magistrala I2C, pozwala na komunikację wielu równolegle połączonych urządzeń. Korzysta przy tym z dwóch linii:\n SCL/SCK (Clock) - pin D1 SDA (Data) - pin D2  Komunikacja jest możliwa dzięki wykorzystaniu adresów. Każde urządzenie posiada swój adres 7 bitowy (127 adresów). Moduły zazwyczaj posiadają dodatkowe piny pozwalające na zmianę adresu poprzez ich zwarcie. Pozwala to na jednoczesne połączenie wielu takich samych układów (na przykład czujników temperatury).\nKomunikacja przy użyciu I2C Połącz mikrokontroler oraz wyświetlacz OLED w następujący sposób:","keywords":[],"articleBody":"Magistrala I2C Magistrala I2C, pozwala na komunikację wielu równolegle połączonych urządzeń. Korzysta przy tym z dwóch linii:\n SCL/SCK (Clock) - pin D1 SDA (Data) - pin D2  Komunikacja jest możliwa dzięki wykorzystaniu adresów. Każde urządzenie posiada swój adres 7 bitowy (127 adresów). Moduły zazwyczaj posiadają dodatkowe piny pozwalające na zmianę adresu poprzez ich zwarcie. Pozwala to na jednoczesne połączenie wielu takich samych układów (na przykład czujników temperatury).\nKomunikacja przy użyciu I2C Połącz mikrokontroler oraz wyświetlacz OLED w następujący sposób:\n   Mikrokontroler OLED     3V3 VCC   GND GND   SCL (D1) SCK   SDA (D2) SDA    Skaner I2C Zazwyczaj, adres urządzenia możemy sprawdzić w dokumentacji. W przypadku gdy nie mamy do niej dostępu, dokumentacja nie specyfikuje adresu, albo po prostu “coś nie działa”, warto napisać prosty skaner.\nW środowisku arduino, do obsługi I2C używamy biblioteki Wire.h. Nasz skaner inicjalizuje obiekt Wire, a następnie próbuje rozpocząć transmisję z każdym adresem po kolei. Jeśli próba zakończy się powodzeniem (nie będzie błędu transmisji, a więc error == false), adres zostanie wypisany na port szeregowy.\nZwróć uwagę, że użyliśmy funkcji printf(). Więcej na jej temat możesz przeczytać tutaj\nWgraj kod na płytkę i obserwuj port szeregowy. Pamiętaj, o odpowiedniej prędkości transmisji!\n#include \"Arduino.h\"#include \"Wire.h\"  void setup() { Wire.begin(); Serial.begin(115200); } void loop() { Serial.println(\"Scanning...\"); for(uint8_t address = 1; address  127; address++ ) { Wire.beginTransmission(address); uint8_t error = Wire.endTransmission(); if(!error) { Serial.printf(\"I2C device found at: 0x%02X\\n\", address); } } delay(3000); } Instalacja bibliotek Do obsługi różnych modułów, możemy skorzystać z gotowych bibliotek. W Arduino IDE instalacja bibliotek jest wyjątkowo prosta.\n Otwórz menedżer bibliotek Wyszukaj SSD1306 Zainstaluj Adafruit SSD1306 by Adafruit oraz wszystkie zależności (wyskakujące okno)  Pokaż rozwiązanie   Aby sprawdzić, czy wszystko działa poprawnie, wgraj poniższy kod.\nPodmień PUT_ADDRESS_HERE na adres, który znalazł skaner!\n#include \"Arduino.h\"#include \"Wire.h\" #include \"Adafruit_GFX.h\"#include \"Adafruit_SSD1306.h\" #define SCREEN_ADDRESS 0x3C Adafruit_SSD1306 display(128, 32, \u0026Wire, -1); void setup() { Wire.begin(); Serial.begin(115200); display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS); display.clearDisplay(); display.setTextColor(SSD1306_WHITE); display.setCursor(0,0); display.print(\"Hello World!\"); display.display(); } void loop() { } Jeśli zainstalowałeś/aś bibliotekę poprawnie, na ekranie ukaże się napis.\nPowyższy program, wymaga kilku wyjaśnień:\n clearDisplay() - czyści wszystko, co aktualnie jest narysowane na wyświetlaczu. Funkcja ta jest niezbędna, ponieważ odpowiada za odświeżanie ekranu setTextColor(SSD1306_WHITE) - ustawia kolor wyświetlanych tekstów na biały. SSD1306_WHITE to predefiniowana wartość z biblioteki. Dzięki niej, gdyby w kodzie bibliotecznym zostały wprowadzone zmiany, programy na nim oparte nie przestaną działać setCursor(x,y) - Wyświetlacz z którego korzystamy, ma rozdzielczość 128x32 pixele. Rozpoczyna rysowanie zawsze od miejsca, w którym ustawimy jego kursor print() - Działa jak Serial.print(), jednak wysyła tekst do wyświetlacza display() - Najważniejsza z funkcji - wyświetla to, co wpisaliśmy do wyświetlacza  Wielokrotnie, będziemy mieć potrzebę wyświetlenia tekstu, zawierającego różne liczby. Pomaga nam w tym funkcja sprintf(). Dokumentację do funkcji znajdziesz tutaj\nZadanie Korzystając z dokumentacji funkcji sprintf() napisz progam który: będzie w kółko liczył od 0 do 10 i wyświetlał aktualną liczbę na ekranie. Ustaw rozmiar tekstu na 4.\nPamiętaj o:\n Czyszczeniu wyświetlacza Stworzeniu globalnego bufora o rozmiarze większym, niż najdłuższa wyświetlana wiadomość Użyciu pętli for()  #include \"Arduino.h\" #include \"Wire.h\" #include \"Adafruit_GFX.h\" #include \"Adafruit_SSD1306.h\" #define SCREEN_ADDRESS 0x3C Adafruit_SSD1306 display(128, 32, \u0026Wire, -1); char buffer[5]; void setup() { Wire.begin(); Serial.begin(115200); display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS); display.setTextColor(SSD1306_WHITE); display.setTextSize(4); } void loop() { for (int i = 0; i  Pokaż rozwiązanie   Zadanie (opcjonalne) Spróbuj przerobić powyższą pętlę loop w taki sposób, aby liczyć co 100ms. Pamiętaj, aby użyć zmiennoprzecinkowego typu float. Dokładność zmiennej zapisywanej do stringa (ciągu znaków) możesz ustawić jako \"%.1f\" co odpowiada jednemu miejscu po przecinku.\nvoid loop() { for (float i = 0; i  Pokaż rozwiązanie   One Wire - czujnik temperatury Wiedząc już, jak wyświetlać liczby zmiennoprzecinkowe na wyświetlaczu, spróbujmy użyć czujnika temperatury DHT11.\nNa początek, zainstaluj bibliotekę do obsługi DHT: DHT sensor library by Adafruit Następnie, nie wypinając wyświetlacza, podepnij DHT w następujący sposób W celu sprawdzenia, czy czujnik działa poprawnie, napiszmy krótki kod. Wyświetli on dane na porcie szeregowym.\nNajpierw, załączmy odpowiednie biblioteki do kodu\n#include \"Adafruit_Sensor.h\"#include \"DHT.h\"#include \"DHT_U.h\"oraz zdefiniujmy obiekt typu DHT_Unified. Jako argumenty inicjalizacji, podamy pin do którego podłączyliśmy linię danych - D3 i typ czujnika DHT11\nDHT_Unified(D3, DHT11); W funkcji setup(), zainicjalizujmy port szeregowy. Następnie, dodajmy również inicjalizację czujnika\ndht.begin(); Na koniec, w pętli loop() odczytajmy wartości z czujnika i wyślijmy je na port szeregowy\nvoid loop() { sensors_event_t event; dht.temperature().getEvent(\u0026event); Serial.print(\"Temperature: \"); Serial.print(event.temperature); Serial.println(\"°C\"); dht.humidity().getEvent(\u0026event); Serial.print(\"Humidity: \"); Serial.print(event.relative_humidity); Serial.println(\"%\"); delay(1000); } (Sklejony kod, znajdziesz pod spoilerem poniżej) #include \"Adafruit_Sensor.h\" #include \"DHT.h\" #include \"DHT_U.h\" DHT_Unified dht(D3, DHT11); void setup() { dht.begin(); Serial.begin(115200); } void loop() { sensors_event_t event; dht.temperature().getEvent(\u0026event); Serial.print(\"Temperature: \"); Serial.print(event.temperature); Serial.println(\"°C\"); dht.humidity().getEvent(\u0026event); Serial.print(\"Humidity: \"); Serial.print(event.relative_humidity); Serial.println(\"%\"); delay(1000); }  Pokaż rozwiązanie  \nW powyższym fragmencie, pojawia się zmienna typu sensors_event_t. Jest ona zdefiniowana (opisana) wewnątrz bibliotek które dołączyliśmy. Jej zawartość, możesz sprawdzić przytrzymując lctrl (lewy control) i klikając w typ. Naszym oczom ukaże się skomplikowana struktura. Dostęp do jej pól możemy uzyskać przy użyciu kropki przy zmienne. Np. event.temperature odnosi się do pola temperature struktury event którą stworzyliśmy. Takie podejście, pozwala na znaczną poprawę czytelności kodu.\nZadanie - Wyświetlenie temperatury na wyświetlaczu OLED Spróbuj połączyć przykład w którym wyświetlaliśmy milisekundy, z wyświetlaniem temperatury i wilgotności na wyświetlaczu OLED.\nPamiętaj o:\n Odpowiednim rozmiarze bufora Zmniejeszeniu rozmiaru tekstu na 1 Ustawieniu kursora na odpowiednią linię (y), aby wyświetlić wyniki osobno Oczekiwany wynik:   #include \"Arduino.h\" #include \"Wire.h\" #include \"Adafruit_GFX.h\" #include \"Adafruit_SSD1306.h\" #include \"DHT.h\" #include \"DHT_U.h\" #define SCREEN_ADDRESS 0x3C Adafruit_SSD1306 display(128, 32, \u0026Wire, -1); DHT_Unified dht(D3, DHT11); char buffer[50]; void setup() { Wire.begin(); Serial.begin(115200); dht.begin(); display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS); display.setTextColor(SSD1306_WHITE); display.setTextSize(1); } void loop() { sensors_event_t event; display.clearDisplay(); display.setCursor(0,0); dht.temperature().getEvent(\u0026event); sprintf(buffer, \"temperature: %.1f\", event.temperature); display.print(buffer); display.setCursor(0,16); dht.humidity().getEvent(\u0026event); sprintf(buffer, \"humidity: %.1f\", event.relative_humidity); display.print(buffer); display.display(); delay(500); } }  Pokaż rozwiązanie   Spróbuj powoli dmuchać na czujnik ciepłym powietrzem. Czy wartości zmieniają się?\n","wordCount":"925","inLanguage":"en","datePublished":"2023-02-13T16:41:27+01:00","dateModified":"2023-02-13T16:41:27+01:00","author":{"@type":"Person","name":"Radosław Sajdak"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://radoslawsajdak.github.io/Highschool_workshop/post/i2c/"},"publisher":{"@type":"Organization","name":"","logo":{"@type":"ImageObject","url":"https://radoslawsajdak.github.io/Highschool_workshop/favicon.ico"}}}</script>
+</head>
+<body class=dark id=top>
+<script>localStorage.getItem("pref-theme")==="light"&&document.body.classList.remove('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<div class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</div>
+</div>
+<ul id=menu>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=https://radoslawsajdak.github.io/Highschool_workshop/>Home</a>&nbsp;»&nbsp;<a href=https://radoslawsajdak.github.io/Highschool_workshop/post/>Posts</a></div>
+<h1 class=post-title>
+I2C - Wyświetlacz OLED
+</h1>
+<div class=post-meta><span title="2023-02-13 16:41:27 +0100 CET">February 13, 2023</span>&nbsp;·&nbsp;925 words&nbsp;·&nbsp;Radosław Sajdak
+</div>
+</header> <div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<span class=details>Table of Contents</span>
+</summary>
+<div class=inner><nav id=TableOfContents>
+<ul>
+<li><a href=#komunikacja-przy-użyciu-i2c>Komunikacja przy użyciu I2C</a>
+<ul>
+<li><a href=#skaner-i2c>Skaner I2C</a></li>
+<li><a href=#instalacja-bibliotek>Instalacja bibliotek</a></li>
+<li><a href=#one-wire---czujnik-temperatury>One Wire - czujnik temperatury</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</details>
+</div>
+<div class=post-content><h1 id=magistrala-i2c>Magistrala I2C<a hidden class=anchor aria-hidden=true href=#magistrala-i2c>#</a></h1>
+<p>Magistrala I2C, pozwala na komunikację wielu równolegle połączonych urządzeń. Korzysta przy tym z dwóch linii:</p>
+<ul>
+<li>SCL/SCK (Clock) - pin D1</li>
+<li>SDA (Data) - pin D2</li>
+</ul>
+<p>Komunikacja jest możliwa dzięki wykorzystaniu adresów. Każde urządzenie posiada swój adres 7 bitowy (127 adresów). Moduły zazwyczaj posiadają dodatkowe piny pozwalające na zmianę adresu poprzez ich zwarcie. Pozwala to na jednoczesne połączenie wielu takich samych układów (na przykład czujników temperatury).</p>
+<h2 id=komunikacja-przy-użyciu-i2c>Komunikacja przy użyciu I2C<a hidden class=anchor aria-hidden=true href=#komunikacja-przy-użyciu-i2c>#</a></h2>
+<p>Połącz mikrokontroler oraz wyświetlacz OLED w następujący sposób:</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:center>Mikrokontroler</th>
+<th style=text-align:center>OLED</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:center>3V3</td>
+<td style=text-align:center>VCC</td>
+</tr>
+<tr>
+<td style=text-align:center>GND</td>
+<td style=text-align:center>GND</td>
+</tr>
+<tr>
+<td style=text-align:center>SCL (D1)</td>
+<td style=text-align:center>SCK</td>
+</tr>
+<tr>
+<td style=text-align:center>SDA (D2)</td>
+<td style=text-align:center>SDA</td>
+</tr>
+</tbody>
+</table>
+<h3 id=skaner-i2c>Skaner I2C<a hidden class=anchor aria-hidden=true href=#skaner-i2c>#</a></h3>
+<p>Zazwyczaj, adres urządzenia możemy sprawdzić w dokumentacji. W przypadku gdy nie mamy do niej dostępu,
+dokumentacja nie specyfikuje adresu, albo po prostu &ldquo;coś nie działa&rdquo;, warto napisać prosty skaner.</p>
+<p>W środowisku arduino, do obsługi I2C używamy biblioteki <code>Wire.h</code>. Nasz skaner inicjalizuje obiekt <code>Wire</code>,
+a następnie próbuje rozpocząć transmisję z każdym adresem po kolei. Jeśli próba zakończy się powodzeniem
+(nie będzie błędu transmisji, a więc <code>error == false</code>), adres zostanie wypisany na port szeregowy.</p>
+<p>Zwróć uwagę, że użyliśmy funkcji <code>printf()</code>. Więcej na jej temat możesz przeczytać <a href=https://cpp0x.pl/dokumentacja/standard-C/printf/321>tutaj</a></p>
+<p>Wgraj kod na płytkę i obserwuj port szeregowy. Pamiętaj, o odpowiedniej prędkości transmisji!</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C><span class=cp>#include</span> <span class=cpf>&#34;Arduino.h&#34;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&#34;Wire.h&#34; </span><span class=cp>
+</span><span class=cp></span>
+<span class=kt>void</span> <span class=nf>setup</span><span class=p>()</span>
+<span class=p>{</span>
+  <span class=n>Wire</span><span class=p>.</span><span class=n>begin</span><span class=p>();</span>
+  <span class=n>Serial</span><span class=p>.</span><span class=n>begin</span><span class=p>(</span><span class=mi>115200</span><span class=p>);</span>
+<span class=p>}</span>
+  
+<span class=kt>void</span> <span class=nf>loop</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>(</span><span class=s>&#34;Scanning...&#34;</span><span class=p>);</span>
+ 
+    <span class=k>for</span><span class=p>(</span><span class=kt>uint8_t</span> <span class=n>address</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span> <span class=n>address</span> <span class=o>&lt;</span> <span class=mi>127</span><span class=p>;</span> <span class=n>address</span><span class=o>++</span> <span class=p>)</span>
+    <span class=p>{</span>
+        <span class=n>Wire</span><span class=p>.</span><span class=n>beginTransmission</span><span class=p>(</span><span class=n>address</span><span class=p>);</span>
+        <span class=kt>uint8_t</span> <span class=n>error</span> <span class=o>=</span> <span class=n>Wire</span><span class=p>.</span><span class=n>endTransmission</span><span class=p>();</span>
+        <span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=n>error</span><span class=p>)</span>
+        <span class=p>{</span>
+            <span class=n>Serial</span><span class=p>.</span><span class=n>printf</span><span class=p>(</span><span class=s>&#34;I2C device found at: 0x%02X</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>address</span><span class=p>);</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+    <span class=n>delay</span><span class=p>(</span><span class=mi>3000</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></div><h3 id=instalacja-bibliotek>Instalacja bibliotek<a hidden class=anchor aria-hidden=true href=#instalacja-bibliotek>#</a></h3>
+<p>Do obsługi różnych modułów, możemy skorzystać z gotowych bibliotek. W Arduino IDE instalacja bibliotek jest wyjątkowo prosta.</p>
+<ul>
+<li>Otwórz menedżer bibliotek</li>
+<li>Wyszukaj SSD1306</li>
+<li>Zainstaluj Adafruit SSD1306 by Adafruit <strong>oraz wszystkie zależności (wyskakujące okno)</strong></li>
+</ul>
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=library_install type=checkbox>
+<img src=images/library_install.png>
+<label for=library_install class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure>
+<p>Aby sprawdzić, czy wszystko działa poprawnie, wgraj poniższy kod.</p>
+<p><strong>Podmień <code>PUT_ADDRESS_HERE</code> na adres, który znalazł skaner!</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C><span class=cp>#include</span> <span class=cpf>&#34;Arduino.h&#34;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&#34;Wire.h&#34; </span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&#34;Adafruit_GFX.h&#34;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&#34;Adafruit_SSD1306.h&#34;</span><span class=cp>
+</span><span class=cp></span>
+<span class=cp>#define SCREEN_ADDRESS 0x3C
+</span><span class=cp></span><span class=n>Adafruit_SSD1306</span> <span class=nf>display</span><span class=p>(</span><span class=mi>128</span><span class=p>,</span> <span class=mi>32</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>Wire</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=p>);</span>
+
+<span class=kt>void</span> <span class=nf>setup</span><span class=p>()</span>
+<span class=p>{</span>
+  <span class=n>Wire</span><span class=p>.</span><span class=n>begin</span><span class=p>();</span>
+  <span class=n>Serial</span><span class=p>.</span><span class=n>begin</span><span class=p>(</span><span class=mi>115200</span><span class=p>);</span>
+  
+  <span class=n>display</span><span class=p>.</span><span class=n>begin</span><span class=p>(</span><span class=n>SSD1306_SWITCHCAPVCC</span><span class=p>,</span> <span class=n>SCREEN_ADDRESS</span><span class=p>);</span>
+
+  <span class=n>display</span><span class=p>.</span><span class=n>clearDisplay</span><span class=p>();</span>
+  <span class=n>display</span><span class=p>.</span><span class=n>setTextColor</span><span class=p>(</span><span class=n>SSD1306_WHITE</span><span class=p>);</span>
+  <span class=n>display</span><span class=p>.</span><span class=n>setCursor</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span><span class=mi>0</span><span class=p>);</span>
+  <span class=n>display</span><span class=p>.</span><span class=n>print</span><span class=p>(</span><span class=s>&#34;Hello World!&#34;</span><span class=p>);</span>
+  <span class=n>display</span><span class=p>.</span><span class=n>display</span><span class=p>();</span>
+<span class=p>}</span>
+  
+<span class=kt>void</span> <span class=nf>loop</span><span class=p>()</span>
+<span class=p>{</span>
+ 
+<span class=p>}</span>
+</code></pre></div><p>Jeśli zainstalowałeś/aś bibliotekę poprawnie, na ekranie ukaże się napis.</p>
+<p>Powyższy program, wymaga kilku wyjaśnień:</p>
+<ul>
+<li><code>clearDisplay()</code> - czyści wszystko, co aktualnie jest narysowane na wyświetlaczu. Funkcja ta jest niezbędna, ponieważ odpowiada za odświeżanie ekranu</li>
+<li><code>setTextColor(SSD1306_WHITE)</code> - ustawia kolor wyświetlanych tekstów na biały. SSD1306_WHITE to predefiniowana wartość z biblioteki. Dzięki niej, gdyby w kodzie bibliotecznym zostały wprowadzone zmiany, programy na nim oparte nie przestaną działać</li>
+<li><code>setCursor(x,y)</code> - Wyświetlacz z którego korzystamy, ma rozdzielczość 128x32 pixele. Rozpoczyna rysowanie <strong>zawsze</strong> od miejsca, w którym ustawimy jego kursor</li>
+<li><code>print()</code> - Działa jak Serial.print(), jednak wysyła tekst do wyświetlacza</li>
+<li><code>display()</code> - Najważniejsza z funkcji - wyświetla to, co wpisaliśmy do wyświetlacza</li>
+</ul>
+<p>Wielokrotnie, będziemy mieć potrzebę wyświetlenia tekstu, zawierającego różne liczby. Pomaga nam w tym funkcja <code>sprintf()</code>.
+Dokumentację do funkcji znajdziesz <a href=https://cplusplus.com/reference/cstdio/sprintf/>tutaj</a></p>
+<h4 id=zadanie>Zadanie<a hidden class=anchor aria-hidden=true href=#zadanie>#</a></h4>
+<p>Korzystając z dokumentacji funkcji <code>sprintf()</code> napisz progam który: będzie w kółko liczył od 0 do 10 i wyświetlał aktualną liczbę na ekranie. Ustaw rozmiar tekstu na 4.</p>
+<p>Pamiętaj o:</p>
+<ul>
+<li>Czyszczeniu wyświetlacza</li>
+<li>Stworzeniu globalnego bufora o rozmiarze większym, niż najdłuższa wyświetlana wiadomość</li>
+<li>Użyciu pętli <code>for()</code></li>
+</ul>
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=0to10with1sstep type=checkbox>
+<pre><code class=language-c>
+#include "Arduino.h"
+#include "Wire.h" 
+#include "Adafruit_GFX.h"
+#include "Adafruit_SSD1306.h"
+
+#define SCREEN_ADDRESS 0x3C
+Adafruit_SSD1306 display(128, 32, &Wire, -1);
+
+char buffer[5];
+
+void setup()
+{
+    Wire.begin();
+    Serial.begin(115200);
+    
+    display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS);
+
+    display.setTextColor(SSD1306_WHITE);
+    display.setTextSize(4);
+}
+  
+void loop()
+{
+    for (int i = 0; i <= 10; i++)
+    {
+        display.clearDisplay();
+        display.setCursor(0,0);
+        sprintf(buffer, "%d", i);
+        display.print(buffer);
+        display.display();
+        delay(1000);
+    }
+}
+
+</pre></code>
+<label for=0to10with1sstep class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure>
+<h4 id=zadanie-opcjonalne>Zadanie (opcjonalne)<a hidden class=anchor aria-hidden=true href=#zadanie-opcjonalne>#</a></h4>
+<p>Spróbuj przerobić powyższą pętlę <code>loop</code> w taki sposób, aby liczyć co 100ms. Pamiętaj, aby użyć zmiennoprzecinkowego typu <code>float</code>.
+Dokładność zmiennej zapisywanej do stringa (ciągu znaków) możesz ustawić jako <code>"%.1f"</code> co odpowiada jednemu miejscu po przecinku.</p>
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=0to10with01sstep type=checkbox>
+<pre><code class=language-c>
+
+void loop()
+{
+    for (float i = 0; i <= 10; i += 0.1)
+    {
+        display.clearDisplay();
+        display.setCursor(0,0);
+        sprintf(buffer, "%.1f", i);
+        display.print(buffer);
+        display.display();
+        delay(100);
+    }
+}
+
+</pre></code>
+<label for=0to10with01sstep class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure>
+<h3 id=one-wire---czujnik-temperatury>One Wire - czujnik temperatury<a hidden class=anchor aria-hidden=true href=#one-wire---czujnik-temperatury>#</a></h3>
+<p>Wiedząc już, jak wyświetlać liczby zmiennoprzecinkowe na wyświetlaczu, spróbujmy użyć czujnika temperatury <code>DHT11</code>.</p>
+<p>Na początek, zainstaluj bibliotekę do obsługi DHT: <code>DHT sensor library by Adafruit</code>
+<img loading=lazy src=images/dht_install.png#center alt=libka>
+</p>
+<p>Następnie, <strong>nie wypinając wyświetlacza</strong>, podepnij DHT w następujący sposób
+<img loading=lazy src=images/dht_connect.png#center alt=dht>
+</p>
+<p>W celu sprawdzenia, czy czujnik działa poprawnie, napiszmy krótki kod. Wyświetli on dane na porcie szeregowym.</p>
+<p>Najpierw, załączmy odpowiednie biblioteki do kodu</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C><span class=cp>#include</span> <span class=cpf>&#34;Adafruit_Sensor.h&#34;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&#34;DHT.h&#34;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&#34;DHT_U.h&#34;</span><span class=cp>
+</span></code></pre></div><p>oraz zdefiniujmy obiekt typu <code>DHT_Unified</code>. Jako argumenty inicjalizacji, podamy pin do którego podłączyliśmy linię danych - <code>D3</code> i typ czujnika <code>DHT11</code></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C><span class=n>DHT_Unified</span><span class=p>(</span><span class=n>D3</span><span class=p>,</span> <span class=n>DHT11</span><span class=p>);</span>
+</code></pre></div><p>W funkcji <code>setup()</code>, zainicjalizujmy port szeregowy. Następnie, dodajmy również inicjalizację czujnika</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C><span class=n>dht</span><span class=p>.</span><span class=n>begin</span><span class=p>();</span>
+</code></pre></div><p>Na koniec, w pętli <code>loop()</code> odczytajmy wartości z czujnika i wyślijmy je na port szeregowy</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-C data-lang=C><span class=kt>void</span> <span class=nf>loop</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=n>sensors_event_t</span> <span class=n>event</span><span class=p>;</span>
+    <span class=n>dht</span><span class=p>.</span><span class=n>temperature</span><span class=p>().</span><span class=n>getEvent</span><span class=p>(</span><span class=o>&amp;</span><span class=n>event</span><span class=p>);</span>
+
+    <span class=n>Serial</span><span class=p>.</span><span class=n>print</span><span class=p>(</span><span class=s>&#34;Temperature: &#34;</span><span class=p>);</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>print</span><span class=p>(</span><span class=n>event</span><span class=p>.</span><span class=n>temperature</span><span class=p>);</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>(</span><span class=s>&#34;°C&#34;</span><span class=p>);</span>
+
+    <span class=n>dht</span><span class=p>.</span><span class=n>humidity</span><span class=p>().</span><span class=n>getEvent</span><span class=p>(</span><span class=o>&amp;</span><span class=n>event</span><span class=p>);</span>
+
+    <span class=n>Serial</span><span class=p>.</span><span class=n>print</span><span class=p>(</span><span class=s>&#34;Humidity: &#34;</span><span class=p>);</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>print</span><span class=p>(</span><span class=n>event</span><span class=p>.</span><span class=n>relative_humidity</span><span class=p>);</span>
+    <span class=n>Serial</span><span class=p>.</span><span class=n>println</span><span class=p>(</span><span class=s>&#34;%&#34;</span><span class=p>);</span>
+
+    <span class=n>delay</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></div><p>(Sklejony kod, znajdziesz pod spoilerem poniżej)
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=dht_test type=checkbox>
+<pre><code class=language-c>
+
+#include "Adafruit_Sensor.h"
+#include "DHT.h"
+#include "DHT_U.h"
+
+DHT_Unified dht(D3, DHT11);
+
+void setup()
+{
+    dht.begin();
+    Serial.begin(115200);
+}
+  
+void loop()
+{
+    sensors_event_t event;
+    dht.temperature().getEvent(&event);
+
+    Serial.print("Temperature: ");
+    Serial.print(event.temperature);
+    Serial.println("°C");
+
+    dht.humidity().getEvent(&event);
+
+    Serial.print("Humidity: ");
+    Serial.print(event.relative_humidity);
+    Serial.println("%");
+
+    delay(1000);
+}
+</pre></code>
+<label for=dht_test class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure></p>
+<p>W powyższym fragmencie, pojawia się zmienna typu <code>sensors_event_t</code>. Jest ona zdefiniowana (opisana) wewnątrz bibliotek które dołączyliśmy. Jej zawartość, możesz sprawdzić przytrzymując <code>lctrl (lewy control)</code> i klikając w typ. Naszym oczom ukaże się skomplikowana struktura. Dostęp do jej pól możemy uzyskać przy użyciu kropki przy zmienne. Np. <code>event.temperature</code> odnosi się do pola <code>temperature</code> struktury <code>event</code> którą stworzyliśmy. Takie podejście, pozwala na znaczną poprawę czytelności kodu.</p>
+<h4 id=zadanie---wyświetlenie-temperatury-na-wyświetlaczu-oled>Zadanie - Wyświetlenie temperatury na wyświetlaczu OLED<a hidden class=anchor aria-hidden=true href=#zadanie---wyświetlenie-temperatury-na-wyświetlaczu-oled>#</a></h4>
+<p>Spróbuj połączyć przykład w którym wyświetlaliśmy milisekundy, z wyświetlaniem temperatury i wilgotności na wyświetlaczu OLED.</p>
+<p>Pamiętaj o:</p>
+<ul>
+<li>Odpowiednim rozmiarze bufora</li>
+<li>Zmniejeszeniu rozmiaru tekstu na 1</li>
+<li>Ustawieniu kursora na odpowiednią linię (y), aby wyświetlić wyniki osobno
+Oczekiwany wynik:
+<img loading=lazy src=images/result_oled.jpg#center alt=result>
+</li>
+</ul>
+<link rel=stylesheet href=../../stylesheets/spoiler.css>
+<figure>
+<div class=spoiler>
+<input id=dht_oled type=checkbox>
+<pre><code class=language-c>
+#include "Arduino.h"
+#include "Wire.h" 
+#include "Adafruit_GFX.h"
+#include "Adafruit_SSD1306.h"
+#include "DHT.h"
+#include "DHT_U.h"
+
+#define SCREEN_ADDRESS 0x3C
+Adafruit_SSD1306 display(128, 32, &Wire, -1);
+DHT_Unified dht(D3, DHT11);
+
+char buffer[50];
+
+void setup()
+{
+    Wire.begin();
+    Serial.begin(115200);
+    dht.begin();
+    
+    display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS);
+
+    display.setTextColor(SSD1306_WHITE);
+    display.setTextSize(1);
+}
+  
+void loop()
+{
+    sensors_event_t event;
+
+    display.clearDisplay();
+
+    display.setCursor(0,0);
+    dht.temperature().getEvent(&event);
+    sprintf(buffer, "temperature: %.1f", event.temperature);
+    display.print(buffer);
+
+    display.setCursor(0,16);
+    dht.humidity().getEvent(&event);
+    sprintf(buffer, "humidity: %.1f", event.relative_humidity);
+    display.print(buffer);
+
+    display.display();
+    delay(500);
+}
+}
+</pre></code>
+<label for=dht_oled class=spoiler-button>Pokaż rozwiązanie
+</div>
+</figure>
+<p>Spróbuj powoli dmuchać na czujnik ciepłym powietrzem. Czy wartości zmieniają się?</p>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+</ul>
+<nav class=paginav>
+<a class=prev href=https://radoslawsajdak.github.io/Highschool_workshop/post/uart/>
+<span class=title>« Prev</span>
+<br>
+<span>UART (Universal Asynchronous Receiver-Transmitter)</span>
+</a>
+<a class=next href=https://radoslawsajdak.github.io/Highschool_workshop/post/wifi/>
+<span class=title>Next »</span>
+<br>
+<span>Wi-fi</span>
+</a>
+</nav>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2023 <a href=https://radoslawsajdak.github.io/Highschool_workshop/></a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerHTML='copy';function d(){a.innerHTML='copied!',setTimeout(()=>{a.innerHTML='copy'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
+</body>
+</html>
