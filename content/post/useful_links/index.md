@@ -1,7 +1,7 @@
 ---
 title: "Użyteczne linki"
 date: 2023-02-13T16:41:39+01:00
-draft: true
+draft: false
 weight: 8
 ---
 Stworzony przeze mnie poradnik, powierzchownie dotyka wielu problemów, technik i języków. Jego celem

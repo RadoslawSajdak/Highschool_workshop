@@ -1,7 +1,7 @@
 ---
 title: "I2C - Wyświetlacz OLED"
 date: 2023-02-13T16:41:27+01:00
-draft: true
+draft: false
 weight: 4
 ShowToc: true
 ---
