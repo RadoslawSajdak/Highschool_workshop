@@ -11,6 +11,11 @@ weight: 1
 - Komputer z systemem Windows / Linux (preferowane ubuntu)
 - ESP8266 oraz peryferia (dostarcza prowadzący)
 ## Instalacja środowiska
+**UWAGA!** Dla systemów UNIX(eg. Ubuntu) należy dodać tzw. "rules", pozwalające na automatyczne przyznawanie uprawnień urządzeniom.
+Informacja jak to zrobić, znajduje się poniżej:
+```link
+https://docs.platformio.org/en/stable/core/installation/udev-rules.html
+```
 ### Arduino IDE
 Pobierz i zainstaluj arduino IDE. Poradnik oraz instalator znajdziesz na [oficjalnej stronie producenta](https://docs.arduino.cc/software/ide-v2/tutorials/getting-started/ide-v2-downloading-and-installing)
 

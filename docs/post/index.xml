@@ -12,8 +12,9 @@
       <pubDate>Sun, 12 Feb 2023 22:17:39 +0100</pubDate>
       
       <guid>https://radoslawsajdak.github.io/Highschool_workshop/post/getting_started/</guid>
-      <description>Mikrokontrolery w praktyce Wstępne wymagania  Komputer z systemem Windows / Linux (preferowane ubuntu) ESP8266 oraz peryferia (dostarcza prowadzący)  Instalacja środowiska Arduino IDE Pobierz i zainstaluj arduino IDE. Poradnik oraz instalator znajdziesz na oficjalnej stronie producenta
-PlatformIO (opcjonalne) Alternatywnym, bardziej rozbudowanym środowiskiem jest PlatformIO. Pozwala ono na tworzenie bardziej złożonych projektów na różne platformy. Podczas warsztatu, będziemy korzystać z ArduinoIDE, jednak przykłady da się uruchomić również przez PlatformIO. Wymaga to jednak nieco dodatkowej konfiguracji.</description>
+      <description>Mikrokontrolery w praktyce Wstępne wymagania  Komputer z systemem Windows / Linux (preferowane ubuntu) ESP8266 oraz peryferia (dostarcza prowadzący)  Instalacja środowiska UWAGA! Dla systemów UNIX(eg. Ubuntu) należy dodać tzw. &amp;ldquo;rules&amp;rdquo;, pozwalające na automatyczne przyznawanie uprawnień urządzeniom. Informacja jak to zrobić, znajduje się poniżej:
+https://docs.platformio.org/en/stable/core/installation/udev-rules.html Arduino IDE Pobierz i zainstaluj arduino IDE. Poradnik oraz instalator znajdziesz na oficjalnej stronie producenta
+PlatformIO (opcjonalne) Alternatywnym, bardziej rozbudowanym środowiskiem jest PlatformIO. Pozwala ono na tworzenie bardziej złożonych projektów na różne platformy.</description>
     </item>
     
     <item>
