@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title></title>
-    <link>https://radoslawsajdak.github.io/Highschool_workshop/</link>
+    <link>https://radoslawsajdak.github.io/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 13 Feb 2023 16:42:09 +0100</lastBuildDate><atom:link href="https://radoslawsajdak.github.io/Highschool_workshop/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Feb 2023 16:42:09 +0100</lastBuildDate><atom:link href="https://radoslawsajdak.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Getting started</title>
-      <link>https://radoslawsajdak.github.io/Highschool_workshop/post/getting_started/</link>
+      <link>https://radoslawsajdak.github.io/post/getting_started/</link>
       <pubDate>Sun, 12 Feb 2023 22:17:39 +0100</pubDate>
       
-      <guid>https://radoslawsajdak.github.io/Highschool_workshop/post/getting_started/</guid>
+      <guid>https://radoslawsajdak.github.io/post/getting_started/</guid>
       <description>Mikrokontrolery w praktyce Wstępne wymagania  Komputer z systemem Windows / Linux (preferowane ubuntu) ESP8266 oraz peryferia (dostarcza prowadzący)  Instalacja środowiska UWAGA! Dla systemów UNIX(eg. Ubuntu) należy dodać tzw. &amp;ldquo;rules&amp;rdquo;, pozwalające na automatyczne przyznawanie uprawnień urządzeniom. Informacja jak to zrobić, znajduje się poniżej:
 https://docs.platformio.org/en/stable/core/installation/udev-rules.html Arduino IDE Pobierz i zainstaluj arduino IDE. Poradnik oraz instalator znajdziesz na oficjalnej stronie producenta
 PlatformIO (opcjonalne) Alternatywnym, bardziej rozbudowanym środowiskiem jest PlatformIO. Pozwala ono na tworzenie bardziej złożonych projektów na różne platformy.</description>
@@ -19,19 +19,19 @@ PlatformIO (opcjonalne) Alternatywnym, bardziej rozbudowanym środowiskiem jest 
     
     <item>
       <title>GPIO</title>
-      <link>https://radoslawsajdak.github.io/Highschool_workshop/post/gpio/</link>
+      <link>https://radoslawsajdak.github.io/post/gpio/</link>
       <pubDate>Mon, 13 Feb 2023 16:35:29 +0100</pubDate>
       
-      <guid>https://radoslawsajdak.github.io/Highschool_workshop/post/gpio/</guid>
+      <guid>https://radoslawsajdak.github.io/post/gpio/</guid>
       <description>GPIO (General-Purpose Input Output) Obsługa wielu wyjść cyfrowych Po ukończeniu wprowadzenia, wiesz już jak zamrugać diodą. Każda dioda, ma katodę (-) oraz anodę (+). Anoda, posiada krótszą nóżkę i to do niej należy podłączyć zasilanie. Można skojarzyć to prez znaną nazwę AK47 (prąd płynie A -&amp;gt; K, a 4 jest mniejsze niż 7 :)). Dodatkowo, aby ograniczyć prąd płynący przez diodę, należy szeregowo włączyć do niej rezystor. Podobnie jak na poniższym obrazku, podłącz trzy diody do pinów D5, D6, D7.</description>
     </item>
     
     <item>
       <title>UART (Universal Asynchronous Receiver-Transmitter)</title>
-      <link>https://radoslawsajdak.github.io/Highschool_workshop/post/uart/</link>
+      <link>https://radoslawsajdak.github.io/post/uart/</link>
       <pubDate>Mon, 13 Feb 2023 16:41:13 +0100</pubDate>
       
-      <guid>https://radoslawsajdak.github.io/Highschool_workshop/post/uart/</guid>
+      <guid>https://radoslawsajdak.github.io/post/uart/</guid>
       <description>&amp;ldquo;UART (Universal Asynchronous Receiver-Transmitter)&amp;rdquo; UART jest jednym z najczęściej stosowanych protokołów komunikacyjnych. Stosuje się go m.in.:
  W komunikacji między procesorami Do wyprowadzania tzw. &amp;ldquo;Debugu&amp;rdquo; Do komunikacji z modułami (Bluetooth, GPS, LTE itp.)  Poznaliśmy wcześniej monitor portu szeregowego. Jest to nic innego, jak właśnie UART. W ten sposób, wysyłając bajt po bajcie, czytaliśmy wiadomości wysyłane przez mikroprocesor.
 Więcej na temat komunikacji UART, przeczytasz tutaj. Dla nas, najważniejszy jest sposób podłączenia &amp;ldquo;na krzyż&amp;rdquo;: UART - komunikacja z komputerem Czytanie wiadomości UART W rozdziale GPIO, przy użyciu biblioteki Serial, wysyłaliśmy wiadomości do naszego komputera.</description>
@@ -39,10 +39,10 @@ Więcej na temat komunikacji UART, przeczytasz tutaj. Dla nas, najważniejszy je
     
     <item>
       <title>I2C - Wyświetlacz OLED</title>
-      <link>https://radoslawsajdak.github.io/Highschool_workshop/post/i2c/</link>
+      <link>https://radoslawsajdak.github.io/post/i2c/</link>
       <pubDate>Mon, 13 Feb 2023 16:41:27 +0100</pubDate>
       
-      <guid>https://radoslawsajdak.github.io/Highschool_workshop/post/i2c/</guid>
+      <guid>https://radoslawsajdak.github.io/post/i2c/</guid>
       <description>Magistrala I2C Magistrala I2C, pozwala na komunikację wielu równolegle połączonych urządzeń. Korzysta przy tym z dwóch linii:
  SCL/SCK (Clock) - pin D1 SDA (Data) - pin D2  Komunikacja jest możliwa dzięki wykorzystaniu adresów. Każde urządzenie posiada swój adres 7 bitowy (127 adresów). Moduły zazwyczaj posiadają dodatkowe piny pozwalające na zmianę adresu poprzez ich zwarcie. Pozwala to na jednoczesne połączenie wielu takich samych układów (na przykład czujników temperatury).
 Komunikacja przy użyciu I2C Połącz mikrokontroler oraz wyświetlacz OLED w następujący sposób:</description>
@@ -50,10 +50,10 @@ Komunikacja przy użyciu I2C Połącz mikrokontroler oraz wyświetlacz OLED w na
     
     <item>
       <title>Wi-fi</title>
-      <link>https://radoslawsajdak.github.io/Highschool_workshop/post/wifi/</link>
+      <link>https://radoslawsajdak.github.io/post/wifi/</link>
       <pubDate>Mon, 13 Feb 2023 16:41:57 +0100</pubDate>
       
-      <guid>https://radoslawsajdak.github.io/Highschool_workshop/post/wifi/</guid>
+      <guid>https://radoslawsajdak.github.io/post/wifi/</guid>
       <description>Wi-Fi Wi-Fi jest zestawem standardów sieci bezprzewodowych. Obecne jest właściwie wszędzie. W IoT również stosuje się je coraz częściej, ze względu na rozwijające się mechanizmy oszczędzania energii.
 Więcej na temat sieci Wi-Fi, można przeczytać np. w wikipedii.
 W poniższym ćwiczeniu, poznamy podstawy łączenia się z istniejącą siecią Wi-Fi oraz komunikacji przy użyciu MQTT.
@@ -63,10 +63,10 @@ Blinky dla Wi-Fi Jak zawsze, pisanie kodu należy zacząć od blinky. W tym celu
     
     <item>
       <title>Aplikacja - Discord BOT</title>
-      <link>https://radoslawsajdak.github.io/Highschool_workshop/post/discord_bot/</link>
+      <link>https://radoslawsajdak.github.io/post/discord_bot/</link>
       <pubDate>Mon, 13 Feb 2023 16:42:09 +0100</pubDate>
       
-      <guid>https://radoslawsajdak.github.io/Highschool_workshop/post/discord_bot/</guid>
+      <guid>https://radoslawsajdak.github.io/post/discord_bot/</guid>
       <description>Discord BOT - aplikacja zaawansowana W tym rozdziale zaprezentowano przykład aplikacji z wykorzystaniem Discord API. Jest to prosta aplikacja mrugająca diodą LED w odpowiedzi na wiadomość na kanale Discord. Niemniej, jej stworzenie wymaga instalacji i zrozumienia wielu różnych zagadnień.
 Instalacja środowiska Do stworzenia aplikacji, potrzebujemy zainstalować:
  Discord App - (desktop/mobile) Python3 Dodatkowe biblioteki python:  discord.py python-dotenv    Discord App Pobierz i zainstaluj aplikację Discord. Załóż również konto w aplikacji.</description>
@@ -74,10 +74,10 @@ Instalacja środowiska Do stworzenia aplikacji, potrzebujemy zainstalować:
     
     <item>
       <title>Użyteczne linki</title>
-      <link>https://radoslawsajdak.github.io/Highschool_workshop/post/useful_links/</link>
+      <link>https://radoslawsajdak.github.io/post/useful_links/</link>
       <pubDate>Mon, 13 Feb 2023 16:41:39 +0100</pubDate>
       
-      <guid>https://radoslawsajdak.github.io/Highschool_workshop/post/useful_links/</guid>
+      <guid>https://radoslawsajdak.github.io/post/useful_links/</guid>
       <description>Stworzony przeze mnie poradnik, powierzchownie dotyka wielu problemów, technik i języków. Jego celem jest jednak pokazanie, że można robić &amp;ldquo;rzeczy&amp;rdquo;, bez specjalistycznej wiedzy. Wystarczą chęci i przeglądarka. Dlatego, dla osób które chcą dalej zgłębiać którykolwiek z rozpoczętych tematów przgotowałem.
 Jednocześnie zapraszam uczestników do bezpośredniego kontaktu. Z przyjemnością pomogę &amp;ldquo;zorganizować&amp;rdquo; sprzęt i odpowiem na nurtujące pytania! :)
 Alternatywne kursy Podstawy elektroniki Tutaj dowiesz się czym jest rezystor oraz jakie podstawowe prawa obowiązują w elektronice.</description>
