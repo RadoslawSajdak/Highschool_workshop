@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Intro to BLE with Zephyr and Docker on </title>
+    <link>/zephyr/</link>
+    <description>Recent content in Intro to BLE with Zephyr and Docker on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 28 Dec 2024 16:41:57 +0100</lastBuildDate><atom:link href="/zephyr/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Setting up VirtualBox</title>
+      <link>/zephyr/virtualbox/</link>
+      <pubDate>Sat, 28 Dec 2024 16:41:57 +0100</pubDate>
+      
+      <guid>/zephyr/virtualbox/</guid>
+      <description>Requirements Because we wanted to provide low weight and similar environment for everyone we created a VirtualBox image. Before you download it, please install virtual box with version 7.1.14. You can download it from the virtualbox.org
+Now you can download the VirtualBox image from https://ubuntu1224.hexu.pl
+This image contains:
+ Ubuntu 24.04 Docker Compose Code JLink drivers nrfjprog tools VirtualBox extension pack Brave browser  To unzip the file, please ask for the password.</description>
+    </item>
+    
+  </channel>
+</rss>
