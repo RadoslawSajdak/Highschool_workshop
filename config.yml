@@ -72,6 +72,8 @@ params:
     buttons:
       - name: Workshop
         url: post
+      - name: NRF & Zephyr lab
+        url: zephyr
       # - name: Tags
       #   url: tags
 
