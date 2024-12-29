@@ -18,5 +18,15 @@ This image contains:
  Ubuntu 24.04 Docker Compose Code JLink drivers nrfjprog tools VirtualBox extension pack Brave browser  To unzip the file, please ask for the password.</description>
     </item>
     
+    <item>
+      <title>First Bluetooth application</title>
+      <link>/zephyr/first_app/</link>
+      <pubDate>Sat, 28 Dec 2024 23:41:57 +0100</pubDate>
+      
+      <guid>/zephyr/first_app/</guid>
+      <description>Description Based on the knowledge from the presentation, we will try to implement simple application using Bluetooth for Zephyr. As a hardware we will use nRF52840DK. You can read more about this devkit here.
+To interact with nRF52840, we will use nRF Connect application. It&amp;rsquo;s available for android and iOS. The second one has little different look but the usage is similar. You can download the application from the Google Store.</description>
+    </item>
+    
   </channel>
 </rss>

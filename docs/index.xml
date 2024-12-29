@@ -5,7 +5,7 @@
     <link>/</link>
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 28 Dec 2024 16:41:57 +0100</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Dec 2024 23:41:57 +0100</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Setting up VirtualBox</title>
       <link>/zephyr/virtualbox/</link>
@@ -27,6 +27,16 @@ This image contains:
       <description>Mikrokontrolery w praktyce Wstępne wymagania  Komputer z systemem Windows / Linux (preferowane ubuntu) ESP8266 oraz peryferia (dostarcza prowadzący)  Instalacja środowiska UWAGA! Dla systemów UNIX(eg. Ubuntu) należy dodać tzw. &amp;ldquo;rules&amp;rdquo;, pozwalające na automatyczne przyznawanie uprawnień urządzeniom. Informacja jak to zrobić, znajduje się poniżej:
 https://docs.platformio.org/en/stable/core/installation/udev-rules.html Arduino IDE Pobierz i zainstaluj arduino IDE. Poradnik oraz instalator znajdziesz na oficjalnej stronie producenta
 PlatformIO (opcjonalne) Alternatywnym, bardziej rozbudowanym środowiskiem jest PlatformIO. Pozwala ono na tworzenie bardziej złożonych projektów na różne platformy.</description>
+    </item>
+    
+    <item>
+      <title>First Bluetooth application</title>
+      <link>/zephyr/first_app/</link>
+      <pubDate>Sat, 28 Dec 2024 23:41:57 +0100</pubDate>
+      
+      <guid>/zephyr/first_app/</guid>
+      <description>Description Based on the knowledge from the presentation, we will try to implement simple application using Bluetooth for Zephyr. As a hardware we will use nRF52840DK. You can read more about this devkit here.
+To interact with nRF52840, we will use nRF Connect application. It&amp;rsquo;s available for android and iOS. The second one has little different look but the usage is similar. You can download the application from the Google Store.</description>
     </item>
     
     <item>
