@@ -24,12 +24,21 @@ This image contains:
 To unzip the file, please ask for the password.
 
 ## Importing the image
-TODO
-- screnshots with step by step manual
+After the .zip file has been unzipped you should have the .ova file availabel to you. Open VirtualBox and select "Import".
+![import image manu](images/vm_setup.png#center)
+
+Press next button located in the roght bottom corner.
+![appliance settings](images/vm_settings.png#center)
+
+We'll leave this setting untouched. Press finish to start loading up the image to VirtualBox.
+![finished importing](images/vm_setup_fin.png#center)
+
+You can try to start your virtual machine, if everything is running smoothly and vm is starting without any issues, close virtual machine and move on to the next point. Password is the same as username.
+![working virtual machine](images/working_vm.png#center)
+
 
 ## Attaching USB devices
-TODO
-- Screenshots how to attach USB device to the vm
+From the topbar panel open `Devices > USB` and attach `Segger JLink`
 
 ## Using the environment
 **If ANY image is not clear, you can click it with RB and use "Open image in new tab" :)**
