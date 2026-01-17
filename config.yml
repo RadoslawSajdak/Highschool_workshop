@@ -88,7 +88,7 @@ params:
     - name: linkedin
       url: "https://pl.linkedin.com/in/radoslawsajdak"
     - name: email
-      url: "mailto:sajdak.radoslaw@gmail.com"
+      url: "mailto:contact@hexu.pl"
 
   # analytics:
   #   google:
